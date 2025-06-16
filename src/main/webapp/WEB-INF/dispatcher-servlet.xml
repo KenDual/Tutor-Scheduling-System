@@ -23,7 +23,7 @@
         <property name="driverClassName"
                   value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
         <property name="url"
-                  value="jdbc:sqlserver://localhost:1433;databaseName=tutor_project_1;encrypt=false " />
+                  value="jdbc:sqlserver://localhost:1433;databaseName=tutor_project;encrypt=false " />
         <property name="username" value="sa" />
         <property name="password" value="1" />
     </bean>

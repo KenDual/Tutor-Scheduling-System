@@ -1,20 +1,35 @@
-
 package com.maiphuhai.service;
 
 import com.maiphuhai.model.Subject;
 import com.maiphuhai.repository.SubjectRepository;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SubjectService {
-    private final SubjectRepository repo;
 
-    public SubjectService(SubjectRepository repo) {
-        this.repo = repo;
-    }
+    @Autowired
+    private SubjectRepository repo;
 
     public List<Subject> findAll() {
         return repo.findAll();
+    }
+
+    public Subject findById(int id) {
+        return repo.findById(id);
+    }
+
+    public void save(Subject s) {
+        repo.save(s);
+    }
+
+    public void update(Subject s) {
+        repo.update(s);
+    }
+
+    public void delete(int id) {
+        repo.delete(id);
     }
 }

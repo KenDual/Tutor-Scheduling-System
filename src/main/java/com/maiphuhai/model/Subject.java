@@ -1,24 +1,25 @@
-
 package com.maiphuhai.model;
 
 public class Subject {
-    private int subjectId;
+
+    private Integer subjectId;
     private String name;
     private String description;
-    
-    public Subject(){}
 
-    public Subject(int subjectId, String name, String description) {
+    public Subject() {
+    }
+
+    public Subject(Integer subjectId, String name, String description) {
         this.subjectId = subjectId;
         this.name = name;
         this.description = description;
     }
 
-    public int getSubjectId() {
+    public Integer getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(int subjectId) {
+    public void setSubjectId(Integer subjectId) {
         this.subjectId = subjectId;
     }
 
@@ -37,4 +38,6 @@ public class Subject {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    
 }

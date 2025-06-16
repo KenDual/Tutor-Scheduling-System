@@ -1,39 +1,35 @@
 package com.maiphuhai.model;
 
-import java.time.LocalDateTime;
-
 public class Session {
+
     private Integer sessionId;
     private Integer tutorId;
     private Integer subjectId;
-    private String day;
-    private String slot;
-    private String location;
-    private Double fee;
-    private Integer capacity;
+    private String day;    
+    private String slot;    
     private String status;
     
-    private String tutorName;     // email GV
-    private String subjectName;   // tên môn
-    private Integer booked;       // số HS đã đặt
-    private LocalDateTime createdAt;
-   
+    private String tutorName;
+    private String subjectName;
+    private Integer booked;   
+
+    public static final String ST_PENDING = "pending";
+    public static final String ST_SCHEDULED = "scheduled";
+    public static final String ST_CANCELLED = "cancelled";
+    public static final String ST_COMPLETED = "completed";
+    
     public Session(){}
 
-    public Session(Integer sessionId, Integer tutorId, Integer subjectId, String day, String slot, String location, Double fee, Integer capacity, String status, String tutorName, String subjectName, Integer booked, LocalDateTime createdAt) {
+    public Session(Integer sessionId, Integer tutorId, Integer subjectId, String day, String slot, String status, String tutorName, String subjectName, Integer booked) {
         this.sessionId = sessionId;
         this.tutorId = tutorId;
         this.subjectId = subjectId;
         this.day = day;
         this.slot = slot;
-        this.location = location;
-        this.fee = 0.0;
-        this.capacity = 10;
-        this.status = "scheduled";
+        this.status = status;
         this.tutorName = tutorName;
         this.subjectName = subjectName;
         this.booked = booked;
-        this.createdAt = createdAt;
     }
 
     public Integer getSessionId() {
@@ -76,30 +72,6 @@ public class Session {
         this.slot = slot;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Double getFee() {
-        return fee;
-    }
-
-    public void setFee(Double fee) {
-        this.fee = fee;
-    }
-
-    public Integer getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -132,16 +104,6 @@ public class Session {
         this.booked = booked;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     
-
     
-
 }

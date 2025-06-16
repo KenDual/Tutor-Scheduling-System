@@ -1,11 +1,16 @@
 package com.maiphuhai.controller;
 
+
 import com.maiphuhai.model.Session;
 import com.maiphuhai.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/sessions")
@@ -14,24 +19,23 @@ public class SessionController {
     @Autowired
     private SessionService sessionService;
 
-    /* thêm một ca */
-    @PostMapping(value = "/add",
-            consumes = "application/json",
-            produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<?> add(@RequestBody Session payload) {
+    @PostMapping("/request")
+    public String request(@ModelAttribute Session session,
+                          RedirectAttributes ra) {
+
         if (sessionService.existsByTutorDaySlot(
-                payload.getTutorId(),
-                payload.getDay(),
-                payload.getSlot())) {
-            return ResponseEntity.status(409).body("duplicate");
+                session.getTutorId(), session.getDay(), session.getSlot())) {
+            ra.addFlashAttribute("flashErr", "Bạn đã gửi yêu cầu trùng ca!");
+            return "redirect:/dashboard-tutor#schedule";
         }
 
-        sessionService.add(payload);
-        return ResponseEntity.ok(payload);        // trả lại cho JS vẽ
+        session.setStatus("scheduled");
+        sessionService.add(session);
+
+        ra.addFlashAttribute("flashMsg", "Gửi yêu cầu thành công!");
+        return "redirect:/dashboard-tutor#schedule";
     }
 
-    /* xoá một ca */
     @PostMapping("/delete/{id}")
     @ResponseBody
     public void delete(@PathVariable int id) {
