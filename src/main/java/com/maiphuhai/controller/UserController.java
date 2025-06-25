@@ -43,8 +43,8 @@ public class UserController {
         session.setAttribute("USER", userOpt.get());
 
         return role.equals("tutor")
-                ? "redirect:/tutor/dashboard"
-                : "redirect:/student/dashboard";
+                ? "redirect:/dashboard-tutor"
+                : "redirect:/dashboard-student";
     }
 
     /* ---------- Admin ---------- */
