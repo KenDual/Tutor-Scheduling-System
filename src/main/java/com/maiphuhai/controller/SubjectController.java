@@ -21,13 +21,13 @@ public class SubjectController {
         return "main/dashboard-admin";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/subjects/add")
     public String showAddForm(Model model) {
-        model.addAttribute("car", new Subject());
+        model.addAttribute("subject", new Subject());
         return "main/dashboard-admin";
     }
     
-    @GetMapping("/edit/{id}")
+    @GetMapping("/subjects/edit/{id}")
     public String showEditForm(@PathVariable("subject_id") int id, Model model) {
         Subject subject = subjectService.findById(id);
         model.addAttribute("subject", subject);
@@ -40,7 +40,7 @@ public class SubjectController {
         return "redirect:/dashboard-admin";
     }
     
-    @PostMapping("/save")
+    @PostMapping("/subjects/save")
     public String save(@ModelAttribute Subject subject) {
         if (subject.getSubject_id() == 0 || subject.getSubject_id() < 0){
             subjectService.save(subject);
@@ -50,7 +50,7 @@ public class SubjectController {
         return "redirect:/dashboard-admin";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/subjects/delete/{id}")
     public String delete(@PathVariable("subject_id") int id) {
         subjectService.delete(id);
         return "redirect:/dashboard-admin";

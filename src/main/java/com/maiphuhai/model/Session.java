@@ -4,30 +4,35 @@ package com.maiphuhai.model;
 import java.util.Date;
 
 public class Session {
-    private int session_id;
+    private int    session_id;
     private String session_code;
-    private int tutor_id;
-    private int subject_id;
+    private int    tutor_id;
+    private int    subject_id;
+    private String day_of_week; 
+    private int    slot;        
     private String location;
-    private int capacity;
-    private String status;
-    private Date created_at;
-    private String day;
-    private int slot;
+    private int    capacity;
+    private String status;      
+    private Date   created_at;
+    
+    private String subjectName;
+    private String tutorName;
     
     public Session(){}
 
-    public Session(int session_id, String session_code, int tutor_id, int subject_id, String location, int capacity, String status, Date created_at, String day, int slot) {
+    public Session(int session_id, String session_code, int tutor_id, int subject_id, String day_of_week, int slot, String location, int capacity, String status, Date created_at, String subjectName, String tutorName) {
         this.session_id = session_id;
         this.session_code = session_code;
         this.tutor_id = tutor_id;
         this.subject_id = subject_id;
+        this.day_of_week = day_of_week;
+        this.slot = slot;
         this.location = location;
         this.capacity = capacity;
         this.status = status;
         this.created_at = created_at;
-        this.day = day;
-        this.slot = slot;
+        this.subjectName = subjectName;
+        this.tutorName = tutorName;
     }
 
     public int getSession_id() {
@@ -62,6 +67,22 @@ public class Session {
         this.subject_id = subject_id;
     }
 
+    public String getDay_of_week() {
+        return day_of_week;
+    }
+
+    public void setDay_of_week(String day_of_week) {
+        this.day_of_week = day_of_week;
+    }
+
+    public int getSlot() {
+        return slot;
+    }
+
+    public void setSlot(int slot) {
+        this.slot = slot;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -94,20 +115,20 @@ public class Session {
         this.created_at = created_at;
     }
 
-    public String getDay() {
-        return day;
+    public String getSubjectName() {
+        return subjectName;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 
-    public int getSlot() {
-        return slot;
+    public String getTutorName() {
+        return tutorName;
     }
 
-    public void setSlot(int slot) {
-        this.slot = slot;
+    public void setTutorName(String tutorName) {
+        this.tutorName = tutorName;
     }
 
     

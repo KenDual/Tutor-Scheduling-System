@@ -7,9 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
@@ -17,10 +15,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /* ---------- Tutor / Student ---------- */
     @GetMapping("/login")
     public String showLoginForm() {
-        return "account/login-form";           // trỏ tới login-form.jsp
+        return "account/login-form";
     }
 
     @PostMapping("/login")
@@ -34,7 +31,6 @@ public class UserController {
 
         if (userOpt.isEmpty()) {
             model.addAttribute("error", "Sai email, mật khẩu hoặc vai trò");
-            // Trả lại email & role (để form giữ nguyên)
             model.addAttribute("email", email);
             model.addAttribute("role", role);
             return "account/login-form";
@@ -77,4 +73,65 @@ public class UserController {
         session.invalidate();
         return "redirect:/login";
     }
+
+    /* ---------- Forgot password (GET) ---------- */
+    @GetMapping("/forgot-password")
+    public String showForgotPwdForm() {
+        return "account/forgot-password";
+    }
+
+    /* ---------- Forgot password (POST) ---------- */
+    @PostMapping("/forgot-password")
+    public String processForgotPwd(@RequestParam String email,
+            @RequestParam String newPassword,
+            Model model) {
+
+        boolean done = userService.resetPasswordByEmail(email, newPassword);
+
+        if (done) {
+            model.addAttribute("msg", "Đổi mật khẩu thành công! Vui lòng đăng nhập.");
+            return "account/forgot-password";
+        } else {
+            model.addAttribute("err", "Email không tồn tại!");
+            model.addAttribute("email", email);
+            return "account/forgot-password";
+        }
+    }
+
+    /* ---------- Sign-up (GET) ---------- */
+    @GetMapping("/signup")
+    public String showSignupForm() {
+        return "account/signup-form";
+    }
+
+    /* ---------- Sign-up (POST) ---------- */
+    @PostMapping("/signup")
+    public String processSignup(@RequestParam String role,
+            @RequestParam String fullName,
+            @RequestParam String email,
+            @RequestParam String password,
+            Model model) {
+
+        // email đã tồn tại?
+        if (userService.findByEmail(email).isPresent()) {
+            model.addAttribute("err", "Email đã tồn tại");
+            model.addAttribute("email", email);
+            return "account/signup-form";
+        }
+
+        User u = new User();
+        u.setEmail(email);
+        u.setPassword(password);
+        u.setRole(role);
+        u.setFull_name(fullName);
+
+        if (userService.register(u)) {
+            model.addAttribute("msg", "Đăng ký thành công! Vui lòng đăng nhập");
+            return "account/login-form";
+        } else {
+            model.addAttribute("err", "Đăng ký thất bại");
+            return "account/signup-form";
+        }
+    }
+
 }

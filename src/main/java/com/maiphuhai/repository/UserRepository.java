@@ -1,4 +1,3 @@
-
 package com.maiphuhai.repository;
 
 import com.maiphuhai.model.User;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRepository {
+
     @Autowired
     private JdbcTemplate jdbc;
 
@@ -64,5 +64,13 @@ public class UserRepository {
 
     public int delete(int id) {
         return jdbc.update(SQL_DELETE, id);
+    }
+
+    // UserRepository.java
+    private static final String SQL_UPDATE_PASSWORD_BY_EMAIL
+            = "UPDATE users SET password=? WHERE email=?";
+
+    public int updatePasswordByEmail(String email, String newPwd) {
+        return jdbc.update(SQL_UPDATE_PASSWORD_BY_EMAIL, newPwd, email);
     }
 }

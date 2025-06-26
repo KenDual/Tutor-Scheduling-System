@@ -1,6 +1,6 @@
 package com.maiphuhai.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Timetable {
 
@@ -10,11 +10,11 @@ public class Timetable {
     private int slot;
     private String location;
     private String status;
-    private Date create_at;
+    private LocalDateTime create_at;
     
     public Timetable(){}
 
-    public Timetable(int timetable_id, int session_id, String day_of_week, int slot, String location, String status, Date create_at) {
+    public Timetable(int timetable_id, int session_id, String day_of_week, int slot, String location, String status, LocalDateTime create_at) {
         this.timetable_id = timetable_id;
         this.session_id = session_id;
         this.day_of_week = day_of_week;
@@ -72,11 +72,13 @@ public class Timetable {
         this.status = status;
     }
 
-    public Date getCreate_at() {
+    public LocalDateTime getCreate_at() {
         return create_at;
     }
 
-    public void setCreate_at(Date create_at) {
+    public void setCreate_at(LocalDateTime create_at) {
         this.create_at = create_at;
     }
+
+    
 }

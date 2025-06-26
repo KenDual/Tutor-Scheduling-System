@@ -1,71 +1,92 @@
 package com.maiphuhai.repository;
 
 import com.maiphuhai.model.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.*;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class SessionRepository {
+
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbc;
 
-    private Session mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Session session = new Session();
-        session.setSession_id(rs.getInt("session_id"));
-        session.setSession_code(rs.getString("session_code"));
-        session.setTutor_id(rs.getInt("tutor_id"));
-        session.setSubject_id(rs.getInt("subject_id"));
-        session.setLocation(rs.getString("location"));
-        session.setCapacity(rs.getInt("capacity"));
-        session.setStatus(rs.getString("status"));
-        session.setCreated_at(rs.getTimestamp("created_at"));
-        return session;
+    /* ---------- RowMapper (kèm subjectName & tutorName) ---------- */
+    private final RowMapper<Session> map = (ResultSet rs, int i) -> {
+        Session s = new Session();
+        s.setSession_id   (rs.getInt   ("session_id"));
+        s.setSession_code (rs.getString("session_code"));
+        s.setTutor_id     (rs.getInt   ("tutor_id"));
+        s.setSubject_id   (rs.getInt   ("subject_id"));
+        s.setDay_of_week  (rs.getString("day_of_week"));
+        s.setSlot         (rs.getInt   ("slot"));
+        s.setLocation     (rs.getString("location"));
+        s.setCapacity     (rs.getInt   ("capacity"));
+        s.setStatus       (rs.getString("status"));
+        s.setCreated_at   (rs.getTimestamp("created_at"));
+        try { s.setSubjectName(rs.getString("subjectName")); } catch (SQLException ignore){}
+        try { s.setTutorName  (rs.getString("tutorName"));   } catch (SQLException ignore){}
+        return s;
+    };
+
+    /* ---------- Câu SELECT có JOIN ---------- */
+    private static final String SELECT_JOIN = "SELECT s.*, sub.name AS subjectName,u.full_name AS tutorName FROM sessions s JOIN subjects sub ON sub.subject_id = s.subject_id JOIN   tutors   t   ON t.tutor_id     = s.tutor_id JOIN   users    u   ON u.user_id      = t.tutor_id";
+
+    /* ---------- save() (không đổi) ---------- */
+    public int save(Session s){
+        String sql = "INSERT INTO sessions(session_code,tutor_id,subject_id,day_of_week,slot,location,capacity,status) VALUES (?,?,?,?,?,?,?,?)";
+        KeyHolder kh = new GeneratedKeyHolder();
+        jdbc.update(con -> {
+            PreparedStatement ps = con.prepareStatement(sql, new String[]{"session_id"});
+            ps.setString(1, s.getSession_code());
+            ps.setInt   (2, s.getTutor_id());
+            ps.setInt   (3, s.getSubject_id());
+            ps.setString(4, s.getDay_of_week());
+            ps.setInt   (5, s.getSlot());
+            ps.setString(6, s.getLocation());
+            ps.setInt   (7, s.getCapacity());
+            ps.setString(8, s.getStatus());
+            return ps;
+        }, kh);
+        return kh.getKey().intValue();
     }
 
-    public List<Session> findAll() {
-        String sql = "SELECT * FROM sessions";
-        return jdbcTemplate.query(sql, this::mapRow);
+    /* ---------- Truy vấn ---------- */
+    public List<Session> findAll(){
+        return jdbc.query(SELECT_JOIN, map);                           // có tên
     }
 
-    public Session findById(int id) {
-        String sql = "SELECT * FROM sessions WHERE session_id = ?";
-        return jdbcTemplate.queryForObject(sql, this::mapRow, id);
+    public Session findById(int id){
+        return jdbc.queryForObject(SELECT_JOIN + " WHERE s.session_id=?", map, id);
     }
 
-    public void save(Session session) {
-        String sql = "INSERT INTO sessions (session_code, tutor_id, subject_id, location, capacity, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, 
-            session.getSession_code(),
-            session.getTutor_id(),
-            session.getSubject_id(),
-            session.getLocation(),
-            session.getCapacity(),
-            session.getStatus(),
-            session.getCreated_at()
-        );
+    public List<Session> findByTutor(int tutorId){
+        return jdbc.query(SELECT_JOIN + " WHERE s.tutor_id=?", map, tutorId);
     }
 
-    public void update(Session session) {
-        String sql = "UPDATE sessions SET session_code = ?, tutor_id = ?, subject_id = ?, location = ?, capacity = ?, status = ?, created_at = ? WHERE session_id = ?";
-        jdbcTemplate.update(sql, 
-            session.getSession_code(),
-            session.getTutor_id(),
-            session.getSubject_id(),
-            session.getLocation(),
-            session.getCapacity(),
-            session.getStatus(),
-            session.getCreated_at(),
-            session.getSession_id()
-        );
+    public List<Session> findScheduled(){
+        return jdbc.query(SELECT_JOIN + " WHERE s.status='scheduled'", map);
     }
 
-    public void delete(int id) {
-        String sql = "DELETE FROM sessions WHERE session_id = ?";
-        jdbcTemplate.update(sql, id);
+    /* ---------- update / delete ---------- */
+    public void update(Session s){
+        String sql = "UPDATE sessions SET subject_id=?,day_of_week=?,slot=?,location=?,capacity=?,status=? WHERE session_id=?";
+        jdbc.update(sql, s.getSubject_id(), s.getDay_of_week(), s.getSlot(),
+                         s.getLocation(), s.getCapacity(), s.getStatus(),
+                         s.getSession_id());
+    }
+
+    public void delete(int id){
+        jdbc.update("DELETE FROM sessions WHERE session_id=?", id);
+    }
+
+    /* ---------- chống trùng ca ---------- */
+    public boolean existsByDaySlotTutor(String day,int slot,int tutorId){
+        String sql = "SELECT COUNT(*) FROM sessions WHERE day_of_week=? AND slot=? AND tutor_id=? AND status<>'cancelled'";
+        return jdbc.queryForObject(sql,Integer.class,day,slot,tutorId) > 0;
     }
 }

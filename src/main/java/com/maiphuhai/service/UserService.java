@@ -1,4 +1,3 @@
-
 package com.maiphuhai.service;
 
 import com.maiphuhai.model.User;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 
 public class UserService {
+
     @Autowired
     private UserRepository repo;
 
@@ -28,5 +28,13 @@ public class UserService {
         return repo.findByCredentials(email, password, "admin");
     }
 
-    // CRUD khác nếu cần...
+    // UserService.java
+    public boolean resetPasswordByEmail(String email, String newPwd) {
+        return repo.updatePasswordByEmail(email, newPwd) > 0;
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return repo.findByEmail(email);
+    }
+
 }

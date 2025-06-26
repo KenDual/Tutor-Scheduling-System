@@ -1,72 +1,65 @@
 package com.maiphuhai.service;
 
 import com.maiphuhai.model.Session;
-import com.maiphuhai.model.Timetable;
+import com.maiphuhai.model.Subject;
 import com.maiphuhai.repository.SessionRepository;
-import com.maiphuhai.repository.TimetableRepository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class SessionService {
 
     @Autowired
-    private SessionRepository sessionRepository;
-    private TimetableRepository timetableRepository;
-    private TimetableService timetableService;
+    private SessionRepository repo;
+    @Autowired
+    private SubjectService subjectService;
 
-    public List<Session> findAll() {
-        return sessionRepository.findAll();
+    /* ---------- API cho Controller ---------- */
+    public List<Session> findByTutor(int tutorId) {
+        return repo.findByTutor(tutorId);
     }
 
-    public Session findById(int id) {
-        return sessionRepository.findById(id);
+    public List<Session> findScheduled() {
+        List<Session> list = repo.findScheduled();
+        Map<Integer, String> subMap = subjectService.findAll()
+                .stream()
+                .collect(Collectors.toMap(
+                        Subject::getSubject_id,
+                        Subject::getName));
+        list.forEach(s
+                -> s.setSubjectName(subMap.get(s.getSubject_id()))
+        );
+        return list;
     }
 
-    public void save(Session session) {
-        sessionRepository.save(session);
-    }
-
-    public void update(Session session) {
-        sessionRepository.update(session);
-    }
-
-    public void delete(int id) {
-        sessionRepository.delete(id);
-    }
-
-    public void registerSession(String day, int slot, int tutorId, String location, int subjectId) throws Exception {
-        
-        if (timetableService.existsByDaySlotTutor(day, slot, tutorId)) {
-            throw new Exception("Ca học vào " + day + ", slot " + slot + " đã được đăng ký!");
+    public void register(String day, int slot, int tutorId,
+            int subjectId, String location) throws Exception {
+        if (repo.existsByDaySlotTutor(day, slot, tutorId)) {
+            throw new Exception("Tutor đã có ca vào " + day + " - slot " + slot);
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
-        String sessionCode = "SESS" + sdf.format(new Date()) + tutorId;
+        Session s = new Session();
+        s.setSession_code("SE" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()));
+        s.setTutor_id(tutorId);
+        s.setSubject_id(subjectId);
+        s.setDay_of_week(day);
+        s.setSlot(slot);
+        s.setLocation(location);
+        s.setCapacity(10);
+        s.setStatus("scheduled");
 
-        Session session = new Session();
-        session.setSession_code(sessionCode);
-        session.setTutor_id(tutorId);
-        session.setSubject_id(subjectId);
-        session.setLocation(location);
-        session.setCapacity(10); // Mặc định
-        session.setStatus("pending");
-        session.setCreated_at(new Date());
+        int id = repo.save(s);
+        s.setSession_id(id);
+    }
 
-        sessionRepository.save(session);
-
-        Timetable timetable = new Timetable();
-        timetable.setSession_id(session.getSession_id());
-        timetable.setDay_of_week(day);
-        timetable.setSlot(slot);
-        timetable.setLocation(location);
-        timetable.setStatus("pending");
-        timetable.setCreate_at(new Date());
-
-        timetableRepository.save(timetable);
+    public void cancel(int id) {
+        Session s = repo.findById(id);
+        s.setStatus("cancelled");
+        repo.update(s);
     }
 }

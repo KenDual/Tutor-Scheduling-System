@@ -39,12 +39,12 @@ public class SubjectRepository {
     }
 
     public void update(Subject subject) {
-        String sql = "UPDATE subjects SET name = ?, description = ?, create_at = ? WHERE id = ?";
+        String sql = "UPDATE subjects SET name = ?, description = ? WHERE subject_id = ?";
         jdbcTemplate.update(sql, subject.getName(), subject.getDescription(), subject.getCreate_at(), subject.getSubject_id());
     }
 
     public void delete(int id) {
-        String sql = "DELETE FROM subjects WHERE id = ?";
+        String sql = "DELETE FROM subjects WHERE subject_id = ?";
         jdbcTemplate.update(sql, id);
     }
 }

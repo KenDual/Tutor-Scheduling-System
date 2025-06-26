@@ -1,27 +1,25 @@
-
 package com.maiphuhai.service;
 
-import com.maiphuhai.model.Timetable;
 import com.maiphuhai.repository.TimetableRepository;
+import com.maiphuhai.model.Timetable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TimetableService {
+
     @Autowired
-    private TimetableRepository timetableRepository;
+    private TimetableRepository repo;
 
-    public void save(Timetable timetable) {
-        timetableRepository.save(timetable);
+    public void create(Timetable t) {
+        repo.save(t);
     }
-
 
     public void delete(int id) {
-        timetableRepository.delete(id);
+        repo.delete(id);
     }
-    
-    public boolean existsByDaySlotTutor(String dayOfWeek, int slot, int tutorId) {
-        return timetableRepository.existsByDaySlotTutor(dayOfWeek, slot, tutorId);
+
+    public boolean tutorHasConflict(String day, int slot, int tutorId) {
+        return repo.existsByDaySlotTutor(day, slot, tutorId);
     }
 }
-    

@@ -110,7 +110,10 @@
                     </c:if>
                     <button type="submit">Login</button>
                     <div class="forgot-password">
-                        <a href="#">Forgot password?</a>
+                        <a href="${pageContext.request.contextPath}/forgot-password"
+                           class="text-blue-600 hover:underline">
+                            Forgot password?
+                        </a>
                     </div>
                 </form>
             </div>
