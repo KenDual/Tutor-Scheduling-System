@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -17,6 +16,7 @@
         <link href="<c:url value='/assets/css/nucleo-icons.css'/>" rel="stylesheet" />
         <link href="<c:url value='/assets/css/nucleo-svg.css'/>" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        <!-- Material Icons -->
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link id="pagestyle" href="<c:url value='/assets/css/material-dashboard.css?v=3.2.0'/>" rel="stylesheet" />
@@ -25,7 +25,7 @@
                 background-size: cover;
                 background-position: center;
             }
-        </style>
+        </style>    
     </head>
 
     <body class="bg-gray-200">
@@ -61,41 +61,32 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <form action="${pageContext.request.contextPath}/login" method="post" role="form" class="text-start">
-                                            <c:if test="${not empty error}">
-                                                <div class="alert alert-danger text-center py-2">${error}</div>
-                                            </c:if>
-                                                
-                                            <div class="d-flex justify-content-center gap-3 my-3">
-                                                <!-- Student -->
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="role" id="roleStudent" value="student" checked>
-                                                    <label class="form-check-label" for="roleStudent">Student</label>
-                                                </div>
-                                                <!-- Tutor -->
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="role" id="roleTutor" value="tutor">
-                                                    <label class="form-check-label" for="roleTutor">Tutor</label>
-                                                </div>
-                                            </div>
-                                            <!-- Email -->
+                                        <form action="${pageContext.request.contextPath}/forgot-password"
+                                              method="post" class="text-start">
+
                                             <div class="input-group input-group-outline my-3">
                                                 <label class="form-label">Email</label>
-                                                <input type="email" class="form-control" name="email" value="${email}" required>
+                                                <input name="email" type="email" class="form-control"
+                                                       value="${email}">
                                             </div>
-                                            <!-- Password -->
+
                                             <div class="input-group input-group-outline mb-3">
-                                                <label class="form-label">Password</label>
-                                                <input type="password" class="form-control" name="password" required>
+                                                <label class="form-label">New password</label>
+                                                <input name="newPassword" type="password"
+                                                       class="form-control" required>
                                             </div>
-                                            <div class="text-center">
-                                                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Login</button>
-                                            </div>
-                                            <p class="mt-4 text-sm text-center">
-                                                Don't have an account?
-                                                <a href="${pageContext.request.contextPath}/signup" class="text-primary text-gradient font-weight-bold">Sign up</a>
-                                            </p>
+
+                                            <button type="submit"
+                                                    class="btn bg-gradient-dark w-100 my-4 mb-2">Reset</button>
+
+                                            <c:if test="${not empty err}">
+                                                <div class="alert alert-danger text-center py-2">${err}</div>
+                                            </c:if>
+                                            <c:if test="${not empty msg}">
+                                                <div class="alert alert-success text-center py-2">${msg}</div>
+                                            </c:if>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>

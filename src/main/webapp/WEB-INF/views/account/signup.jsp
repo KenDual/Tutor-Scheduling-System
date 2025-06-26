@@ -68,22 +68,42 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form" class="text-start">
+                                    <form action="${pageContext.request.contextPath}/signup" method="post" class="text-start">
+                                        <div class="d-flex justify-content-center gap-3 my-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                       name="role" id="rStudent" value="student" checked>
+                                                <label class="form-check-label" for="rStudent">Student</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                       name="role" id="rTutor" value="tutor">
+                                                <label class="form-check-label" for="rTutor">Tutor</label>
+                                            </div>
+                                        </div>
                                         <div class="input-group input-group-outline my-3">
-                                            <label class="form-label">Enter email</label>
-                                            <input type="email" class="form-control">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" name="email" class="form-control" required>
                                         </div>
+
                                         <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label">Enter password</label>
-                                            <input type="password" class="form-control">
+                                            <label class="form-label">Password</label>
+                                            <input type="password" name="password" class="form-control" required>
                                         </div>
+
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label">Confirm password</label>
-                                            <input type="password" class="form-control">
+                                            <input type="password" name="confirm" class="form-control" required>
                                         </div>
                                         <div class="text-center">
                                             <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
                                         </div>
+                                        <c:if test="${not empty err}">
+                                            <div class="alert alert-danger text-center py-2">${err}</div>
+                                        </c:if>
+                                        <c:if test="${not empty msg}">
+                                            <div class="alert alert-success text-center py-2">${msg}</div>
+                                        </c:if>
                                         <p class="mt-4 text-sm text-center">
                                             Already have an account?
                                             <a href="${pageContext.request.contextPath}/login" class="text-primary text-gradient font-weight-bold">Log in</a>
