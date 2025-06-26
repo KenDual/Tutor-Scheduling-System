@@ -288,23 +288,18 @@
                 </div>
                 <div id="materials" style="display: none;">
                     <h2 class="text-2xl font-bold mb-4">Study materials</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="bg-white shadow rounded-lg p-6">
-                            <h3 class="text-lg font-semibold">Math</h3>
-                            <p class="text-gray-500">About...</p>
-                            <a href="#" class="text-blue-600 hover:underline">Download</a>
-                        </div>
-                        <div class="bg-white shadow rounded-lg p-6">
-                            <h3 class="text-lg font-semibold">English</h3>
-                            <p class="text-gray-500">About...</p>
-                            <a href="#" class="text-blue-600 hover:underline">Download</a>
-                        </div>
-                        <div class="bg-white shadow rounded-lg p-6">
-                            <h3 class="text-lg font-semibold">Physics</h3>
-                            <p class="text-gray-500">About...</p>
-                            <a href="#" class="text-blue-600 hover:underline">Download</a>
-                        </div>
-                    </div>
+                    <ul class="space-y-3">
+                        <c:forEach var="m" items="${list}">
+                            <li class="bg-white shadow rounded p-4 flex justify-between">
+                                <span>
+                                    <strong>${m.title}</strong><br/>
+                                    <span class="text-sm text-gray-500">${m.description}</span>
+                                </span>
+                                <a href="${pageContext.request.contextPath}${m.fileUrl}"
+                                   class="text-blue-600 hover:underline self-center">Download</a>
+                            </li>
+                        </c:forEach>
+                    </ul>
                 </div>
                 <div id="settings" style="display: none;">
                     <h2 class="text-2xl font-bold mb-4">Account</h2

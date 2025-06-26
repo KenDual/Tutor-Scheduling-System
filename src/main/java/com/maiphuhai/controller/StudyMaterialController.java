@@ -28,7 +28,7 @@ public class StudyMaterialController {
     @GetMapping("/upload")
     public String form(Model model) {
         model.addAttribute("material", new StudyMaterial());
-        return "material_form"; // JSP
+        return "material-form"; // JSP
     }
 
     @PostMapping("/upload")
@@ -39,7 +39,7 @@ public class StudyMaterialController {
             RedirectAttributes rattr) throws IOException {
 
         if (rs.hasErrors()) {
-            return "material_form";
+            return "material-form";
         }
 
         /* ----- 1. Thư mục lưu: webapp/files ----- */
@@ -67,6 +67,6 @@ public class StudyMaterialController {
     @GetMapping
     public String list(Model model) {
         model.addAttribute("list", service.listAll());
-        return "material_list"; // JSP
+        return "material-list"; // JSP
     }
 }

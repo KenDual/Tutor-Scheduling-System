@@ -112,14 +112,45 @@
                         <thead>
                             <tr>
                                 <th>Thời gian</th>
-                                <th>Thứ 2</th><th>Thứ 3</th><th>Thứ 4</th>
-                                <th>Thứ 5</th><th>Thứ 6</th><th>Thứ 7</th><th>CN</th>
+                                <th>Thứ 2</th>
+                                <th>Thứ 3</th>
+                                <th>Thứ 4</th>
+                                <th>Thứ 5</th>
+                                <th>Thứ 6</th>
+                                <th>Thứ 7</th>
+                                <th>CN</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>Sáng (08-11h)</td><td id="monMorning"></td><td id="tueMorning"></td><td id="wedMorning"></td><td id="thuMorning"></td><td id="friMorning"></td><td id="satMorning"></td><td id="sunMorning"></td></tr>
-                            <tr><td>Chiều (13-16h)</td><td id="monAfternoon"></td><td id="tueAfternoon"></td><td id="wedAfternoon"></td><td id="thuAfternoon"></td><td id="friAfternoon"></td><td id="satAfternoon"></td><td id="sunAfternoon"></td></tr>
-                            <tr><td>Tối (18-21h)</td><td id="monEvening"></td><td id="tueEvening"></td><td id="wedEvening"></td><td id="thuEvening"></td><td id="friEvening"></td><td id="satEvening"></td><td id="sunEvening"></td></tr>
+                            <tr>
+                                <td>Sáng (08-11h)</td>
+                                <td id="monMorning"></td>
+                                <td id="tueMorning"></td>
+                                <td id="wedMorning"></td>
+                                <td id="thuMorning"></td>
+                                <td id="friMorning"></td>
+                                <td id="satMorning"></td>
+                                <td id="sunMorning"></td>
+                            </tr>
+                            <tr><td>Chiều (13-16h)</td>
+                                <td id="monAfternoon"></td>
+                                <td id="tueAfternoon"></td>
+                                <td id="wedAfternoon"></td>
+                                <td id="thuAfternoon"></td>
+                                <td id="friAfternoon"></td>
+                                <td id="satAfternoon"></td>
+                                <td id="sunAfternoon"></td>
+                            </tr>
+                            <tr>
+                                <td>Tối (18-21h)</td>
+                                <td id="monEvening"></td>
+                                <td id="tueEvening"></td>
+                                <td id="wedEvening"></td>
+                                <td id="thuEvening"></td>
+                                <td id="friEvening"></td>
+                                <td id="satEvening"></td>
+                                <td id="sunEvening"></td>
+                            </tr>
                         </tbody>
                     </table>
 
@@ -161,15 +192,11 @@
                             <form:input path="location" class="form-control" required="true"/>
                         </div>
 
-
-
-
                         <button type="submit"
                                 class="bg-blue-600 text-white py-2 rounded col-span-1">
                             Gửi yêu cầu
                         </button>
                     </form:form>
-
 
                     <c:if test="${not empty flashMsg}">
                         <p class="text-green-600 mt-2">${flashMsg}</p>
@@ -189,7 +216,9 @@
         </div>
 
         <footer class="bg-blue-600 text-white py-4 mt-8 text-center">
-            © 2025 Online Tutor Scheduling
+            <div class="container mx-auto text-center">
+                <p>© 2025 Online Tutor Scheduling. All rights reserved.</p>
+            </div>
         </footer>
 
         <!-- ============ SCRIPT CHUYỂN TAB ============ -->
