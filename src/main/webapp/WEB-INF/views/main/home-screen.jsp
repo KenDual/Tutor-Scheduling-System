@@ -236,7 +236,7 @@
             <section class="hero">
                 <h1>Khám Phá Vũ Trụ Kiến Thức</h1>
                 <p>Hành trình học tập của bạn bắt đầu từ đây</p>
-                <a href="#" class="btn">Đăng Ký Ngay</a>
+                <a href="${pageContext.request.contextPath}/signup" class="btn">Đăng Ký Ngay</a>
             </section>
 
             <!-- Services Section -->
