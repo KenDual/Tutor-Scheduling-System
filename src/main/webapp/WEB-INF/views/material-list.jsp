@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -26,19 +27,25 @@
                         <td class="px-6 py-4">${m.title}</td>
                         <td class="px-6 py-4">${m.description}</td>
                         <td class="px-6 py-4">
-                <fmt:formatDate value="${m.uploadedAt}" pattern="dd/MM/yyyy HH:mm"/>
-            </td>
-            <td class="px-6 py-4">
-                <a href="${pageContext.request.contextPath}${m.fileUrl}"
-                   class="text-blue-600 hover:underline">Download</a>
-            </td>
-        </tr>
-    </c:forEach>
-    <c:if test="${empty list}">
-        <tr><td colspan="4" class="px-6 py-4 text-center">No materials uploaded yet.</td></tr>
-    </c:if>
-</tbody>
-</table>
+                            <fmt:formatDate value="${m.uploadedAt}" pattern="dd/MM/yyyy HH:mm"/>
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="${pageContext.request.contextPath}/materials/download/${m.materialId}"
+                               class="text-blue-600 hover:underline">
+                                Download
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
+                <c:if test="${empty list}">
+                    <tr>
+                        <td colspan="4" class="px-6 py-4 text-center">
+                            No materials uploaded yet.
+                        </td>
+                    </tr>
+                </c:if>
+            </tbody>
+        </table>
 
-</body>
+    </body>
 </html>
