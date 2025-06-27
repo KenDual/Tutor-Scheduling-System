@@ -17,7 +17,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String showLoginForm() {
-        return "account/login-form";
+        return "account/login";
     }
 
     @PostMapping("/login")
@@ -33,7 +33,7 @@ public class UserController {
             model.addAttribute("error", "Sai email, mật khẩu hoặc vai trò");
             model.addAttribute("email", email);
             model.addAttribute("role", role);
-            return "account/login-form";
+            return "account/login";
         }
 
         session.setAttribute("USER", userOpt.get());
@@ -101,7 +101,7 @@ public class UserController {
     /* ---------- Sign-up (GET) ---------- */
     @GetMapping("/signup")
     public String showSignupForm() {
-        return "account/signup-form";
+        return "account/signup";
     }
 
     /* ---------- Sign-up (POST) ---------- */
@@ -116,7 +116,7 @@ public class UserController {
         if (userService.findByEmail(email).isPresent()) {
             model.addAttribute("err", "Email đã tồn tại");
             model.addAttribute("email", email);
-            return "account/signup-form";
+            return "account/signup";
         }
 
         User u = new User();
@@ -127,10 +127,10 @@ public class UserController {
 
         if (userService.register(u)) {
             model.addAttribute("msg", "Đăng ký thành công! Vui lòng đăng nhập");
-            return "account/login-form";
+            return "account/login";
         } else {
             model.addAttribute("err", "Đăng ký thất bại");
-            return "account/signup-form";
+            return "account/signup";
         }
     }
 

@@ -1,14 +1,9 @@
 package com.maiphuhai.model;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
-/**
- * POJO khớp bảng study_materials (giữ nguyên cấu trúc DB gốc).
- * Không ràng buộc khóa ngoại, chỉ cung cấp các trường cột có sẵn.
- */
 public class StudyMaterial {
-    private int materialId;          // material_id (PK)
+    private int materialId;
     private String title;
     private String description;
     private String fileUrl;
@@ -63,7 +58,4 @@ public class StudyMaterial {
     public void setUploadedAt(Date uploadedAt) {
         this.uploadedAt = uploadedAt;
     }
-
-   
 }
-

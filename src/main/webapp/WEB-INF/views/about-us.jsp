@@ -1,6 +1,5 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -12,7 +11,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>About Us – Vũ Trụ Kiến Thức</title>
-        <!-- Google font & vendor libs -->
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
               rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -21,7 +19,6 @@
               rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
         <style>
-            /* ---- RESET & THEME ---- */
             * {
                 box-sizing: border-box;
                 margin: 0;
@@ -30,19 +27,16 @@
             }
 
             body {
-                background: url('icon/background.jpg') center/cover fixed no-repeat;
+                background: url('<c:url value="/assets/img/universe.jpg"/>') center/cover fixed no-repeat;
                 color: #f8f9fa;
                 line-height: 1.7;
                 overflow-x: hidden;
                 -webkit-font-smoothing: antialiased
             }
-
             a {
                 color: inherit;
                 text-decoration: none
             }
-
-            /* HEADER (giữ nguyên từ home) */
             header {
                 background: rgba(0, 31, 63, .85);
                 padding: 18px 24px;
@@ -54,37 +48,30 @@
                 top: 0;
                 z-index: 1000
             }
-
             .logo {
                 font-size: 26px;
                 font-weight: 700;
                 letter-spacing: .5px;
                 text-shadow: 0 2px 6px #000
             }
-
             .logo span {
                 color: #FFDC00
             }
-
             nav ul {
                 list-style: none;
                 display: flex;
                 gap: 22px;
                 margin-bottom: 0
             }
-
             nav a {
                 padding: 8px 14px;
                 border-radius: 6px;
                 transition: background .3s
             }
-
             nav a:hover,
             nav .active {
                 background: #0074D9
             }
-
-            /* HERO */
             .hero {
                 padding: 160px 20px 90px;
                 text-align: center
@@ -143,7 +130,7 @@
             /* TEAM CUSTOM */
             .member-card {
                 background: rgba(80, 128, 165, .75);
-                border: none
+                border: none;
             }
 
             .member-card img {
@@ -206,10 +193,10 @@
             <div class="logo">Vũ Trụ <span>Kiến Thức</span></div>
             <nav>
                 <ul>
-                    <li><a href="home-screen.html">Home</a></li>
-                    <li><a href="#" class="active">About us</a></li>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Signup</a></li>
+                    <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+                    <li><a href="" class="active">About us</a></li>
+                    <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                    <li><a href="${pageContext.request.contextPath}/signup">Signup</a></li>
                 </ul>
             </nav>
         </header>
@@ -222,7 +209,7 @@
         </section>
 
         <!-- Who we are -->
-        <section class="bg-white text-dark" data-aos="fade-up">
+        <section class="bg-dark text-light" data-aos="fade-up">
             <div class="container">
                 <h2 class="section-title">Chúng tôi là ai?</h2>
                 <p class="lead text-center">Vũ Trụ Kiến Thức là nền tảng dạy học online hiện đại, kết nối
@@ -233,7 +220,7 @@
         </section>
 
         <!-- Mission & Vision Cards -->
-        <section class="bg-light text-dark" data-aos="fade-up">
+        <section class="bg-dark text-light" data-aos="fade-up">
             <div class="container">
                 <h2 class="section-title">Sứ mệnh &amp; Tầm nhìn</h2>
                 <div class="row g-4">
@@ -262,7 +249,7 @@
         </section>
 
         <!-- Features -->
-        <section class="bg-white text-dark" data-aos="fade-up">
+        <section class="bg-dark text-light" data-aos="fade-up">
             <div class="container">
                 <h2 class="section-title">Những giá trị chúng tôi mang lại</h2>
                 <p class="lead text-center mb-5">Không chỉ là công cụ – chúng tôi kiến tạo hành trình học
@@ -309,7 +296,7 @@
         </section>
 
         <!-- Team -->
-        <section class="bg-light text-dark" data-aos="fade-up">
+        <section class="bg-dark text-light" data-aos="fade-up">
             <div class="container">
                 <h2 class="section-title">Đội ngũ của chúng tôi</h2>
                 <div class="row g-4 justify-content-center">
@@ -347,9 +334,8 @@
         <!-- Contact -->
         <section class="bg-dark text-white" data-aos="fade-up">
             <div class="container text-center">
-                <h2 class="section-title">Liên hệ</h2>
-                <p class="lead">Email: support@vutrukienthuc.com | Hotline: 0123 456 789 | Địa chỉ: Số 123
-                    Nguyễn Văn Cừ, Quận 1, TP. HCM</p>
+                <h2 class="section-title">Contact</h2>
+                <p class="lead">Email: maiphuhai123@gmail.com | Hotline: 0123 456 789 | Address: In my heart</p>
             </div>
         </section>
 
@@ -358,7 +344,7 @@
             <p>©
             <fmt:formatDate value="${now}" pattern="yyyy" /> Vũ Trụ Kiến Thức. All rights reserved.
         </p>
-        <img class="spaceship" src="icon/spaceship.png" alt="Tàu vũ trụ">
+        <img class="spaceship" src="<c:url value="/assets/img/rocket.png"/>" alt="Tàu vũ trụ">
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

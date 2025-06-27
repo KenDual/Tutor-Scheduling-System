@@ -19,7 +19,6 @@ public class DashBoardTutorController {
     @Autowired
     private SubjectService subjectService;
 
-    /* Hiển thị dashboard + form đăng ký */
     @GetMapping("/dashboard-tutor")
     public String view(HttpSession sess, Model m) {
         User u = (User) sess.getAttribute("USER");
