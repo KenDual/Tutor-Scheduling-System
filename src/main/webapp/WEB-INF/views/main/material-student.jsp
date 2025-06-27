@@ -1,10 +1,4 @@
-<%-- 
-    Document   : dashboard-student
-    Created on : Jun 27, 2025, 6:13:47 PM
-    Author     : maiph
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,17 +8,21 @@
         <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
         <link rel="icon" type="image/png" href="../assets/img/favicon.png">
         <title>
-            Student Dashboard
+            Study Material
         </title>
+        <!--     Fonts and icons     -->
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
+        <!-- Nucleo Icons -->
         <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
         <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+        <!-- Font Awesome Icons -->
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        <!-- Material Icons -->
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <!-- CSS Files -->
         <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
     </head>
-
 
     <body class="g-sidenav-show  bg-gray-100">
         <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2"
@@ -32,8 +30,7 @@
             <div class="sidenav-header">
                 <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                    aria-hidden="true" id="iconSidenav"></i>
-                <a class="navbar-brand px-4 py-3 m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
-                   target="_blank">
+                <a class="navbar-brand px-4 py-3 m-0" href="https://github.com/KenDual/Tutor-Scheduling-System" target="_blank">
                     <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
                     <span class="ms-1 text-sm text-dark">Scheduling System</span>
                 </a>
@@ -42,7 +39,7 @@
             <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active bg-gradient-dark text-white" href="../pages/dashboard.html">
+                        <a class="nav-link text-dark" href="../pages/dashboard.html">
                             <i class="material-symbols-rounded opacity-5">dashboard</i>
                             <span class="nav-link-text ms-1">Dashboard</span>
                         </a>
@@ -60,7 +57,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/study-material.html">
+                        <a class="nav-link active bg-gradient-dark text-white" href="../pages/study-material.html">
                             <i class="material-symbols-rounded opacity-5">notifications</i>
                             <span class="nav-link-text ms-1">Study material</span>
                         </a>
@@ -75,9 +72,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/log-in.html">
+                        <a class="nav-link text-dark" href="../pages/sign-in.html">
                             <i class="material-symbols-rounded opacity-5">login</i>
-                            <span class="nav-link-text ms-1">Log out</span>
+                            <span class="nav-link-text ms-1">Sign In</span>
                         </a>
                     </li>
                 </ul>
@@ -85,7 +82,7 @@
             <div class="sidenav-footer position-absolute w-100 bottom-0 ">
                 <div class="mx-3">
                     <a class="btn btn-outline-dark mt-4 w-100"
-                       href="/about-us"
+                       href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard?ref=sidebarfree"
                        type="button">Documentation</a>
                 </div>
             </div>
@@ -105,7 +102,6 @@
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         </div>
                         <ul class="navbar-nav d-flex align-items-center  justify-content-end">
-
                             <li class="mt-1">
                                 <a class="github-button" href="https://github.com/KenDual/Tutor-Scheduling-System"
                                    data-icon="octicon-star" data-size="large" data-show-count="true"
@@ -217,100 +213,157 @@
             <!-- End Navbar -->
             <div class="container-fluid py-2">
                 <div class="row">
-                    <div class="ms-3">
-                        <h3 class="mb-0 h4 font-weight-bolder">Dashboard</h3>
-                        <p class="mb-4">
-                            Check tutor status.
-                        </p>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                        <div class="card">
-                            <div class="card-header p-2 ps-3">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <p class="text-sm mb-0 text-capitalize">Tổng ca học trong tuần</p>
-                                        <h4 class="mb-0">$53k</h4>
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="card mt-4">
+                            <div class="card-header p-3">
+                                <h5 class="mb-0">Assignments</h5>
+                            </div>
+                            <ippetsdiv class="card-body p-3 pb-0">
+                                <div class="alert alert-primary d-flex justify-content-between align-items-center text-white"
+                                     role="alert">
+                                    <span class="text-sm">Math ? Homework&nbsp;01</span>
+                                    <a class="btn btn-sm btn-light text-dark d-inline-flex align-items-center"
+                                       href="../files/homework01.pdf" download>
+                                        <i class="material-symbols-rounded me-1">download</i> Download
+                                    </a>
+                                </div>
+                                <div class="alert alert-primary d-flex justify-content-between align-items-center text-white"
+                                     role="alert">
+                                    <span class="text-sm">Math ? Homework&nbsp;02</span>
+                                    <a class="btn btn-sm btn-light text-dark d-inline-flex align-items-center"
+                                       href="../files/homework01.pdf" download>
+                                        <i class="material-symbols-rounded me-1">download</i> Download
+                                    </a>
+                                </div>
+                                <div class="alert alert-primary d-flex justify-content-between align-items-center text-white"
+                                     role="alert">
+                                    <span class="text-sm">Math ? Homework&nbsp;03</span>
+                                    <a class="btn btn-sm btn-light text-dark d-inline-flex align-items-center"
+                                       href="../files/homework01.pdf" download>
+                                        <i class="material-symbols-rounded me-1">download</i> Download
+                                    </a>
+                                </div>
+                                <div class="card mt-4">
+                                    <div class="card-header p-3">
+                                        <h5 class="mb-0">Notifications</h5>
+                                        <p class="text-sm mb-0">
+                                            Notifications on this page use Toasts from Bootstrap. Read more details <a
+                                                href="https://getbootstrap.com/docs/5.0/components/toasts/" target="
+                                                ">here</a>.
+                                        </p>
                                     </div>
-                                    <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-                                        <i class="material-symbols-rounded opacity-10">weekend</i>
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-sm-6 col-12">
+                                                <button class="btn bg-gradient-success w-100 mb-0 toast-btn" type="button"
+                                                        data-target="successToast">Success</button>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-6 col-12 mt-sm-0 mt-2">
+                                                <button class="btn bg-gradient-info w-100 mb-0 toast-btn" type="button"
+                                                        data-target="infoToast">Info</button>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-6 col-12 mt-lg-0 mt-2">
+                                                <button class="btn bg-gradient-warning w-100 mb-0 toast-btn" type="button"
+                                                        data-target="warningToast">Warning</button>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-6 col-12 mt-lg-0 mt-2">
+                                                <button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="button"
+                                                        data-target="dangerToast">Danger</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                        </div>
+                    </div>
+                    <div class="position-fixed bottom-1 end-1 z-index-2">
+                        <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast"
+                             aria-atomic="true">
+                            <div class="toast-header border-0">
+                                <i class="material-symbols-rounded text-success me-2">
+                                    check
+                                </i>
+                                <span class="me-auto font-weight-bold">Material Dashboard </span>
+                                <small class="text-body">11 mins ago</small>
+                                <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
                             </div>
-                            <hr class="dark horizontal my-0">
-                            <div class="card-footer p-2 ps-3">
-                                <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">Session</span></p>
+                            <hr class="horizontal dark m-0">
+                            <div class="toast-body">
+                                Hello, world! This is a notification message.
+                            </div>
+                        </div>
+                        <div class="toast fade hide p-2 mt-2 bg-gradient-info" role="alert" aria-live="assertive" id="infoToast"
+                             aria-atomic="true">
+                            <div class="toast-header bg-transparent border-0">
+                                <i class="material-symbols-rounded text-white me-2">
+                                    notifications
+                                </i>
+                                <span class="me-auto text-white font-weight-bold">Material Dashboard </span>
+                                <small class="text-white">11 mins ago</small>
+                                <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast"
+                                   aria-label="Close"></i>
+                            </div>
+                            <hr class="horizontal light m-0">
+                            <div class="toast-body text-white">
+                                Hello, world! This is a notification message.
+                            </div>
+                        </div>
+                        <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast"
+                             aria-atomic="true">
+                            <div class="toast-header border-0">
+                                <i class="material-symbols-rounded text-warning me-2">
+                                    travel_explore
+                                </i>
+                                <span class="me-auto font-weight-bold">Material Dashboard </span>
+                                <small class="text-body">11 mins ago</small>
+                                <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+                            </div>
+                            <hr class="horizontal dark m-0">
+                            <div class="toast-body">
+                                Hello, world! This is a notification message.
+                            </div>
+                        </div>
+                        <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="dangerToast"
+                             aria-atomic="true">
+                            <div class="toast-header border-0">
+                                <i class="material-symbols-rounded text-danger me-2">
+                                    campaign
+                                </i>
+                                <span class="me-auto text-gradient text-danger font-weight-bold">Material Dashboard </span>
+                                <small class="text-body">11 mins ago</small>
+                                <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+                            </div>
+                            <hr class="horizontal dark m-0">
+                            <div class="toast-body">
+                                Hello, world! This is a notification message.
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                        <div class="card">
-                            <div class="card-header p-2 ps-3">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <p class="text-sm mb-0 text-capitalize">Bài tập về nhà</p>
-                                        <h4 class="mb-0">2300</h4>
-                                    </div>
-                                    <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-                                        <i class="material-symbols-rounded opacity-10">person</i>
+                    <footer class="footer py-4  ">
+                        <div class="container-fluid">
+                            <div class="row align-items-center justify-content-lg-between">
+                                <div class="col-lg-6 mb-lg-0 mb-4">
+                                    <div class="copyright text-center text-sm text-muted text-lg-start">
+                                        �
+                                        <script>
+                                            document.write(new Date().getFullYear())
+                                        </script>,
+                                        made with <i class="fa fa-heart"></i>lichen by
+                                        <a href="https://github.com/KenDual/Tutor-Scheduling-System.git" class="font-weight-bold" target="_blank">Bo Tam AI Thu</a>
+                                        for a better web.
                                     </div>
                                 </div>
-                            </div>
-                            <hr class="dark horizontal my-0">
-                            <div class="card-footer p-2 ps-3">
-                                <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">Exercises</p>
+                                <div class="col-lg-6">
+                                    <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                        <li class="nav-item">
+                                            <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
+                                               target="_blank">About Us</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-
+                    </footer>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mt-4 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h6 class="mb-0 ">Website Views</h6>
-                                <p class="text-sm ">Last Campaign Performance</p>
-                                <div class="pe-2">
-                                    <div class="chart">
-                                        <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mt-4 mb-4">
-                        <div class="card ">
-                            <div class="card-body">
-                                <h6 class="mb-0 "> Daily Sales </h6>
-                                <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales. </p>
-                                <div class="pe-2">
-                                    <div class="chart">
-                                        <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <footer class="footer py-4  ">
-                    <div class="container-fluid">
-                        <div class="row align-items-center justify-content-lg-between">
-                            <div class="col-lg-6 mb-lg-0 mb-4">
-                                <div class="copyright text-center text-sm text-muted text-lg-start">
-                                    ©
-                                    <script>
-                                        document.write(new Date().getFullYear())
-                                    </script>,
-                                    made with <i class="fa fa-heart"></i> by
-                                    <a class="font-weight-bold" target="_blank">Bo Tam AI Thu</a>
-                                    for a better web.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
         </main>
         <div class="fixed-plugin">
             <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
@@ -383,7 +436,7 @@
                            data-icon="octicon-star" data-size="large" data-show-count="true"
                            aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
                         <h6 class="mt-3">Thank you for sharing!</h6>
-                        <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard"
+                        <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard"
                            class="btn btn-dark mb-0 me-2" target="_blank">
                             <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
                         </a>
@@ -400,252 +453,16 @@
         <script src="../assets/js/core/bootstrap.min.js"></script>
         <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
         <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-        <script src="../assets/js/plugins/chartjs.min.js"></script>
         <script>
-                      var ctx = document.getElementById("chart-bars").getContext("2d");
-
-                      new Chart(ctx, {
-                          type: "bar",
-                          data: {
-                              labels: ["M", "T", "W", "T", "F", "S", "S"],
-                              datasets: [{
-                                      label: "Views",
-                                      tension: 0.4,
-                                      borderWidth: 0,
-                                      borderRadius: 4,
-                                      borderSkipped: false,
-                                      backgroundColor: "#43A047",
-                                      data: [50, 45, 22, 28, 50, 60, 76],
-                                      barThickness: 'flex'
-                                  }, ],
-                          },
-                          options: {
-                              responsive: true,
-                              maintainAspectRatio: false,
-                              plugins: {
-                                  legend: {
-                                      display: false,
-                                  }
-                              },
-                              interaction: {
-                                  intersect: false,
-                                  mode: 'index',
-                              },
-                              scales: {
-                                  y: {
-                                      grid: {
-                                          drawBorder: false,
-                                          display: true,
-                                          drawOnChartArea: true,
-                                          drawTicks: false,
-                                          borderDash: [5, 5],
-                                          color: '#e5e5e5'
-                                      },
-                                      ticks: {
-                                          suggestedMin: 0,
-                                          suggestedMax: 500,
-                                          beginAtZero: true,
-                                          padding: 10,
-                                          font: {
-                                              size: 14,
-                                              lineHeight: 2
-                                          },
-                                          color: "#737373"
-                                      },
-                                  },
-                                  x: {
-                                      grid: {
-                                          drawBorder: false,
-                                          display: false,
-                                          drawOnChartArea: false,
-                                          drawTicks: false,
-                                          borderDash: [5, 5]
-                                      },
-                                      ticks: {
-                                          display: true,
-                                          color: '#737373',
-                                          padding: 10,
-                                          font: {
-                                              size: 14,
-                                              lineHeight: 2
-                                          },
-                                      }
-                                  },
-                              },
-                          },
-                      });
-
-
-                      var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-                      new Chart(ctx2, {
-                          type: "line",
-                          data: {
-                              labels: ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"],
-                              datasets: [{
-                                      label: "Sales",
-                                      tension: 0,
-                                      borderWidth: 2,
-                                      pointRadius: 3,
-                                      pointBackgroundColor: "#43A047",
-                                      pointBorderColor: "transparent",
-                                      borderColor: "#43A047",
-                                      backgroundColor: "transparent",
-                                      fill: true,
-                                      data: [120, 230, 130, 440, 250, 360, 270, 180, 90, 300, 310, 220],
-                                      maxBarThickness: 6
-
-                                  }],
-                          },
-                          options: {
-                              responsive: true,
-                              maintainAspectRatio: false,
-                              plugins: {
-                                  legend: {
-                                      display: false,
-                                  },
-                                  tooltip: {
-                                      callbacks: {
-                                          title: function (context) {
-                                              const fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                                              return fullMonths[context[0].dataIndex];
-                                          }
-                                      }
-                                  }
-                              },
-                              interaction: {
-                                  intersect: false,
-                                  mode: 'index',
-                              },
-                              scales: {
-                                  y: {
-                                      grid: {
-                                          drawBorder: false,
-                                          display: true,
-                                          drawOnChartArea: true,
-                                          drawTicks: false,
-                                          borderDash: [4, 4],
-                                          color: '#e5e5e5'
-                                      },
-                                      ticks: {
-                                          display: true,
-                                          color: '#737373',
-                                          padding: 10,
-                                          font: {
-                                              size: 12,
-                                              lineHeight: 2
-                                          },
-                                      }
-                                  },
-                                  x: {
-                                      grid: {
-                                          drawBorder: false,
-                                          display: false,
-                                          drawOnChartArea: false,
-                                          drawTicks: false,
-                                          borderDash: [5, 5]
-                                      },
-                                      ticks: {
-                                          display: true,
-                                          color: '#737373',
-                                          padding: 10,
-                                          font: {
-                                              size: 12,
-                                              lineHeight: 2
-                                          },
-                                      }
-                                  },
-                              },
-                          },
-                      });
-
-                      var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
-
-                      new Chart(ctx3, {
-                          type: "line",
-                          data: {
-                              labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                              datasets: [{
-                                      label: "Tasks",
-                                      tension: 0,
-                                      borderWidth: 2,
-                                      pointRadius: 3,
-                                      pointBackgroundColor: "#43A047",
-                                      pointBorderColor: "transparent",
-                                      borderColor: "#43A047",
-                                      backgroundColor: "transparent",
-                                      fill: true,
-                                      data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                                      maxBarThickness: 6
-
-                                  }],
-                          },
-                          options: {
-                              responsive: true,
-                              maintainAspectRatio: false,
-                              plugins: {
-                                  legend: {
-                                      display: false,
-                                  }
-                              },
-                              interaction: {
-                                  intersect: false,
-                                  mode: 'index',
-                              },
-                              scales: {
-                                  y: {
-                                      grid: {
-                                          drawBorder: false,
-                                          display: true,
-                                          drawOnChartArea: true,
-                                          drawTicks: false,
-                                          borderDash: [4, 4],
-                                          color: '#e5e5e5'
-                                      },
-                                      ticks: {
-                                          display: true,
-                                          padding: 10,
-                                          color: '#737373',
-                                          font: {
-                                              size: 14,
-                                              lineHeight: 2
-                                          },
-                                      }
-                                  },
-                                  x: {
-                                      grid: {
-                                          drawBorder: false,
-                                          display: false,
-                                          drawOnChartArea: false,
-                                          drawTicks: false,
-                                          borderDash: [4, 4]
-                                      },
-                                      ticks: {
-                                          display: true,
-                                          color: '#737373',
-                                          padding: 10,
-                                          font: {
-                                              size: 14,
-                                              lineHeight: 2
-                                          },
-                                      }
-                                  },
-                              },
-                          },
-                      });
+                      var win = navigator.platform.indexOf('Win') > -1;
+                      if (win && document.querySelector('#sidenav-scrollbar')) {
+                          var options = {
+                              damping: '0.5'
+                          };
+                          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+                      }
         </script>
-        <script>
-            var win = navigator.platform.indexOf('Win') > -1;
-            if (win && document.querySelector('#sidenav-scrollbar')) {
-                var options = {
-                    damping: '0.5'
-                }
-                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-            }
-        </script>
-        <!-- Github buttons -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="../assets/js/material-dashboard.min.js?v=3.2.0"></script>
     </body>
 

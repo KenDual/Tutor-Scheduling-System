@@ -1,633 +1,646 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard Giáo Viên - Tutor Scheduling</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <style>
-            body {
-                font-family: 'Arial', sans-serif;
-            }
-            .nav-button {
-                transition: background-color 0.2s, transform 0.2s;
-            }
-            .nav-button:hover {
-                background-color: #3b82f6;
-                transform: scale(1.05);
-                color: white;
-            }
-            .timetable {
-                border-collapse: collapse;
-                width: 100%;
-                min-width: 800px;
-                margin-top: 1rem;
-            }
-            .timetable th {
-                background-color: #007bff;
-                color: white;
-                padding: 0.75rem;
-                text-align: center;
-                border: 1px solid #dee2e6;
-            }
-            .timetable td {
-                border: 1px solid #dee2e6;
-                padding: 0.5rem;
-                text-align: center;
-                height: 80px;
-                vertical-align: top;
-                position: relative;
-            }
-            .schedule-item {
-                background-color: #fff3cd;
-                padding: 0.25rem;
-                border-radius: 0.25rem;
-                font-size: 0.875rem;
-                cursor: pointer;
-                position: relative;
-            }
-            .schedule-item:hover .tooltip {
-                display: block;
-            }
-            .progress-bar {
-                width: 100%;
-                background-color: #e9ecef;
-                border-radius: 0.25rem;
-                height: 0.5rem;
-                margin-top: 0.25rem;
-            }
-            .progress {
-                height: 100%;
-                background-color: #28a745;
-                border-radius: 0.25rem;
-                transition: width 0.3s;
-            }
-            .tooltip {
-                display: none;
-                position: absolute;
-                background-color: #333;
-                color: white;
-                padding: 0.5rem;
-                border-radius: 0.25rem;
-                z-index: 10;
-                top: -100%;
-                left: 50%;
-                transform: translateX(-50%);
-                white-space: nowrap;
-                font-size: 0.75rem;
-            }
-            .delete-tooltip {
-                display: none;
-                position: absolute;
-                background-color: #333;
-                color: white;
-                padding: 0.5rem;
-                border-radius: 0.25rem;
-                z-index: 10;
-                top: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-                white-space: nowrap;
-                font-size: 0.75rem;
-                cursor: pointer;
-            }
-            .schedule-item:hover .delete-tooltip {
-                display: block;
-            }
-        </style>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+        <title>
+            Student Dashboard
+        </title>
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
+        <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+        <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
     </head>
-    <body class="bg-gray-100">
-        <header class="bg-blue-600 text-white py-6 relative">
-            <div class="container mx-auto flex justify-between items-center">
-                <h1 class="text-3xl font-bold">Dashboard Giáo Viên</h1>
-                <div class="flex items-center">
-                    <a href="#" class="text-white mr-4" aria-label="Thông Báo">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
+
+
+    <body class="g-sidenav-show  bg-gray-100">
+        <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2"
+               id="sidenav-main">
+            <div class="sidenav-header">
+                <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                   aria-hidden="true" id="iconSidenav"></i>
+                <a class="navbar-brand px-4 py-3 m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+                   target="_blank">
+                    <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
+                    <span class="ms-1 text-sm text-dark">Scheduling System</span>
+                </a>
+            </div>
+            <hr class="horizontal dark mt-0 mb-2">
+            <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active bg-gradient-dark text-white" href="../pages/dashboard.html">
+                            <i class="material-symbols-rounded opacity-5">dashboard</i>
+                            <span class="nav-link-text ms-1">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="../pages/timetable.html">
+                            <i class="material-symbols-rounded opacity-5">table_view</i>
+                            <span class="nav-link-text ms-1">Timetable</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="../pages/exercise.html">
+                            <i class="material-symbols-rounded opacity-5">table_view</i>
+                            <span class="nav-link-text ms-1">Exercise</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="../pages/study-material.html">
+                            <i class="material-symbols-rounded opacity-5">notifications</i>
+                            <span class="nav-link-text ms-1">Study material</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Account pages</h6>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="../pages/profile.html">
+                            <i class="material-symbols-rounded opacity-5">person</i>
+                            <span class="nav-link-text ms-1">Profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="../pages/log-in.html">
+                            <i class="material-symbols-rounded opacity-5">login</i>
+                            <span class="nav-link-text ms-1">Log out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+                <div class="mx-3">
+                    <a class="btn btn-outline-dark mt-4 w-100"
+                       href="/about-us"
+                       type="button">Documentation</a>
+                </div>
+            </div>
+        </aside>
+        <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+            <!-- Navbar -->
+            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur"
+                 data-scroll="true">
+                <div class="container-fluid py-1 px-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Student Dashboard</li>
+                        </ol>
+                    </nav>
+                    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        </div>
+                        <ul class="navbar-nav d-flex align-items-center  justify-content-end">
+
+                            <li class="mt-1">
+                                <a class="github-button" href="https://github.com/KenDual/Tutor-Scheduling-System"
+                                   data-icon="octicon-star" data-size="large" data-show-count="true"
+                                   aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
+                            </li>
+                            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                                <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                    <div class="sidenav-toggler-inner">
+                                        <i class="sidenav-toggler-line"></i>
+                                        <i class="sidenav-toggler-line"></i>
+                                        <i class="sidenav-toggler-line"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item px-3 d-flex align-items-center">
+                                <a href="javascript:;" class="nav-link text-body p-0">
+                                    <i class="material-symbols-rounded fixed-plugin-button-nav">settings</i>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown pe-3 d-flex align-items-center">
+                                <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    <i class="material-symbols-rounded">notifications</i>
+                                </a>
+                                <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                                    <li class="mb-2">
+                                        <a class="dropdown-item border-radius-md" href="javascript:;">
+                                            <div class="d-flex py-1">
+                                                <div class="my-auto">
+                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="text-sm font-weight-normal mb-1">
+                                                        <span class="font-weight-bold">New message</span> from Laur
+                                                    </h6>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        <i class="fa fa-clock me-1"></i>
+                                                        13 minutes ago
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a class="dropdown-item border-radius-md" href="javascript:;">
+                                            <div class="d-flex py-1">
+                                                <div class="my-auto">
+                                                    <img src="../assets/img/small-logos/logo-spotify.svg"
+                                                         class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="text-sm font-weight-normal mb-1">
+                                                        <span class="font-weight-bold">New album</span> by Travis Scott
+                                                    </h6>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        <i class="fa fa-clock me-1"></i>
+                                                        1 day
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item border-radius-md" href="javascript:;">
+                                            <div class="d-flex py-1">
+                                                <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                                                    <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
+                                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <title>credit-card</title>
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                                    <g transform="translate(1716.000000, 291.000000)">
+                                                    <g transform="translate(453.000000, 454.000000)">
+                                                    <path class="color-background"
+                                                          d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
+                                                          opacity="0.593633743"></path>
+                                                    <path class="color-background"
+                                                          d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
+                                                    </path>
+                                                    </g>
+                                                    </g>
+                                                    </g>
+                                                    </g>
+                                                    </svg>
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="text-sm font-weight-normal mb-1">
+                                                        Payment successfully completed
+                                                    </h6>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        <i class="fa fa-clock me-1"></i>
+                                                        2 days
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item d-flex align-items-center">
+                                <a href="../pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+                                    <i class="material-symbols-rounded">account_circle</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="container-fluid py-2">
+                <div class="row">
+                    <div class="ms-3">
+                        <h3 class="mb-0 h4 font-weight-bolder">Dashboard</h3>
+                        <p class="mb-4">
+                            Check tutor status.
+                        </p>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                        <div class="card">
+                            <div class="card-header p-2 ps-3">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p class="text-sm mb-0 text-capitalize">Tổng ca học trong tuần</p>
+                                        <h4 class="mb-0">$53k</h4>
+                                    </div>
+                                    <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+                                        <i class="material-symbols-rounded opacity-10">weekend</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="dark horizontal my-0">
+                            <div class="card-footer p-2 ps-3">
+                                <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">Session</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                        <div class="card">
+                            <div class="card-header p-2 ps-3">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p class="text-sm mb-0 text-capitalize">Bài tập về nhà</p>
+                                        <h4 class="mb-0">2300</h4>
+                                    </div>
+                                    <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+                                        <i class="material-symbols-rounded opacity-10">person</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="dark horizontal my-0">
+                            <div class="card-footer p-2 ps-3">
+                                <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">Exercises</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="mb-0 ">Website Views</h6>
+                                <p class="text-sm ">Last Campaign Performance</p>
+                                <div class="pe-2">
+                                    <div class="chart">
+                                        <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                        <div class="card ">
+                            <div class="card-body">
+                                <h6 class="mb-0 "> Daily Sales </h6>
+                                <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales. </p>
+                                <div class="pe-2">
+                                    <div class="chart">
+                                        <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="footer py-4  ">
+                    <div class="container-fluid">
+                        <div class="row align-items-center justify-content-lg-between">
+                            <div class="col-lg-6 mb-lg-0 mb-4">
+                                <div class="copyright text-center text-sm text-muted text-lg-start">
+                                    ©
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script>,
+                                    made with <i class="fa fa-heart"></i> by
+                                    <a class="font-weight-bold" target="_blank">Bo Tam AI Thu</a>
+                                    for a better web.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </main>
+        <div class="fixed-plugin">
+            <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+                <i class="material-symbols-rounded py-2">settings</i>
+            </a>
+            <div class="card shadow-lg">
+                <div class="card-header pb-0 pt-3">
+                    <div class="float-start">
+                        <h5 class="mt-3 mb-0">Material UI Configurator</h5>
+                        <p>See our dashboard options.</p>
+                    </div>
+                    <div class="float-end mt-4">
+                        <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                            <i class="material-symbols-rounded">clear</i>
+                        </button>
+                    </div>
+                    <!-- End Toggle Button -->
+                </div>
+                <hr class="horizontal dark my-1">
+                <div class="card-body pt-sm-3 pt-0">
+                    <!-- Sidebar Backgrounds -->
+                    <div>
+                        <h6 class="mb-0">Sidebar Colors</h6>
+                    </div>
+                    <a href="javascript:void(0)" class="switch-trigger background-color">
+                        <div class="badge-colors my-2 text-start">
+                            <span class="badge filter bg-gradient-primary" data-color="primary" onclick="sidebarColor(this)"></span>
+                            <span class="badge filter bg-gradient-dark active" data-color="dark" onclick="sidebarColor(this)"></span>
+                            <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+                            <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
+                            <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
+                            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+                        </div>
                     </a>
-                    <button class="bg-green-700 text-white text-sm font-semibold py-1 px-3 rounded-lg hover:bg-green-800">Profile</button>
-                    <a href="${pageContext.request.contextPath}/logout" class="bg-green-600 text-white text-sm font-semibold py-1 px-3 rounded-lg ml-2 hover:bg-green-700">Sign out</a>
+                    <!-- Sidenav Type -->
+                    <div class="mt-3">
+                        <h6 class="mb-0">Sidenav Type</h6>
+                        <p class="text-sm">Choose between different sidenav types.</p>
+                    </div>
+                    <div class="d-flex">
+                        <button class="btn bg-gradient-dark px-3 mb-2" data-class="bg-gradient-dark"
+                                onclick="sidebarType(this)">Dark</button>
+                        <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent"
+                                onclick="sidebarType(this)">Transparent</button>
+                        <button class="btn bg-gradient-dark px-3 mb-2  active ms-2" data-class="bg-white"
+                                onclick="sidebarType(this)">White</button>
+                    </div>
+                    <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+                    <!-- Navbar Fixed -->
+                    <div class="mt-3 d-flex">
+                        <h6 class="mb-0">Navbar Fixed</h6>
+                        <div class="form-check form-switch ps-0 ms-auto my-auto">
+                            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
+                        </div>
+                    </div>
+                    <hr class="horizontal dark my-3">
+                    <div class="mt-2 d-flex">
+                        <h6 class="mb-0">Light / Dark</h6>
+                        <div class="form-check form-switch ps-0 ms-auto my-auto">
+                            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
+                        </div>
+                    </div>
+                    <hr class="horizontal dark my-sm-4">
+                    <a class="btn bg-gradient-info w-100" href="https://www.creative-tim.com/product/material-dashboard-pro">Free
+                        Download</a>
+                    <a class="btn btn-outline-dark w-100"
+                       href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard">View documentation</a>
+                    <div class="w-100 text-center">
+                        <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard"
+                           data-icon="octicon-star" data-size="large" data-show-count="true"
+                           aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
+                        <h6 class="mt-3">Thank you for sharing!</h6>
+                        <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard"
+                           class="btn btn-dark mb-0 me-2" target="_blank">
+                            <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard"
+                           class="btn btn-dark mb-0 me-2" target="_blank">
+                            <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
+                        </a>
+                    </div>
                 </div>
             </div>
-        </header>
-        <div class="flex">
-            <aside class="w-64 bg-white shadow-lg min-h-screen p-4">
-                <nav>
-                    <ul>
-                        <li class="mb-4"><a href="#" data-section="overview" class="block nav-button p-3 rounded-lg text-gray-700 font-medium hover:bg-blue-100">Dashboard</a></li>
-                        <li class="mb-4"><a href="#" data-section="schedule" class="block nav-button p-3 rounded-lg text-gray-700 font-medium hover:bg-blue-100">Lịch Học</a></li>
-                        <li class="mb-4"><a href="#" data-section="assignments" class="block nav-button p-3 rounded-lg text-gray-700 font-medium hover:bg-blue-100">Bài Tập</a></li>
-                        <li class="mb-4"><a href="#" data-section="materials" class="block nav-button p-3 rounded-lg text-gray-700 font-medium hover:bg-blue-100">Tài Liệu Học</a></li>
-                        <li class="mb-4"><a href="#" data-section="settings" class="block nav-button p-3 rounded-lg text-gray-700 font-medium hover:bg-blue-100">Cài Đặt</a></li>
-                    </ul>
-                </nav>
-            </aside>
-            <main class="flex-1 p-8">
-                <div id="overview" style="display: block;">
-                    <h2 class="text-2xl font-bold mb-6">Tổng Quan</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="bg-white shadow rounded-lg p-6">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m-4 4h10M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div class="ml-4">
-                                    <h3 class="text-lg font-semibold">Lớp Học</h3>
-                                    <p class="text-2xl font-bold">5</p>
-                                    <p class="text-sm text-gray-500">Đã đăng ký</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white shadow rounded-lg p-6">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 bg-green-100 text-green-600 rounded-full p-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m2 4H7m10-8H7m7-4h.01" />
-                                    </svg>
-                                </div>
-                                <div class="ml-4">
-                                    <h3 class="text-lg font-semibold">Học Sinh</h3>
-                                    <p class="text-2xl font-bold">15</p>
-                                    <p class="text-sm text-gray-500">Đã đăng ký</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white shadow rounded-lg p-6">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 bg-yellow-100 text-yellow-600 rounded-full p-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-3.866 0-7 3.134-7 7h14c0-3.866-3.134-7-7-7z" />
-                                    </svg>
-                                </div>
-                                <div class="ml-4">
-                                    <h2 class="text-lg font-semibold">Đánh Giá</h2>
-                                    <p class="text-2xl font-bold">4.5</p>
-                                    <p class="text-sm text-gray-500">Trung bình</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="schedule" style="display: none;">
-                    <h2 class="text-2xl font-bold mb-4">Thời Khóa Biểu</h2>
-                    <table class="timetable">
-                        <thead>
-                            <tr>
-                                <th>Thời gian</th>
-                                <th>Thứ 2<br>09/06/2025</th>
-                                <th>Thứ 3<br>10/06/2025</th>
-                                <th>Thứ 4<br>11/06/2025</th>
-                                <th>Thứ 5<br>12/06/2025</th>
-                                <th>Thứ 6<br>13/06/2025</th>
-                                <th>Thứ 7<br>14/06/2025</th>
-                                <th>Chủ nhật<br>15/06/2025</th>
-                            </tr>
-                        </thead>
-                        <tbody id="timetableBody">
-                            <tr>
-                                <td>Sáng (08:00-11:00)</td>
-                                <td id="monMorning">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'mon' && s.slot == 1}">
-                                            <div class="schedule-item" data-day="mon" data-slot="morning" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Morning</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 08:00-11:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="tueMorning">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'tue' && s.slot == 1}">
-                                            <div class="schedule-item" data-day="tue" data-slot="morning" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Morning</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 08:00-11:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="wedMorning">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'wed' && s.slot == 1}">
-                                            <div class="schedule-item" data-day="wed" data-slot="morning" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Morning</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 08:00-11:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="thuMorning">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'thu' && s.slot == 1}">
-                                            <div class="schedule-item" data-day="thu" data-slot="morning" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Morning</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 08:00-11:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="friMorning">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'fri' && s.slot == 1}">
-                                            <div class="schedule-item" data-day="fri" data-slot="morning" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Morning</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 08:00-11:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="satMorning">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'sat' && s.slot == 1}">
-                                            <div class="schedule-item" data-day="sat" data-slot="morning" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Morning</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 08:00-11:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <demand class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                            <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="sunMorning">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'sun' && s.slot == 1}">
-                                            <div class="schedule-item" data-day="sun" data-slot="morning" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Morning</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 08:00-11:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Chiều (13:00-16:00)</td>
-                                <td id="monAfternoon">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'mon' && s.slot == 2}">
-                                            <div class="schedule-item" data-day="mon" data-slot="afternoon" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Afternoon</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 13:00-16:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="tueAfternoon">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'tue' && s.slot == 2}">
-                                            <div class="schedule-item" data-day="tue" data-slot="afternoon" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Afternoon</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 13:00-16:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="wedAfternoon">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'wed' && s.slot == 2}">
-                                            <div class="schedule-item" data-day="wed" data-slot="afternoon" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Afternoon</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 13:00-16:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="thuAfternoon">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'thu' && s.slot == 2}">
-                                            <div class="schedule-item" data-day="thu" data-slot="afternoon" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Afternoon</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 13:00-16:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="friAfternoon">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'fri' && s.slot == 2}">
-                                            <div class="schedule-item" data-day="fri" data-slot="afternoon" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Afternoon</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 13:00-16:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="satAfternoon">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'sat' && s.slot == 2}">
-                                            <div class="schedule-item" data-day="sat" data-slot="afternoon" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Afternoon</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 13:00-16:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="sunAfternoon">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'sun' && s.slot == 2}">
-                                            <div class="schedule-item" data-day="sun" data-slot="afternoon" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Afternoon</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 13:00-16:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Tối (18:00-21:00)</td>
-                                <td id="monEvening">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'mon' && s.slot == 3}">
-                                            <div class="schedule-item" data-day="mon" data-slot="evening" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Evening</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 18:00-21:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="tueEvening">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'tue' && s.slot == 3}">
-                                            <div class="schedule-item" data-day="tue" data-slot="evening" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Evening</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 18:00-21:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="wedEvening">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'wed' && s.slot == 3}">
-                                            <div class="schedule-item" data-day="wed" data-slot="evening" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Evening</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 18:00-21:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="thuEvening">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'thu' && s.slot == 3}">
-                                            <div class="schedule-item" data-day="thu" data-slot="evening" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Evening</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 18:00-21:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="friEvening">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'fri' && s.slot == 3}">
-                                            <div class="schedule-item" data-day="fri" data-slot="evening" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Evening</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 18:00-21:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="satEvening">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'sat' && s.slot == 3}">
-                                            <div class="schedule-item" data-day="sat" data-slot="evening" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Evening</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 18:00-21:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td id="sunEvening">
-                                    <c:forEach var="s" items="${sessions}">
-                                        <c:if test="${s.day_of_week == 'sun' && s.slot == 3}">
-                                            <div class="schedule-item" data-day="sun" data-slot="evening" data-id="${s.id}">
-                                                <span>${s.subject_id}<br>${s.tutor_id}<br>Evening</span>
-                                                <div class="tooltip">Giáo viên: ${s.tutor_id}<br>Môn: ${s.subject_id}<br>Thời gian: 18:00-21:00<br>Số học sinh: ${s.studentCount}/10</div>
-                                                <div class="progress-bar"><div class="progress" style="width: ${s.studentCount * 10}%;"></div></div>
-                                                <div class="delete-tooltip">Xóa ca học</div>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="mt-8">
-                        <h3 class="text-xl font-bold mb-4">Đăng ký Lớp Học</h3>
-                        <form:form action="${pageContext.request.contextPath}/sessions/register" method="post" cssClass="grid grid-cols-5 gap-4">
-                            <select name="day" class="border p-2 col-span-1">
-                                <option value="mon">Thứ 2</option>
-                                <option value="tue">Thứ 3</option>
-                                <option value="wed">Thứ 4</option>
-                                <option value="thu">Thứ 5</option>
-                                <option value="fri">Thứ 6</option>
-                                <option value="sat">Thứ 7</option>
-                                <option value="sun">Chủ nhật</option>
-                            </select>
-                            <select name="slot" class="border p-2 col-span-1">
-                                <option value="1">Sáng (08:00-11:00)</option>
-                                <option value="2">Chiều (13:00-16:00)</option>
-                                <option value="3">Tối (18:00-21:00)</option>
-                            </select>
-                            <select name="subjectId" class="border p-2 col-span-1">
-                                <c:forEach var="sub" items="${subjectList}">
-                                    <option value="${sub.subject_id}">${sub.name}</option>
-                                </c:forEach>
-                            </select>
-                            <input name="location" placeholder="Location" class="border p-2 col-span-1" required/>
-                            <button class="bg-blue-600 text-white rounded col-span-1">Đăng ký lớp học</button>
-                        </form:form>
-                        <c:if test="${not empty msg}">
-                            <p class="text-green-700 mt-3">${msg}</p>
-                        </c:if>
-                        <c:if test="${not empty err}">
-                            <p class="text-red-600 mt-3">${err}</p>
-                        </c:if>
-                    </div>
-                </div>
-                <div id="assignments" style="display: none;">
-                    <h2 class="text-2xl font-bold mb-4">Danh Sách Bài Tập Đã Giao</h2>
-                    <table class="min-w-full bg-white rounded-lg shadow overflow-hidden">
-                        <thead class="bg-blue-600 text-white">
-                            <tr>
-                                <th class="px-6 py-3 text-left">Tên Bài Tập</th>
-                                <th class="px-6 py-3 text-left">Môn Học</th>
-                                <th class="px-6 py-3 text-left">Hạn Nộp</th>
-                                <th class="px-6 py-3 text-left">Số Học Sinh Đã Nộp</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-gray-700">
-                            <tr class="border-b">
-                                <td class="px-6 py-4">Bài tập 1: Hình học</td>
-                                <td class="px-6 py-4">Toán</td>
-                                <td class="px-6 py-4">15/06/2025</td>
-                                <td class="px-6 py-4">10/15</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="px-6 py-4">Bài tập 2: Từ vựng</td>
-                                <td class="px-6 py-4">Tiếng Anh</td>
-                                <td class="px-6 py-4">16/06/2025</td>
-                                <td class="px-6 py-4">12/15</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4">Bài tập 3: Thí nghiệm</td>
-                                <td class="px-6 py-4">Vật Lý</td>
-                                <td class="px-6 py-4">17/06/2025</td>
-                                <td class="px-6 py-4">8/15</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="materials" style="display: none;">
-                    <h2 class="text-2xl font-bold mb-4">Tài Liệu Học</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="bg-white shadow rounded-lg p-6">
-                            <h3 class="text-lg font-semibold">Tài Liệu Toán</h3>
-                            <p class="text-gray-500">Bài giảng về...</p>
-                            <a href="#" class="text-blue-600 hover:underline">Tải xuống</a>
-                        </div>
-                        <div class="bg-white shadow rounded-lg p-6">
-                            <h3 class="text-lg font-semibold">Tài Liệu Tiếng Anh</h3>
-                            <p class="text-gray-500">Bài giảng về...</p>
-                            <a href="#" class="text-blue-600 hover:underline">Tải xuống</a>
-                        </div>
-                        <div class="bg-white shadow rounded-lg p-6">
-                            <h3 class="text-lg font-semibold">Tài Liệu Vật Lý</h3>
-                            <p class="text-gray-500">Bài giảng về...</p>
-                            <a href="#" class="text-blue-600 hover:underline">Tải xuống</a>
-                        </div>
-                    </div>
-                    <button class="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Upload Tài Liệu</button>
-                </div>
-                <div id="settings" style="display: none;">
-                    <h2 class="text-2xl font-bold mb-4">Cài Đặt</h2>
-                    <div class="bg-white shadow rounded-lg p-6">
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-medium">Tên</label>
-                            <input type="text" class="w-full p-2 border rounded" value="Tên giáo viên">
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-medium">Email</label>
-                            <input type="email" class="w-full p-2 border rounded" value="email@example.com">
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-medium">Đổi mật khẩu</label>
-                            <input type="password" class="w-full p-2 border rounded" placeholder="Mật khẩu mới">
-                        </div>
-                        <button class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Lưu</button>
-                    </div>
-                </div>
-            </main>
         </div>
-        <footer class="bg-blue-600 text-white py-4 mt-8">
-            <div class="container mx-auto text-center">
-                <p>© 2025 Online Tutor Scheduling. All rights reserved.</p>
-            </div>
-        </footer>
+        <!--   Core JS Files   -->
+        <script src="../assets/js/core/popper.min.js"></script>
+        <script src="../assets/js/core/bootstrap.min.js"></script>
+        <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+        <script src="../assets/js/plugins/chartjs.min.js"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const navLinks = document.querySelectorAll('nav a');
-                const sections = document.querySelectorAll('main > div');
+                      var ctx = document.getElementById("chart-bars").getContext("2d");
 
-                // Hàm ẩn tất cả các section
-                function hideAllSections() {
-                    sections.forEach(section => section.style.display = 'none');
-                }
+                      new Chart(ctx, {
+                          type: "bar",
+                          data: {
+                              labels: ["M", "T", "W", "T", "F", "S", "S"],
+                              datasets: [{
+                                      label: "Views",
+                                      tension: 0.4,
+                                      borderWidth: 0,
+                                      borderRadius: 4,
+                                      borderSkipped: false,
+                                      backgroundColor: "#43A047",
+                                      data: [50, 45, 22, 28, 50, 60, 76],
+                                      barThickness: 'flex'
+                                  }, ],
+                          },
+                          options: {
+                              responsive: true,
+                              maintainAspectRatio: false,
+                              plugins: {
+                                  legend: {
+                                      display: false,
+                                  }
+                              },
+                              interaction: {
+                                  intersect: false,
+                                  mode: 'index',
+                              },
+                              scales: {
+                                  y: {
+                                      grid: {
+                                          drawBorder: false,
+                                          display: true,
+                                          drawOnChartArea: true,
+                                          drawTicks: false,
+                                          borderDash: [5, 5],
+                                          color: '#e5e5e5'
+                                      },
+                                      ticks: {
+                                          suggestedMin: 0,
+                                          suggestedMax: 500,
+                                          beginAtZero: true,
+                                          padding: 10,
+                                          font: {
+                                              size: 14,
+                                              lineHeight: 2
+                                          },
+                                          color: "#737373"
+                                      },
+                                  },
+                                  x: {
+                                      grid: {
+                                          drawBorder: false,
+                                          display: false,
+                                          drawOnChartArea: false,
+                                          drawTicks: false,
+                                          borderDash: [5, 5]
+                                      },
+                                      ticks: {
+                                          display: true,
+                                          color: '#737373',
+                                          padding: 10,
+                                          font: {
+                                              size: 14,
+                                              lineHeight: 2
+                                          },
+                                      }
+                                  },
+                              },
+                          },
+                      });
 
-                // Hàm hiển thị section theo ID
-                function showSection(id) {
-                    const section = document.getElementById(id);
-                    console.log('Showing section:', id, section); // Debug: Kiểm tra section được hiển thị
-                    if (section) {
-                        section.style.display = 'block';
-                    } else {
-                        console.error('Section not found:', id); // Debug: Báo lỗi nếu section không tồn tại
-                    }
-                }
 
-                // Hàm đặt link đang hoạt động
-                function setActiveLink(link) {
-                    navLinks.forEach(l => l.classList.remove('bg-blue-100', 'text-blue-600'));
-                    link.classList.add('bg-blue-100', 'text-blue-600');
-                }
+                      var ctx2 = document.getElementById("chart-line").getContext("2d");
 
-                // Xử lý sự kiện click cho các nav link
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const sectionId = this.getAttribute('data-section');
-                        console.log('Clicked on:', sectionId); // Debug: Kiểm tra link được click
-                        hideAllSections();
-                        showSection(sectionId);
-                        setActiveLink(this);
-                    });
-                });
+                      new Chart(ctx2, {
+                          type: "line",
+                          data: {
+                              labels: ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"],
+                              datasets: [{
+                                      label: "Sales",
+                                      tension: 0,
+                                      borderWidth: 2,
+                                      pointRadius: 3,
+                                      pointBackgroundColor: "#43A047",
+                                      pointBorderColor: "transparent",
+                                      borderColor: "#43A047",
+                                      backgroundColor: "transparent",
+                                      fill: true,
+                                      data: [120, 230, 130, 440, 250, 360, 270, 180, 90, 300, 310, 220],
+                                      maxBarThickness: 6
 
-                // Xử lý xóa ca học
-                document.querySelectorAll('.schedule-item').forEach(item => {
-                    item.addEventListener('contextmenu', (e) => {
-                        e.preventDefault();
-                        if (confirm('Bạn có muốn xóa ca học?')) {
-                            const id = item.getAttribute('data-id');
-                            fetch(`${pageContext.request.contextPath}/sessions/delete/${id}`, {method: 'DELETE'})
-                                                        .then(response => {
-                                                            if (response.ok) {
-                                                                item.parentElement.removeChild(item); // Xóa phần tử khỏi DOM nếu thành công
-                                                            } else {
-                                                                alert('Xóa thất bại');
-                                                            }
-                                                        })
-                                                        .catch(() => alert('Lỗi khi xóa ca học')); // Báo lỗi nếu fetch thất bại
-                                            }
-                                        });
-                                    });
+                                  }],
+                          },
+                          options: {
+                              responsive: true,
+                              maintainAspectRatio: false,
+                              plugins: {
+                                  legend: {
+                                      display: false,
+                                  },
+                                  tooltip: {
+                                      callbacks: {
+                                          title: function (context) {
+                                              const fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                                              return fullMonths[context[0].dataIndex];
+                                          }
+                                      }
+                                  }
+                              },
+                              interaction: {
+                                  intersect: false,
+                                  mode: 'index',
+                              },
+                              scales: {
+                                  y: {
+                                      grid: {
+                                          drawBorder: false,
+                                          display: true,
+                                          drawOnChartArea: true,
+                                          drawTicks: false,
+                                          borderDash: [4, 4],
+                                          color: '#e5e5e5'
+                                      },
+                                      ticks: {
+                                          display: true,
+                                          color: '#737373',
+                                          padding: 10,
+                                          font: {
+                                              size: 12,
+                                              lineHeight: 2
+                                          },
+                                      }
+                                  },
+                                  x: {
+                                      grid: {
+                                          drawBorder: false,
+                                          display: false,
+                                          drawOnChartArea: false,
+                                          drawTicks: false,
+                                          borderDash: [5, 5]
+                                      },
+                                      ticks: {
+                                          display: true,
+                                          color: '#737373',
+                                          padding: 10,
+                                          font: {
+                                              size: 12,
+                                              lineHeight: 2
+                                          },
+                                      }
+                                  },
+                              },
+                          },
+                      });
 
-                                    // Khởi tạo trạng thái ban đầu
-                                    hideAllSections();
-                                    showSection('overview');
-                                    setActiveLink(document.querySelector('nav a[data-section="overview"]'));
-                                });
+                      var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+
+                      new Chart(ctx3, {
+                          type: "line",
+                          data: {
+                              labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                              datasets: [{
+                                      label: "Tasks",
+                                      tension: 0,
+                                      borderWidth: 2,
+                                      pointRadius: 3,
+                                      pointBackgroundColor: "#43A047",
+                                      pointBorderColor: "transparent",
+                                      borderColor: "#43A047",
+                                      backgroundColor: "transparent",
+                                      fill: true,
+                                      data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                                      maxBarThickness: 6
+
+                                  }],
+                          },
+                          options: {
+                              responsive: true,
+                              maintainAspectRatio: false,
+                              plugins: {
+                                  legend: {
+                                      display: false,
+                                  }
+                              },
+                              interaction: {
+                                  intersect: false,
+                                  mode: 'index',
+                              },
+                              scales: {
+                                  y: {
+                                      grid: {
+                                          drawBorder: false,
+                                          display: true,
+                                          drawOnChartArea: true,
+                                          drawTicks: false,
+                                          borderDash: [4, 4],
+                                          color: '#e5e5e5'
+                                      },
+                                      ticks: {
+                                          display: true,
+                                          padding: 10,
+                                          color: '#737373',
+                                          font: {
+                                              size: 14,
+                                              lineHeight: 2
+                                          },
+                                      }
+                                  },
+                                  x: {
+                                      grid: {
+                                          drawBorder: false,
+                                          display: false,
+                                          drawOnChartArea: false,
+                                          drawTicks: false,
+                                          borderDash: [4, 4]
+                                      },
+                                      ticks: {
+                                          display: true,
+                                          color: '#737373',
+                                          padding: 10,
+                                          font: {
+                                              size: 14,
+                                              lineHeight: 2
+                                          },
+                                      }
+                                  },
+                              },
+                          },
+                      });
         </script>
+        <script>
+            var win = navigator.platform.indexOf('Win') > -1;
+            if (win && document.querySelector('#sidenav-scrollbar')) {
+                var options = {
+                    damping: '0.5'
+                }
+                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+            }
+        </script>
+        <!-- Github buttons -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="../assets/js/material-dashboard.min.js?v=3.2.0"></script>
     </body>
+
 </html>
