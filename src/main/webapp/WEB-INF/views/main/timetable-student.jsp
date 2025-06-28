@@ -6,56 +6,39 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-        <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="<c:url value="/assets/img/apple-icon.png"/>">
+        <link rel="icon" type="image/png" href="<c:url value="/assets/img/favicon.png"/>">
         <title>
             Timetable
         </title>
         <style>
-            /* ───── TIMETABLE LAYOUT ─────────────────────────────── */
-
-            /* khung bao: cao tối thiểu chiếm đa số màn hình để bảng không “lọt thỏm” */
             .card .table-responsive {
                 min-height: 60vh;
-                /* 60% viewport height */
             }
-
-            /* bảng chính */
             .timetable {
                 width: 100%;
                 border-collapse: collapse;
                 table-layout: fixed;
                 border-bottom: 1px solid #dee2e6;
-                /* cột đều nhau */
             }
-
             .timetable tr:last-child th,
             .timetable tr:last-child td {
                 border-right: 1px solid #dee2e6 !important;
             }
-
-            /* ô tiêu đề + ô dữ liệu chung */
             .timetable th,
             .timetable td {
                 border: 1px solid #dee2e6 !important;
                 padding: 18px 10px;
-                /* cao hơn / thoáng hơn */
                 height: 120px;
-                /* chiều cao mỗi ca học */
                 vertical-align: top;
-                /* text nằm trên-cùng  (dễ đọc) */
                 text-align: center;
                 font-size: 14px;
             }
-
-            /* cột tiêu đề hàng (Morning / Afternoon / Evening) */
             .timetable .time-col {
                 width: 110px;
                 background: #f8f9fa;
                 font-weight: 600;
             }
-
-            /* hàng tiêu đề thứ (Monday …) dính trên khi cuộn */
             .timetable thead th {
                 position: sticky;
                 top: 0;
@@ -64,24 +47,17 @@
                 font-weight: 600;
                 white-space: nowrap;
             }
-
-            /* nội dung môn + GV dùng flex để căn */
             .class-info {
                 position: relative;
-                /* MỚI: làm cha tương đối cho tooltip  */
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 gap: 2px;
             }
-
-            /* dòng GV nhỏ hơn & xám nhẹ */
             .class-info .tutor {
                 font-size: 13px;
                 color: #6c757d;
             }
-
-            /* ───── Tooltip cải tiến ─────────────────────────────── */
             .class-info .tooltip {
                 position: absolute;
                 top: 100%;
@@ -115,8 +91,6 @@
                 border: 6px solid transparent;
                 border-bottom-color: #333;
             }
-
-            /* ───── Responsive (<992px) ─────────────────────────── */
             @media (max-width:992px) {
 
                 .timetable th,
@@ -132,12 +106,12 @@
             }
         </style>
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
-        <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+        <link href="<c:url value="/assets/css/nucleo-icons.css"/>" rel="stylesheet" />
+        <link href="<c:url value="/assets/css/nucleo-svg.css"/> rel="stylesheet" />
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-        <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
+        <link id="pagestyle" href="<c:url value="/assets/css/material-dashboard.css?v=3.2.0"/>" rel="stylesheet" />
     </head>
 
     <body class="g-sidenav-show  bg-gray-100">
@@ -147,7 +121,7 @@
                 <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                    aria-hidden="true" id="iconSidenav"></i>
                 <a class="navbar-brand px-4 py-3 m-0" href="https://github.com/KenDual/Tutor-Scheduling-System" target="_blank">
-                    <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
+                    <img src="<c:url value='/assets/img/logo-ct-dark.png'/>" class="navbar-brand-img" width="26" height="26" alt="main_logo">
                     <span class="ms-1 text-sm text-dark">Scheduling System</span>
                 </a>
             </div>
@@ -155,25 +129,25 @@
             <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/dashboard.html">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/dashboard-student">
                             <i class="material-symbols-rounded opacity-5">dashboard</i>
                             <span class="nav-link-text ms-1">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active bg-gradient-dark text-white" href="../pages/timetable.html">
+                        <a class="nav-link active bg-gradient-dark text-white" href="${pageContext.request.contextPath}/timetable-student">
                             <i class="material-symbols-rounded opacity-5">table_view</i>
                             <span class="nav-link-text ms-1">Timetable</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/exercise.html">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/exercise-student">
                             <i class="material-symbols-rounded opacity-5">checklist</i>
                             <span class="nav-link-text ms-1">Exercise</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/study-material.html">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/material-student">
                             <i class="material-symbols-rounded opacity-5">notifications</i>
                             <span class="nav-link-text ms-1">Study material</span>
                         </a>
@@ -182,13 +156,13 @@
                         <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Account pages</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/profile.html">
+                        <a class="nav-link text-dark" href="<c:url value='/profile'/>">
                             <i class="material-symbols-rounded opacity-5">person</i>
                             <span class="nav-link-text ms-1">Profile</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/sign-in.html">
+                        <a class="nav-link text-dark" href="<c:url value='/logout'/>">
                             <i class="material-symbols-rounded opacity-5">login</i>
                             <span class="nav-link-text ms-1">Log out</span>
                         </a>
@@ -243,80 +217,6 @@
                                    aria-expanded="false">
                                     <i class="material-symbols-rounded">notifications</i>
                                 </a>
-                                <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                                    <li class="mb-2">
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">
-                                            <div class="d-flex py-1">
-                                                <div class="my-auto">
-                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="text-sm font-weight-normal mb-1">
-                                                        <span class="font-weight-bold">New message</span> from Laur
-                                                    </h6>
-                                                    <p class="text-xs text-secondary mb-0">
-                                                        <i class="fa fa-clock me-1"></i>
-                                                        13 minutes ago
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="mb-2">
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">
-                                            <div class="d-flex py-1">
-                                                <div class="my-auto">
-                                                    <img src="../assets/img/small-logos/logo-spotify.svg"
-                                                         class="avatar avatar-sm bg-gradient-dark  me-3 ">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="text-sm font-weight-normal mb-1">
-                                                        <span class="font-weight-bold">New album</span> by Travis Scott
-                                                    </h6>
-                                                    <p class="text-xs text-secondary mb-0">
-                                                        <i class="fa fa-clock me-1"></i>
-                                                        1 day
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">
-                                            <div class="d-flex py-1">
-                                                <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                                                    <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
-                                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                    <title>credit-card</title>
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                                    <g transform="translate(1716.000000, 291.000000)">
-                                                    <g transform="translate(453.000000, 454.000000)">
-                                                    <path class="color-background"
-                                                          d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-                                                          opacity="0.593633743"></path>
-                                                    <path class="color-background"
-                                                          d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
-                                                    </path>
-                                                    </g>
-                                                    </g>
-                                                    </g>
-                                                    </g>
-                                                    </svg>
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="text-sm font-weight-normal mb-1">
-                                                        Payment successfully completed
-                                                    </h6>
-                                                    <p class="text-xs text-secondary mb-0">
-                                                        <i class="fa fa-clock me-1"></i>
-                                                        2 days
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
                             <li class="nav-item d-flex align-items-center">
                                 <a href="../pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
@@ -467,15 +367,6 @@
                                     for a better web.
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                                    <li class="nav-item">
-                                        <a href="https://github.com/KenDual/Tutor-Scheduling-System" class="nav-link text-muted"
-                                           target="_blank">About
-                                            Us</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </footer>
@@ -570,13 +461,13 @@
         <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
         <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
         <script>
-                      var win = navigator.platform.indexOf('Win') > -1;
-                      if (win && document.querySelector('#sidenav-scrollbar')) {
-                          var options = {
-                              damping: '0.5'
-                          }
-                          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-                      }
+                                var win = navigator.platform.indexOf('Win') > -1;
+                                if (win && document.querySelector('#sidenav-scrollbar')) {
+                                    var options = {
+                                        damping: '0.5'
+                                    }
+                                    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+                                }
         </script>
         <!-- Github buttons -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>

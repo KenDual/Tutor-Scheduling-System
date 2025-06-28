@@ -1,3 +1,4 @@
+
 package com.maiphuhai.controller;
 
 import com.maiphuhai.model.StudyMaterial;
@@ -16,32 +17,29 @@ import java.nio.file.*;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/materials")
-public class StudyMaterialController {
+@RequestMapping("/material-student")
+public class MaterialStudentController {
 
     private final StudyMaterialService service;
     private final ServletContext servletContext;
 
     @Autowired
-    public StudyMaterialController(StudyMaterialService service,
-            ServletContext servletContext) {
+    public MaterialStudentController(StudyMaterialService service,ServletContext servletContext) {
         this.service = service;
         this.servletContext = servletContext;
     }
-
+    
     // 1) Hiển thị form upload (tutor)
     @GetMapping("/upload")
     public String showUploadForm(Model model) {
         model.addAttribute("material", new StudyMaterial());
-        return "material-form";    // /WEB-INF/views/material-form.jsp
+        return "material-form";
     }
 
     // 2) Xử lý POST upload
     @PostMapping("/upload")
     public String upload(@ModelAttribute("material") StudyMaterial material,
             @RequestParam("file") MultipartFile file) throws IOException {
-
-        // tạo folder /files nếu chưa có
         String realPath = servletContext.getRealPath("/files");
         Path uploadDir = Paths.get(realPath);
         if (!Files.exists(uploadDir)) {
@@ -59,14 +57,14 @@ public class StudyMaterialController {
         material.setFileUrl("/files/" + filename);
         service.upload(material);
 
-        return "redirect:/materials";
+        return "redirect:/material-student";
     }
 
     // 3) List tất cả tài liệu
     @GetMapping
     public String list(Model model) {
         model.addAttribute("list", service.listAll());
-        return "material-list";    // /WEB-INF/views/material-list.jsp
+        return "main/material-student";
     }
 
     // 4) Download: GET /materials/download/{id}

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/exercises")
-public class ExerciseController {
+@RequestMapping("/exercise-tutor")
+public class ExerciseTutorController {
     @Autowired
     private ExerciseService exerciseService;
 
@@ -21,7 +21,7 @@ public class ExerciseController {
         List<Exercise> exercises = exerciseService.getBySessionId(sessionId);
         model.addAttribute("exercises", exercises);
         model.addAttribute("sessionId", sessionId);
-        return "exercise-list";
+        return "main/exercise-student";
     }
 
     // Form thêm mới
@@ -30,7 +30,7 @@ public class ExerciseController {
         Exercise e = new Exercise();
         e.setSessionId(sessionId);
         model.addAttribute("exercise", e);
-        return "exercise-form";
+        return "main/exercise-student";
     }
 
     // Xử lý thêm
@@ -45,7 +45,7 @@ public class ExerciseController {
     public String showEditForm(@PathVariable("id") int id, Model model) {
         Exercise e = exerciseService.getById(id);
         model.addAttribute("exercise", e);
-        return "exercise-form";
+        return "main/exercise-student";
     }
 
     // Xử lý cập nhật

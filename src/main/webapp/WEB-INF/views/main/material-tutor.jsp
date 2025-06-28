@@ -41,25 +41,25 @@
             <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/dashboard.html">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/dashboard-student">
                             <i class="material-symbols-rounded opacity-5">dashboard</i>
                             <span class="nav-link-text ms-1">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/timetable.html">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/timetable-student">
                             <i class="material-symbols-rounded opacity-5">table_view</i>
                             <span class="nav-link-text ms-1">Timetable</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/exercise.html">
-                            <i class="material-symbols-rounded opacity-5">table_view</i>
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/exercise-student">
+                            <i class="material-symbols-rounded opacity-5">checklist</i>
                             <span class="nav-link-text ms-1">Exercise</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active bg-gradient-dark text-white" href="../pages/study-material.html">
+                        <a class="nav-link active bg-gradient-dark text-white" href="${pageContext.request.contextPath}/material-student">
                             <i class="material-symbols-rounded opacity-5">notifications</i>
                             <span class="nav-link-text ms-1">Study material</span>
                         </a>
@@ -68,15 +68,15 @@
                         <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Account pages</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/profile.html">
+                        <a class="nav-link text-dark" href="<c:url value='/profile'/>">
                             <i class="material-symbols-rounded opacity-5">person</i>
                             <span class="nav-link-text ms-1">Profile</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/sign-in.html">
+                        <a class="nav-link text-dark" href="<c:url value='/logout'/>">
                             <i class="material-symbols-rounded opacity-5">login</i>
-                            <span class="nav-link-text ms-1">Sign In</span>
+                            <span class="nav-link-text ms-1">Log out</span>
                         </a>
                     </li>
                 </ul>
@@ -472,13 +472,13 @@
         <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
         <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
         <script>
-                      var win = navigator.platform.indexOf('Win') > -1;
-                      if (win && document.querySelector('#sidenav-scrollbar')) {
-                          var options = {
-                              damping: '0.5'
-                          };
-                          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-                      }
+                                var win = navigator.platform.indexOf('Win') > -1;
+                                if (win && document.querySelector('#sidenav-scrollbar')) {
+                                    var options = {
+                                        damping: '0.5'
+                                    };
+                                    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+                                }
         </script>
         <!-- Github buttons -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>

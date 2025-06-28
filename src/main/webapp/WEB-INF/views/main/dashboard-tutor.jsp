@@ -34,14 +34,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/sessions/register">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/timetable-student">
                             <i class="material-symbols-rounded opacity-5">table_view</i>
                             <span class="nav-link-text ms-1">Timetable</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="${pageContext.request.contextPath}/exercise-student">
-                            <i class="material-symbols-rounded opacity-5">table_view</i>
+                            <i class="material-symbols-rounded opacity-5">checklist</i>
                             <span class="nav-link-text ms-1">Exercise</span>
                         </a>
                     </li>

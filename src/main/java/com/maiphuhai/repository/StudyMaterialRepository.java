@@ -20,6 +20,7 @@ public class StudyMaterialRepository {
         this.jdbc = jdbc;
     }
 
+    /* ---------- RowMapper: đọc mọi cột ---------- */
     private static final RowMapper<StudyMaterial> MAPPER = new RowMapper<>() {
         @Override
         public StudyMaterial mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -33,6 +34,7 @@ public class StudyMaterialRepository {
         }
     };
 
+    /* ---------- INSERT: ghi uploaded_at ---------- */
     public int save(StudyMaterial m) {
         String sql
                 = "INSERT INTO study_materials"
@@ -42,9 +44,10 @@ public class StudyMaterialRepository {
                 m.getTitle(),
                 m.getDescription(),
                 m.getFileUrl(),
-                new Timestamp(m.getUploadedAt().getTime()));
+                new Timestamp(m.getUploadedAt().getTime()));   // Date → Timestamp
     }
 
+    /* ---------- SELECT helpers ---------- */
     public Optional<StudyMaterial> findById(int id) {
         String sql = "SELECT * FROM study_materials WHERE material_id = ?";
         List<StudyMaterial> list = jdbc.query(sql, MAPPER, id);
@@ -56,3 +59,4 @@ public class StudyMaterialRepository {
         return jdbc.query(sql, MAPPER);
     }
 }
+

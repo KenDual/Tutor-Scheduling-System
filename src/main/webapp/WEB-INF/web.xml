@@ -13,11 +13,8 @@
         
         <!-- ========== BẮT BUỘC: multipart-config ========= -->
         <multipart-config>
-            <!-- file tối đa 10MB -->
             <max-file-size>10485760</max-file-size>
-            <!-- tổng request (cả text+file) tối đa 20MB -->
             <max-request-size>20971520</max-request-size>
-            <!-- nếu file nhỏ hơn threshold thì giữ trong memory -->
             <file-size-threshold>0</file-size-threshold>
         </multipart-config>
         <!-- ================================================ -->
