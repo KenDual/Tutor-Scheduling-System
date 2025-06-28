@@ -20,6 +20,22 @@ public class SessionService {
     private SubjectService subjectService;
 
     /* ---------- API cho Controller ---------- */
+    public int getScheduledSessionCount() {
+        return repo.findScheduled().size();
+    }
+
+    public List<Session> ofStudent(int sid) {
+        return repo.findByStudent(sid);
+    }
+
+    public List<Session> ofTutor(int tid) {
+        return repo.findByTutor(tid);
+    }
+
+    public List<Session> ofAdmin() {
+        return repo.findAllWithJoin();
+    }
+
     public List<Session> findByTutor(int tutorId) {
         return repo.findByTutor(tutorId);
     }
@@ -61,5 +77,9 @@ public class SessionService {
         Session s = repo.findById(id);
         s.setStatus("cancelled");
         repo.update(s);
+    }
+
+    public boolean existsByDaySlotTutor(String day, int slot, int tutorId) {
+        return repo.existsByDaySlotTutor(day, slot, tutorId);
     }
 }

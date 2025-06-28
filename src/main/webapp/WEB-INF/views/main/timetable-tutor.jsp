@@ -405,12 +405,11 @@
                                     </table>
                                     <hr class="my-4">
 
-                                    <form id="register-form" class="row g-3 px-4">
-                                        <!-- 1. Chọn ngày -->
+                                    <form action="${pageContext.request.contextPath}/sessions/register"
+                                          method="post" class="row g-2">
                                         <div class="col-md-3">
-                                            <label class="form-label fw-bold">Day of week</label>
-                                            <select id="daySelect" class="form-select">
-                                                <option selected disabled>Choose a day…</option>
+                                            <select name="day" class="form-select" required>
+                                                <option selected disabled>Choose a day...</option>
                                                 <option value="mon">Monday</option>
                                                 <option value="tue">Tuesday</option>
                                                 <option value="wed">Wednesday</option>
@@ -420,32 +419,23 @@
                                                 <option value="sun">Sunday</option>
                                             </select>
                                         </div>
-
-                                        <!-- 2. Chọn ca – mặc định bị khoá -->
                                         <div class="col-md-3">
-                                            <label class="form-label fw-bold">Timeslot</label>
-                                            <select id="slotSelect" class="form-select" disabled>
-                                                <option selected disabled>Choose a slot…</option>
-                                                <option value="morning">Morning</option>
-                                                <option value="afternoon">Afternoon</option>
-                                                <option value="evening">Evening</option>
+                                            <select name="slot" class="form-select" required>
+                                                <option selected disabled>Choose a slot...</option>
+                                                <option value="1">Morning</option>
+                                                <option value="2">Afternoon</option>
+                                                <option value="3">Evening</option>
                                             </select>
                                         </div>
-
-                                        <!-- 3. Nhập môn học – mặc định bị khoá -->
                                         <div class="col-md-4">
-                                            <label class="form-label fw-bold">Subject</label>
-                                            <input id="subjectInput" type="text" class="form-control" placeholder="Choose a slot first…"
-                                                   disabled>
+                                            <input  name="subjectId" class="form-control"
+                                                    placeholder="Subject ID" required>
                                         </div>
-
-                                        <!-- 4. Submit -->
-                                        <div class="col-md-2 d-flex align-items-end">
-                                            <button id="submitBtn" type="submit" class="btn btn-primary w-100" disabled>
-                                                Submit
-                                            </button>
+                                        <div class="col-md-2 d-grid">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
@@ -569,62 +559,62 @@
         <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
         <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
         <script>
-                      var win = navigator.platform.indexOf('Win') > -1;
-                      if (win && document.querySelector('#sidenav-scrollbar')) {
-                          var options = {
-                              damping: '0.5'
-                          }
-                          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-                      }
+                                var win = navigator.platform.indexOf('Win') > -1;
+                                if (win && document.querySelector('#sidenav-scrollbar')) {
+                                    var options = {
+                                        damping: '0.5'
+                                    }
+                                    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+                                }
         </script>
         <script src="../assets/js/material-dashboard.min.js?v=3.2.0"></script>
         <script>
-                      // Lấy các phần tử
-                      const daySel = document.getElementById('daySelect');
-                      const slotSel = document.getElementById('slotSelect');
-                      const subjectInp = document.getElementById('subjectInput');
-                      const submitBtn = document.getElementById('submitBtn');
+                                // Lấy các phần tử
+                                const daySel = document.getElementById('daySelect');
+                                const slotSel = document.getElementById('slotSelect');
+                                const subjectInp = document.getElementById('subjectInput');
+                                const submitBtn = document.getElementById('submitBtn');
 
-                      // Khi chọn ngày ► mở khoá chọn ca
-                      daySel.addEventListener('change', () => {
-                          slotSel.disabled = false;
-                          slotSel.selectedIndex = 0;           // reset nếu user đổi ngày
-                          subjectInp.value = '';
-                          subjectInp.disabled = true;
-                          submitBtn.disabled = true;
-                      });
+                                // Khi chọn ngày ► mở khoá chọn ca
+                                daySel.addEventListener('change', () => {
+                                    slotSel.disabled = false;
+                                    slotSel.selectedIndex = 0;           // reset nếu user đổi ngày
+                                    subjectInp.value = '';
+                                    subjectInp.disabled = true;
+                                    submitBtn.disabled = true;
+                                });
 
-                      // Khi chọn ca ► mở khoá ô nhập môn
-                      slotSel.addEventListener('change', () => {
-                          subjectInp.disabled = false;
-                          subjectInp.placeholder = 'Enter a subject…';
-                          submitBtn.disabled = true;
-                          subjectInp.value = '';
-                          subjectInp.focus();
-                      });
+                                // Khi chọn ca ► mở khoá ô nhập môn
+                                slotSel.addEventListener('change', () => {
+                                    subjectInp.disabled = false;
+                                    subjectInp.placeholder = 'Enter a subject…';
+                                    submitBtn.disabled = true;
+                                    subjectInp.value = '';
+                                    subjectInp.focus();
+                                });
 
-                      // Khi gõ môn học ► kích hoạt submit (nếu không trống)
-                      subjectInp.addEventListener('input', () => {
-                          submitBtn.disabled = subjectInp.value.trim() === '';
-                      });
+                                // Khi gõ môn học ► kích hoạt submit (nếu không trống)
+                                subjectInp.addEventListener('input', () => {
+                                    submitBtn.disabled = subjectInp.value.trim() === '';
+                                });
 
-                      // Ngăn submit giả tạo (demo)
-                      document.getElementById('register-form')
-                              .addEventListener('submit', e => {
-                                  e.preventDefault();
-                                  // TODO: AJAX gửi dữ liệu về server
-                                  alert(
-                                          `Đăng ký thành công:\n• Day: ${daySel.value}\n• Slot: ${slotSel.value}\n• Subject: ${subjectInp.value}`
-                                          );
-                                  // reset form
-                                  daySel.selectedIndex = 0;
-                                  slotSel.disabled = true;
-                                  subjectInp.disabled = true;
-                                  submitBtn.disabled = true;
-                                  slotSel.selectedIndex = 0;
-                                  subjectInp.value = '';
-                                  subjectInp.placeholder = 'Choose a slot first…';
-                              });
+                                // Ngăn submit giả tạo (demo)
+                                document.getElementById('register-form')
+                                        .addEventListener('submit', e => {
+                                            e.preventDefault();
+                                            // TODO: AJAX gửi dữ liệu về server
+                                            alert(
+                                                    `Đăng ký thành công:\n• Day: ${daySel.value}\n• Slot: ${slotSel.value}\n• Subject: ${subjectInp.value}`
+                                                    );
+                                            // reset form
+                                            daySel.selectedIndex = 0;
+                                            slotSel.disabled = true;
+                                            subjectInp.disabled = true;
+                                            submitBtn.disabled = true;
+                                            slotSel.selectedIndex = 0;
+                                            subjectInp.value = '';
+                                            subjectInp.placeholder = 'Choose a slot first…';
+                                        });
         </script>
 
     </body>

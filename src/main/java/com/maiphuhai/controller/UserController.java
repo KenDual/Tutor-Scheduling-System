@@ -14,73 +14,57 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    
     @GetMapping("/login")
     public String showLoginForm() {
         return "account/login";
     }
 
     @PostMapping("/login")
-    public String processLogin(@RequestParam String role,
-            @RequestParam String email,
+    public String processLogin(@RequestParam String email,
             @RequestParam String password,
+            @RequestParam String role,
             HttpSession session,
             Model model) {
 
         Optional<User> userOpt = userService.login(email, password, role);
-
         if (userOpt.isEmpty()) {
-            model.addAttribute("error", "Sai email, mật khẩu hoặc vai trò");
-            model.addAttribute("email", email);
-            model.addAttribute("role", role);
+            model.addAttribute("error", "Sai tài khoản hoặc mật khẩu");
             return "account/login";
         }
 
-        session.setAttribute("USER", userOpt.get());
+        User u = userOpt.get();
+        session.setAttribute("currentUser", u);
+        session.setAttribute("role", u.getRole());
 
-        return role.equals("tutor")
-                ? "redirect:/dashboard-tutor"
-                : "redirect:/dashboard-student";
-    }
-
-    /* ---------- Admin ---------- */
-    @GetMapping("/admin/login")
-    public String showAdminLoginForm() {
-        return "admin-login";
-    }
-
-    @PostMapping("/admin/login")
-    public String processAdminLogin(@RequestParam String email,
-            @RequestParam String password,
-            HttpSession session,
-            Model model) {
-
-        Optional<User> userOpt = userService.adminLogin(email, password);
-
-        if (userOpt.isEmpty()) {
-            model.addAttribute("error", "Sai email hoặc mật khẩu admin");
-            model.addAttribute("email", email);
-            return "admin-login";
+        // Chuyển hướng dựa trên vai trò
+        switch (u.getRole()) {
+            case "admin":
+                return "redirect:/dashboard-admin";
+            case "tutor":
+                return "redirect:/dashboard-tutor";
+            case "student":
+                return "redirect:/dashboard-student";
+            default:
+                model.addAttribute("error", "Vai trò không hợp lệ");
+                return "account/login";
         }
-
-        session.setAttribute("ADMIN", userOpt.get());
-        return "redirect:/admin/dashboard-admin";
     }
 
-    /* ---------- Logout chung ---------- */
+    // Đăng xuất chung
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/login";
     }
 
-    /* ---------- Forgot password (GET) ---------- */
+    // Hiển thị form quên mật khẩu
     @GetMapping("/forgot-password")
     public String showForgotPwdForm() {
         return "account/forgot-password";
     }
 
-    /* ---------- Forgot password (POST) ---------- */
+    // Xử lý quên mật khẩu
     @PostMapping("/forgot-password")
     public String processForgotPwd(@RequestParam String email,
             @RequestParam String newPassword,
@@ -98,21 +82,41 @@ public class UserController {
         }
     }
 
-    /* ---------- Sign-up (GET) ---------- */
+    // Hiển thị form đăng ký
     @GetMapping("/signup")
     public String showSignupForm() {
         return "account/signup";
     }
 
-    /* ---------- Sign-up (POST) ---------- */
+    // Xử lý đăng ký với xác thực cơ bản
     @PostMapping("/signup")
     public String processSignup(@RequestParam String role,
             @RequestParam String fullName,
             @RequestParam String email,
             @RequestParam String password,
             Model model) {
-
-        // email đã tồn tại?
+        // Xác thực đầu vào
+        if (role == null || role.isEmpty()) {
+            model.addAttribute("err", "Vui lòng chọn vai trò");
+            return "account/signup";
+        }
+        if (fullName == null || fullName.isEmpty()) {
+            model.addAttribute("err", "Họ tên không được để trống");
+            return "account/signup";
+        }
+        if (email == null || email.isEmpty()) {
+            model.addAttribute("err", "Email không được để trống");
+            return "account/signup";
+        }
+        if (password == null || password.isEmpty()) {
+            model.addAttribute("err", "Mật khẩu không được để trống");
+            return "account/signup";
+        }
+        if (password.length() < 6) {
+            model.addAttribute("err", "Mật khẩu phải có ít nhất 6 ký tự");
+            return "account/signup";
+        }
+        // Kiểm tra email đã tồn tại
         if (userService.findByEmail(email).isPresent()) {
             model.addAttribute("err", "Email đã tồn tại");
             model.addAttribute("email", email);
@@ -133,5 +137,4 @@ public class UserController {
             return "account/signup";
         }
     }
-
 }

@@ -23,11 +23,6 @@ public class UserService {
         return repo.findByCredentials(email, password, role);
     }
 
-    // Kiểm tra đăng nhập admin (role cố định)
-    public Optional<User> adminLogin(String email, String password) {
-        return repo.findByCredentials(email, password, "admin");
-    }
-
     // UserService.java
     public boolean resetPasswordByEmail(String email, String newPwd) {
         return repo.updatePasswordByEmail(email, newPwd) > 0;
@@ -36,5 +31,4 @@ public class UserService {
     public Optional<User> findByEmail(String email) {
         return repo.findByEmail(email);
     }
-
 }

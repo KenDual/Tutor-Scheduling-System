@@ -26,6 +26,11 @@ public class ExerciseRepository {
         }
         return e;
     }
+    
+    public List<Exercise> findAll() {
+        String sql = "SELECT * FROM exercises";
+        return jdbcTemplate.query(sql, this::mapRow);
+    }
 
     public List<Exercise> findAllBySessionId(int sessionId) {
         String sql = "SELECT * FROM exercises WHERE session_id = ?";

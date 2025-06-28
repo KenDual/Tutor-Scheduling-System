@@ -77,6 +77,11 @@
                                                     <input class="form-check-input" type="radio" name="role" id="roleTutor" value="tutor">
                                                     <label class="form-check-label" for="roleTutor">Tutor</label>
                                                 </div>
+                                                <!-- Admin -->
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="role" id="roleAdmin" value="admin">
+                                                    <label class="form-check-label" for="roleAdmin">Admin</label>
+                                                </div>
                                             </div>
                                             <!-- Email -->
                                             <div class="input-group input-group-outline my-3">

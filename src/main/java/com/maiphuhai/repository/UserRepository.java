@@ -66,7 +66,6 @@ public class UserRepository {
         return jdbc.update(SQL_DELETE, id);
     }
 
-    // UserRepository.java
     private static final String SQL_UPDATE_PASSWORD_BY_EMAIL
             = "UPDATE users SET password=? WHERE email=?";
 

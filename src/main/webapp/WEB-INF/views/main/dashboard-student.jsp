@@ -19,8 +19,6 @@
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link id="pagestyle" href="<c:url value='/assets/css/material-dashboard.css?v=3.2.0'/>" rel="stylesheet" />
     </head>
-
-
     <body class="g-sidenav-show  bg-gray-100">
         <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2"
                id="sidenav-main">
@@ -31,32 +29,32 @@
                    target="_blank">
                     <img src="<c:url value='/assets/img/logo-ct-dark.png'/>"
                          class="navbar-brand-img" width="26" height="26" alt="main_logo">
-                    <span class="ms-1 text-sm text-dark">Scheduling System</span>
+                    <span class="ms-1 text-sm text-dark">Tutor Scheduling System</span>
                 </a>
             </div>
             <hr class="horizontal dark mt-0 mb-2">
             <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active bg-gradient-dark text-white" href="<c:url value='/dashboard-student'/>">
+                        <a class="nav-link active bg-gradient-dark text-white" href="${pageContext.request.contextPath}/dashboard-student">
                             <i class="material-symbols-rounded opacity-5">dashboard</i>
                             <span class="nav-link-text ms-1">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="<c:url value='/timetable-student'/>">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/sessions/register">
                             <i class="material-symbols-rounded opacity-5">table_view</i>
                             <span class="nav-link-text ms-1">Timetable</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="<c:url value='/exercise-student'/>">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/exercise-student">
                             <i class="material-symbols-rounded opacity-5">table_view</i>
                             <span class="nav-link-text ms-1">Exercise</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="<c:url value='/material-student'/>">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/material-student">
                             <i class="material-symbols-rounded opacity-5">notifications</i>
                             <span class="nav-link-text ms-1">Study material</span>
                         </a>
@@ -224,7 +222,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <p class="text-sm mb-0 text-capitalize">Tổng ca học trong tuần</p>
-                                        <h4 class="mb-0">$53k</h4>
+                                        <h4 class="mb-0">${totalSessions}</h4>
                                     </div>
                                     <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
                                         <i class="material-symbols-rounded opacity-10">weekend</i>
@@ -243,7 +241,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <p class="text-sm mb-0 text-capitalize">Bài tập về nhà</p>
-                                        <h4 class="mb-0">2300</h4>
+                                        <h4 class="mb-0">${totalExercises}</h4>
                                     </div>
                                     <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
                                         <i class="material-symbols-rounded opacity-10">person</i>
