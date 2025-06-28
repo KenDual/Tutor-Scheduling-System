@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -230,7 +232,7 @@
                         <div class="card my-4">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
-                                    <h6 class="text-white text-capitalize ps-3">Gi?ng viên: Lâm Chí B?o</h6>
+                                    <h6 class="text-white text-capitalize ps-3">Gi?ng viÃªn: LÃ¢m ChÃ­ B?o</h6>
                                 </div>
                             </div>
                             <div class="card-body px-0 pb-2">
@@ -238,16 +240,16 @@
                                     <table class="table align-items-center mb-0" id="exerciseTable">
                                         <thead>
                                             <tr>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên bài t?p</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">TÃªn bÃ i t?p</th>
                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ch?n file</th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Set deadline (ngày gi?)</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Set deadline (ngÃ y gi?)</th>
                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="exerciseTableBody">
                                             <tr>
                                                 <td>
-                                                    <input type="text" class="form-control form-control-sm" id="exerciseName1" value="Bài t?p toán ch??ng 1" placeholder="Nh?p tên bài t?p">
+                                                    <input type="text" class="form-control form-control-sm" id="exerciseName1" value="BÃ i t?p toÃ¡n ch??ng 1" placeholder="Nh?p tÃªn bÃ i t?p">
                                                 </td>
                                                 <td>
                                                     <input type="file" class="form-control form-control-sm" id="fileInput1">
@@ -262,7 +264,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <button class="btn btn-success add-btn" onclick="addExerciseRow()">Thêm bài t?p</button>
+                                <button class="btn btn-success add-btn" onclick="addExerciseRow()">ThÃªm bÃ i t?p</button>
                                 <div id="uploadedExercises" class="mt-3"></div>
                             </div>
                         </div>
@@ -286,7 +288,7 @@
 
                             newRow.innerHTML = `
               <td>
-                <input type="text" class="form-control form-control-sm" id="exerciseName${exerciseCount}" placeholder="Nh?p tên bài t?p">
+                <input type="text" class="form-control form-control-sm" id="exerciseName${exerciseCount}" placeholder="Nh?p tÃªn bÃ i t?p">
               </td>
               <td>
                 <input type="file" class="form-control form-control-sm" id="fileInput${exerciseCount}">
@@ -308,15 +310,15 @@
                             const uploadedExercisesDiv = document.getElementById('uploadedExercises');
 
                             if (!exerciseNameInput.value) {
-                                alert("Vui lòng nh?p tên bài t?p!");
+                                alert("Vui lÃ²ng nh?p tÃªn bÃ i t?p!");
                                 return;
                             }
                             if (fileInput.files.length === 0) {
-                                alert("Vui lòng ch?n file!");
+                                alert("Vui lÃ²ng ch?n file!");
                                 return;
                             }
                             if (!deadlineInput.value) {
-                                alert("Vui lòng set deadline!");
+                                alert("Vui lÃ²ng set deadline!");
                                 return;
                             }
 
@@ -326,8 +328,8 @@
 
                             const exerciseInfo = `
               <div class="alert alert-success" role="alert">
-                <strong>Upload thành công!</strong><br>
-                Tên bài t?p: ${exerciseName}<br>
+                <strong>Upload thÃ nh cÃ´ng!</strong><br>
+                TÃªn bÃ i t?p: ${exerciseName}<br>
                 File: ${fileName}<br>
                 Deadline: ${deadline}
               </div>

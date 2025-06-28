@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -10,19 +9,134 @@
         <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
         <link rel="icon" type="image/png" href="../assets/img/favicon.png">
         <title>
-            Study Material
+            Timetable
         </title>
-        <!--     Fonts and icons     -->
+        <style>
+            /* ───── TIMETABLE LAYOUT ─────────────────────────────── */
+
+            /* khung bao: cao tối thiểu chiếm đa số màn hình để bảng không “lọt thỏm” */
+            .card .table-responsive {
+                min-height: 60vh;
+                /* 60% viewport height */
+            }
+
+            /* bảng chính */
+            .timetable {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                border-bottom: 1px solid #dee2e6;
+                /* cột đều nhau */
+            }
+
+            .timetable tr:last-child th,
+            .timetable tr:last-child td {
+                border-right: 1px solid #dee2e6 !important;
+            }
+
+            /* ô tiêu đề + ô dữ liệu chung */
+            .timetable th,
+            .timetable td {
+                border: 1px solid #dee2e6 !important;
+                padding: 18px 10px;
+                /* cao hơn / thoáng hơn */
+                height: 120px;
+                /* chiều cao mỗi ca học */
+                vertical-align: top;
+                /* text nằm trên-cùng  (dễ đọc) */
+                text-align: center;
+                font-size: 14px;
+            }
+
+            /* cột tiêu đề hàng (Morning / Afternoon / Evening) */
+            .timetable .time-col {
+                width: 110px;
+                background: #f8f9fa;
+                font-weight: 600;
+            }
+
+            /* hàng tiêu đề thứ (Monday …) dính trên khi cuộn */
+            .timetable thead th {
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                background: #f8f9fa;
+                font-weight: 600;
+                white-space: nowrap;
+            }
+
+            /* nội dung môn + GV dùng flex để căn */
+            .class-info {
+                position: relative;
+                /* MỚI: làm cha tương đối cho tooltip  */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 2px;
+            }
+
+            /* dòng GV nhỏ hơn & xám nhẹ */
+            .class-info .tutor {
+                font-size: 13px;
+                color: #6c757d;
+            }
+
+            /* ───── Tooltip cải tiến ─────────────────────────────── */
+            .class-info .tooltip {
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                margin-top: 6px;
+                background: #333;
+                color: #fff;
+                padding: 8px 12px;
+                border-radius: 4px;
+                font-size: 12px;
+                white-space: nowrap;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity .2s;
+                z-index: 20;
+            }
+
+            .class-info:hover .tooltip {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .class-info .tooltip::before {
+                content: "";
+                position: absolute;
+                top: -6px;
+                left: 50%;
+                transform: translateX(-50%);
+                border: 6px solid transparent;
+                border-bottom-color: #333;
+            }
+
+            /* ───── Responsive (<992px) ─────────────────────────── */
+            @media (max-width:992px) {
+
+                .timetable th,
+                .timetable td {
+                    height: 90px;
+                    padding: 12px 6px;
+                    font-size: 13px;
+                }
+
+                .class-info .tutor {
+                    font-size: 11px;
+                }
+            }
+        </style>
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
-        <!-- Nucleo Icons -->
         <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
         <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- Font Awesome Icons -->
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <!-- Material Icons -->
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-        <!-- CSS Files -->
         <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
     </head>
 
@@ -47,19 +161,19 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="../pages/timetable.html">
+                        <a class="nav-link active bg-gradient-dark text-white" href="../pages/timetable.html">
                             <i class="material-symbols-rounded opacity-5">table_view</i>
                             <span class="nav-link-text ms-1">Timetable</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="../pages/exercise.html">
-                            <i class="material-symbols-rounded opacity-5">table_view</i>
+                            <i class="material-symbols-rounded opacity-5">checklist</i>
                             <span class="nav-link-text ms-1">Exercise</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active bg-gradient-dark text-white" href="../pages/study-material.html">
+                        <a class="nav-link text-dark" href="../pages/study-material.html">
                             <i class="material-symbols-rounded opacity-5">notifications</i>
                             <span class="nav-link-text ms-1">Study material</span>
                         </a>
@@ -76,7 +190,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="../pages/sign-in.html">
                             <i class="material-symbols-rounded opacity-5">login</i>
-                            <span class="nav-link-text ms-1">Sign In</span>
+                            <span class="nav-link-text ms-1">Log out</span>
                         </a>
                     </li>
                 </ul>
@@ -97,13 +211,14 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Student Dashboard</li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Student Timetable</li>
                         </ol>
                     </nav>
                     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         </div>
                         <ul class="navbar-nav d-flex align-items-center  justify-content-end">
+
                             <li class="mt-1">
                                 <a class="github-button" href="https://github.com/KenDual/Tutor-Scheduling-System"
                                    data-icon="octicon-star" data-size="large" data-show-count="true"
@@ -212,176 +327,159 @@
                     </div>
                 </div>
             </nav>
+
             <!-- End Navbar -->
             <div class="container-fluid py-2">
                 <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto">
-                        <div class="card mt-4">
-                            <div class="card-header p-3">
-                                <h5 class="mb-0">Assignments</h5>
-                            </div>
-                            <ippetsdiv class="card-body p-3 pb-0">
-                                <div class="alert alert-primary d-flex justify-content-between align-items-center text-white"
-                                     role="alert">
-                                    <span class="text-sm">Toán – Homework&nbsp;01.pdf</span>
-                                    <a class="btn btn-sm btn-light text-dark d-inline-flex align-items-center"
-                                       href="../files/homework01.pdf" download>
-                                        <i class="material-symbols-rounded me-1">download</i> Download
-                                    </a>
+                    <div class="col-12">
+                        <div class="card my-4">
+                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                                <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+                                    <h6 class="text-white text-capitalize ps-3">Timetable</h6>
                                 </div>
-                                <div class="alert alert-primary d-flex justify-content-between align-items-center text-white"
-                                     role="alert">
-                                    <span class="text-sm">Toán – Homework&nbsp;02.pdf</span>
-                                    <a class="btn btn-sm btn-light text-dark d-inline-flex align-items-center"
-                                       href="../files/homework01.pdf" download>
-                                        <i class="material-symbols-rounded me-1">download</i> Download
-                                    </a>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="table-responsive p-0">
+                                    <table class="table timetable">
+
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Monday</th>
+                                                <th>Tuesday</th>
+                                                <th>Wednesday</th>
+                                                <th>Thursday</th>
+                                                <th>Friday</th>
+                                                <th>Saturday</th>
+                                                <th>Sunday</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th class="time-col">Morning</th>
+                                                <td>
+                                                    <div class="class-info">
+                                                        <p class="subject mb-0">Toán</p>
+                                                        <p class="tutor mb-0 text-secondary small">GV: A</p>
+                                                        <div class="tooltip">
+                                                            <p><strong>Tutor:</strong> A</p>
+                                                            <p><strong>Subject:</strong> Toán</p>
+                                                            <p><strong>Address:</strong> Phòng 101</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <div class="class-info">
+                                                        <p class="subject mb-0">Toán</p>
+                                                        <p class="tutor mb-0 text-secondary small">GV: A</p>
+                                                        <div class="tooltip">
+                                                            <p><strong>Tutor:</strong> D</p>
+                                                            <p><strong>Subject:</strong> Lịch Sử</p>
+                                                            <p><strong>Address:</strong> Phòng 202</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="time-col">Afternoon</th>
+                                                <td></td>
+                                                <td>
+                                                    <div class="class-info">
+                                                        <p class="subject mb-0">Toán</p>
+                                                        <p class="tutor mb-0 text-secondary small">GV: A</p>
+                                                        <div class="tooltip">
+                                                            <p><strong>Tutor:</strong> B</p>
+                                                            <p><strong>Subject:</strong> Khoa Học</p>
+                                                            <p><strong>Address:</strong> Lab 2</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <div class="class-info">
+                                                        <p class="subject mb-0">Toán</p>
+                                                        <p class="tutor mb-0 text-secondary small">GV: A</p>
+                                                        <div class="tooltip">
+                                                            <p><strong>Tutor:</strong> E</p>
+                                                            <p><strong>Subject:</strong> Mỹ Thuật</p>
+                                                            <p><strong>Address:</strong> Xưởng 1</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="time-col">Evening</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <div class="class-info">
+                                                        <p class="subject mb-0">Toán</p>
+                                                        <p class="tutor mb-0 text-secondary small">GV: A</p>
+                                                        <div class="tooltip">
+                                                            <p><strong>Tutor:</strong> C</p>
+                                                            <p><strong>Subject:</strong> Tiếng Anh</p>
+                                                            <p><strong>Address:</strong> Library</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <div class="class-info">
+                                                        <p class="subject mb-0">Toán</p>
+                                                        <p class="tutor mb-0 text-secondary small">GV: A</p>
+                                                        <div class="tooltip">
+                                                            <p><strong>Tutor:</strong> F</p>
+                                                            <p><strong>Subject:</strong> Âm Nhạc</p>
+                                                            <p><strong>Address:</strong> Hall 3</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="alert alert-primary d-flex justify-content-between align-items-center text-white"
-                                     role="alert">
-                                    <span class="text-sm">Toán – Homework&nbsp;03.pdf</span>
-                                    <a class="btn btn-sm btn-light text-dark d-inline-flex align-items-center"
-                                       href="../files/homework01.pdf" download>
-                                        <i class="material-symbols-rounded me-1">download</i> Download
-                                    </a>
-                                </div>
-                                <div class="alert alert-primary d-flex justify-content-between align-items-center text-white"
-                                     role="alert">
-                                    <span class="text-sm">Toán – Homework&nbsp;04.pdf</span>
-                                    <a class="btn btn-sm btn-light text-dark d-inline-flex align-items-center"
-                                       href="../files/homework01.pdf" download>
-                                        <i class="material-symbols-rounded me-1">download</i> Download
-                                    </a>
-                                </div>
-                                <div class="alert alert-primary d-flex justify-content-between align-items-center text-white"
-                                     role="alert">
-                                    <span class="text-sm">Toán – Homework&nbsp;05.pdf</span>
-                                    <a class="btn btn-sm btn-light text-dark d-inline-flex align-items-center"
-                                       href="../files/homework01.pdf" download>
-                                        <i class="material-symbols-rounded me-1">download</i> Download
-                                    </a>
-                                </div>
-                                <div class="card mt-4">
-                                    <div class="card-header p-3">
-                                        <h5 class="mb-0">Notifications</h5>
-                                        <p class="text-sm mb-0">
-                                            Notifications on this page use Toasts from Bootstrap. Read more details <a
-                                                href="https://getbootstrap.com/docs/5.0/components/toasts/" target="
-                                                ">here</a>.
-                                        </p>
-                                    </div>
-                                    <div class="card-body p-3">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-sm-6 col-12">
-                                                <button class="btn bg-gradient-success w-100 mb-0 toast-btn" type="button"
-                                                        data-target="successToast">Success</button>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-12 mt-sm-0 mt-2">
-                                                <button class="btn bg-gradient-info w-100 mb-0 toast-btn" type="button"
-                                                        data-target="infoToast">Info</button>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-12 mt-lg-0 mt-2">
-                                                <button class="btn bg-gradient-warning w-100 mb-0 toast-btn" type="button"
-                                                        data-target="warningToast">Warning</button>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-12 mt-lg-0 mt-2">
-                                                <button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="button"
-                                                        data-target="dangerToast">Danger</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="position-fixed bottom-1 end-1 z-index-2">
-                        <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast"
-                             aria-atomic="true">
-                            <div class="toast-header border-0">
-                                <i class="material-symbols-rounded text-success me-2">
-                                    check
-                                </i>
-                                <span class="me-auto font-weight-bold">Material Dashboard </span>
-                                <small class="text-body">11 mins ago</small>
-                                <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
-                            </div>
-                            <hr class="horizontal dark m-0">
-                            <div class="toast-body">
-                                Hello, world! This is a notification message.
-                            </div>
-                        </div>
-                        <div class="toast fade hide p-2 mt-2 bg-gradient-info" role="alert" aria-live="assertive" id="infoToast"
-                             aria-atomic="true">
-                            <div class="toast-header bg-transparent border-0">
-                                <i class="material-symbols-rounded text-white me-2">
-                                    notifications
-                                </i>
-                                <span class="me-auto text-white font-weight-bold">Material Dashboard </span>
-                                <small class="text-white">11 mins ago</small>
-                                <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast"
-                                   aria-label="Close"></i>
-                            </div>
-                            <hr class="horizontal light m-0">
-                            <div class="toast-body text-white">
-                                Hello, world! This is a notification message.
-                            </div>
-                        </div>
-                        <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast"
-                             aria-atomic="true">
-                            <div class="toast-header border-0">
-                                <i class="material-symbols-rounded text-warning me-2">
-                                    travel_explore
-                                </i>
-                                <span class="me-auto font-weight-bold">Material Dashboard </span>
-                                <small class="text-body">11 mins ago</small>
-                                <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
-                            </div>
-                            <hr class="horizontal dark m-0">
-                            <div class="toast-body">
-                                Hello, world! This is a notification message.
-                            </div>
-                        </div>
-                        <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="dangerToast"
-                             aria-atomic="true">
-                            <div class="toast-header border-0">
-                                <i class="material-symbols-rounded text-danger me-2">
-                                    campaign
-                                </i>
-                                <span class="me-auto text-gradient text-danger font-weight-bold">Material Dashboard </span>
-                                <small class="text-body">11 mins ago</small>
-                                <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
-                            </div>
-                            <hr class="horizontal dark m-0">
-                            <div class="toast-body">
-                                Hello, world! This is a notification message.
                             </div>
                         </div>
                     </div>
-                    <footer class="footer py-4  ">
-                        <div class="container-fluid">
-                            <div class="row align-items-center justify-content-lg-between">
-                                <div class="col-lg-6 mb-lg-0 mb-4">
-                                    <div class="copyright text-center text-sm text-muted text-lg-start">
-                                        ©
-                                        <script>
-                                            document.write(new Date().getFullYear())
-                                        </script>,
-                                        made with <i class="fa fa-heart"></i>lichen by
-                                        <a href="https://github.com/KenDual/Tutor-Scheduling-System.git" class="font-weight-bold" target="_blank">Bo Tam AI Thu</a>
-                                        for a better web.
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                                        <li class="nav-item">
-                                            <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                               target="_blank">About Us</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
                 </div>
+                <footer class="footer py-4  ">
+                    <div class="container-fluid">
+                        <div class="row align-items-center justify-content-lg-between">
+                            <div class="col-lg-6 mb-lg-0 mb-4">
+                                <div class="copyright text-center text-sm text-muted text-lg-start">
+                                    ©
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script>,
+                                    made with <i class="fa fa-heart"></i> by
+                                    <a href="https://github.com/KenDual/Tutor-Scheduling-System" class="font-weight-bold" target="_blank">Bo
+                                        Tam AI Thu</a>
+                                    for a better web.
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                    <li class="nav-item">
+                                        <a href="https://github.com/KenDual/Tutor-Scheduling-System" class="nav-link text-muted"
+                                           target="_blank">About
+                                            Us</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </main>
         <div class="fixed-plugin">
             <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
@@ -454,7 +552,7 @@
                            data-icon="octicon-star" data-size="large" data-show-count="true"
                            aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
                         <h6 class="mt-3">Thank you for sharing!</h6>
-                        <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard"
+                        <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard"
                            class="btn btn-dark mb-0 me-2" target="_blank">
                             <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
                         </a>
@@ -476,7 +574,7 @@
                       if (win && document.querySelector('#sidenav-scrollbar')) {
                           var options = {
                               damping: '0.5'
-                          };
+                          }
                           Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
                       }
         </script>

@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -271,23 +273,23 @@
                                     <table class="table align-items-center mb-0" id="exerciseTable">
                                         <thead>
                                             <tr>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên bài t?p</th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gi?ng viên
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">TÃªn bÃ i t?p</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gi?ng viÃªn
                                                 </th>
                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Deadline</th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">T?i bài t?p
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">T?i bÃ i t?p
                                                 </th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">N?p bài t?p
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">N?p bÃ i t?p
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody id="exerciseTableBody">
                                             <tr>
                                                 <td>
-                                                    <h6 class="mb-0 text-sm">Bài t?p toán ch??ng 1</h6>
+                                                    <h6 class="mb-0 text-sm">BÃ i t?p toÃ¡n ch??ng 1</h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-sm">Lâm Chí B?o</h6>
+                                                    <h6 class="mb-0 text-sm">LÃ¢m ChÃ­ B?o</h6>
                                                 </td>
                                                 <td>
                                                     <h6 class="mb-0 text-sm">2025-06-29T12:00</h6>
@@ -302,10 +304,10 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <h6 class="mb-0 text-sm">Bài t?p toán ch??ng 2</h6>
+                                                    <h6 class="mb-0 text-sm">BÃ i t?p toÃ¡n ch??ng 2</h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-sm">Lâm Chí B?o</h6>
+                                                    <h6 class="mb-0 text-sm">LÃ¢m ChÃ­ B?o</h6>
                                                 </td>
                                                 <td>
                                                     <h6 class="mb-0 text-sm">2025-07-01T14:00</h6>
@@ -339,8 +341,8 @@
 
                                   function downloadExercise(rowId) {
                                       const exerciseName = document.querySelector(`#exerciseTableBody tr:nth-child(${rowId}) td:first-child h6`).textContent;
-                                      alert(`?ang t?i file cho ${exerciseName}. (Tính n?ng mô ph?ng, file m?u không th?c s? t?i xu?ng)`);
-                                      // ? ?ây b?n có th? thêm logic t?i file th?c t? n?u có server
+                                      alert(`?ang t?i file cho ${exerciseName}. (TÃ­nh n?ng mÃ´ ph?ng, file m?u khÃ´ng th?c s? t?i xu?ng)`);
+                                      // ? ?Ã¢y b?n cÃ³ th? thÃªm logic t?i file th?c t? n?u cÃ³ server
                                   }
 
                                   function submitExercise(rowId) {
@@ -349,7 +351,7 @@
                                       const exerciseName = document.querySelector(`#exerciseTableBody tr:nth-child(${rowId}) td:first-child h6`).textContent;
 
                                       if (fileInput.files.length === 0) {
-                                          alert("Vui lòng ch?n file ?? n?p!");
+                                          alert("Vui lÃ²ng ch?n file ?? n?p!");
                                           return;
                                       }
 
@@ -358,8 +360,8 @@
 
                                       const submissionInfo = `
               <div class="alert alert-success submitted-item" role="alert">
-                <strong>N?p bài thành công!</strong><br>
-                Tên bài t?p: ${exerciseName}<br>
+                <strong>N?p bÃ i thÃ nh cÃ´ng!</strong><br>
+                TÃªn bÃ i t?p: ${exerciseName}<br>
                 File n?p: ${fileName}<br>
                 Th?i gian n?p: ${submissionTime}
               </div>

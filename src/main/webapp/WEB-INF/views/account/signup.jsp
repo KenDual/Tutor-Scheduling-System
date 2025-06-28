@@ -3,7 +3,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -80,6 +79,15 @@
                                                        name="role" id="rTutor" value="tutor">
                                                 <label class="form-check-label" for="rTutor">Tutor</label>
                                             </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                       name="role" id="rTutor" value="admin">
+                                                <label class="form-check-label" for="rTutor">Admin</label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label">Full name</label>
+                                            <input type="text" name="fullName" class="form-control" required>
                                         </div>
                                         <div class="input-group input-group-outline my-3">
                                             <label class="form-label">Email</label>
@@ -96,7 +104,7 @@
                                             <input type="password" name="confirm" class="form-control" required>
                                         </div>
                                         <div class="text-center">
-                                            <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
+                                            <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
                                         </div>
                                         <c:if test="${not empty err}">
                                             <div class="alert alert-danger text-center py-2">${err}</div>
