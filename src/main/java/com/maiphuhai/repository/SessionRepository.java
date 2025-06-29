@@ -63,7 +63,7 @@ public class SessionRepository {
 
     /* ---------- Truy vấn ---------- */
     public List<Session> findAll() {
-        return jdbc.query(SELECT_JOIN, map);                           // có tên
+        return jdbc.query(SELECT_JOIN, map);
     }
 
     public Session findById(int id) {

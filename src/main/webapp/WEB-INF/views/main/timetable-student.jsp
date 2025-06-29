@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,7 +115,8 @@
             <div class="sidenav-header">
                 <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
                 <a class="navbar-brand px-4 py-3 m-0" href="https://github.com/KenDual/Tutor-Scheduling-System" target="_blank">
-                    <img src="<c:url value='/assets/img/logo-ct-dark.png'/>" class="navbar-brand-img" width="26" height="26" alt="main_logo">
+                    <img src="<c:url value='/assets/img/logo-ct-dark.png'/>" 
+                         class="navbar-brand-img" width="26" height="26" alt="main_logo">
                     <span class="ms-1 text-sm text-dark">Scheduling System</span>
                 </a>
             </div>
@@ -239,9 +241,7 @@
                                             <c:forEach var="slot" items="${['Morning', 'Afternoon', 'Evening']}">
                                                 <tr>
                                                     <th class="time-col">${slot}</th>
-                                                    --
-
-                                                    <c:forEach var="day" items="${['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']}">
+                                                        <c:forEach var="day" items="${['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']}">
                                                         <td>
                                                             <c:forEach var="session" items="${sessions}">
                                                                 <c:if test="${session.day_of_week == day && session.slot == (slot == 'Morning' ? 1 : slot == 'Afternoon' ? 2 : 3)}">
@@ -368,14 +368,15 @@
                                 }
 
                                 function selectSession(sessionId) {
-                                    var studentId = ${sessionScope.studentId != null ? sessionScope.studentId : 0}; // Assuming studentId is stored in session scope
+                                    var studentId = ${sessionScope.studentId != null ? sessionScope.studentId : 0};
+                                    console.log("Student ID: " + studentId);
                                     if (studentId === 0) {
                                         alert("Vui lòng đăng nhập để chọn ca học!");
                                         return;
                                     }
                                     $.ajax({
                                         type: "POST",
-                                        url: "${pageContext.request.contextPath}/booking/book",
+                                        url: "${pageContext.request.contextPath}/sessions/book",
                                         data: {
                                             sessionId: sessionId,
                                             studentId: studentId

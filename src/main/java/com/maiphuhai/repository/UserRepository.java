@@ -43,6 +43,11 @@ public class UserRepository {
         return jdbc.update(SQL_INSERT, u.getEmail(), u.getPassword(), u.getRole(), u.getFull_name(), u.getPhone());
     }
 
+    public List<User> findAll() {
+        String sql = "SELECT * FROM users";
+        return jdbc.query(sql, mapper);
+    }
+
     public Optional<User> findById(int id) {
         List<User> list = jdbc.query(SQL_SELECT_BY_ID, mapper, id);
         return list.isEmpty() ? Optional.empty() : Optional.of(list.get(0));
@@ -58,8 +63,9 @@ public class UserRepository {
         return list.isEmpty() ? Optional.empty() : Optional.of(list.get(0));
     }
 
-    public int update(User u) {
-        return jdbc.update(SQL_UPDATE, u.getEmail(), u.getPassword(), u.getRole(), u.getFull_name(), u.getPhone(), u.getUser_id());
+    public void update(User user) {
+        String sql = "UPDATE users SET email=?, password=?, full_name=?, phone=? WHERE user_id=?";
+        jdbc.update(sql, user.getEmail(), user.getPassword(), user.getFull_name(), user.getPhone(), user.getUser_id());
     }
 
     public int delete(int id) {

@@ -28,6 +28,10 @@ public class SessionService {
         return repo.findByStudent(studentId);
     }
 
+    public List<Session> findAll() {
+        return repo.findAll();
+    }
+    
     public List<Session> ofStudent(int sid) {
         return repo.findByStudent(sid);
     }

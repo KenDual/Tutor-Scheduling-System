@@ -47,6 +47,13 @@ public class UserController {
         session.setAttribute("currentUser", u);
         session.setAttribute("role", u.getRole());
 
+        if ("student".equals(u.getRole())) {
+            session.setAttribute("studentId", u.getUser_id());
+        } 
+        if ("tutor".equals(u.getRole())) {
+            session.setAttribute("tutorId", u.getUser_id());
+        } 
+
         switch (u.getRole()) {
             case "admin":
                 return "redirect:/dashboard-admin";

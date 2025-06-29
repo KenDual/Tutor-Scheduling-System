@@ -28,7 +28,7 @@ public class TimetableStudentController {
         }
         
         int studentId = user.getUser_id();
-        List<Session> sessions = sessionService.ofStudent(studentId);
+        List<Session> sessions = sessionService.ofAdmin();
         model.addAttribute("sessions", sessions);
         model.addAttribute("subjects", subjectService.findAll());
         
