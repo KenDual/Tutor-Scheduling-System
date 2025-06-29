@@ -1,6 +1,10 @@
 package com.maiphuhai.controller;
 
+import com.maiphuhai.model.Student;
+import com.maiphuhai.model.Tutor;
 import com.maiphuhai.model.User;
+import com.maiphuhai.service.StudentService;
+import com.maiphuhai.service.TutorService;
 import com.maiphuhai.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import java.util.Optional;
@@ -14,7 +18,13 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    
+
+    @Autowired
+    private TutorService tutorService;
+
+    @Autowired
+    private StudentService studentService;
+
     @GetMapping("/login")
     public String showLoginForm() {
         return "account/login";
@@ -37,7 +47,6 @@ public class UserController {
         session.setAttribute("currentUser", u);
         session.setAttribute("role", u.getRole());
 
-        // Chuyển hướng dựa trên vai trò
         switch (u.getRole()) {
             case "admin":
                 return "redirect:/dashboard-admin";
@@ -51,20 +60,17 @@ public class UserController {
         }
     }
 
-    // Đăng xuất chung
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/login";
     }
 
-    // Hiển thị form quên mật khẩu
     @GetMapping("/forgot-password")
     public String showForgotPwdForm() {
         return "account/forgot-password";
     }
 
-    // Xử lý quên mật khẩu
     @PostMapping("/forgot-password")
     public String processForgotPwd(@RequestParam String email,
             @RequestParam String newPassword,
@@ -82,20 +88,17 @@ public class UserController {
         }
     }
 
-    // Hiển thị form đăng ký
     @GetMapping("/signup")
     public String showSignupForm() {
         return "account/signup";
     }
 
-    // Xử lý đăng ký với xác thực cơ bản
     @PostMapping("/signup")
     public String processSignup(@RequestParam String role,
             @RequestParam String fullName,
             @RequestParam String email,
             @RequestParam String password,
             Model model) {
-        // Xác thực đầu vào
         if (role == null || role.isEmpty()) {
             model.addAttribute("err", "Vui lòng chọn vai trò");
             return "account/signup";
@@ -116,7 +119,6 @@ public class UserController {
             model.addAttribute("err", "Mật khẩu phải có ít nhất 6 ký tự");
             return "account/signup";
         }
-        // Kiểm tra email đã tồn tại
         if (userService.findByEmail(email).isPresent()) {
             model.addAttribute("err", "Email đã tồn tại");
             model.addAttribute("email", email);
@@ -136,5 +138,24 @@ public class UserController {
             model.addAttribute("err", "Đăng ký thất bại");
             return "account/signup";
         }
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("currentUser");
+        if (user == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("user", user);
+
+        if ("tutor".equals(user.getRole())) {
+            Optional<Tutor> tutorOpt = tutorService.findById(user.getUser_id());
+            tutorOpt.ifPresent(tutor -> model.addAttribute("tutor", tutor));
+        } else if ("student".equals(user.getRole())) {
+            Optional<Student> studentOpt = studentService.findById(user.getUser_id());
+            studentOpt.ifPresent(student -> model.addAttribute("student", student));
+        }
+
+        return "main/profile";
     }
 }

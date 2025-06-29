@@ -5,14 +5,15 @@ import com.maiphuhai.model.User;
 import com.maiphuhai.service.SessionService;
 import com.maiphuhai.service.SubjectService;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Controller
-public class TimetableStudentController {
+public class TimetableTutorController {
     
     @Autowired
     private SubjectService subjectService;
@@ -20,18 +21,18 @@ public class TimetableStudentController {
     @Autowired
     private SessionService sessionService;
 
-    @GetMapping("/timetable-student")
+    @GetMapping("/timetable-tutor")
     public String show(Model model, HttpSession session) {
         User user = (User) session.getAttribute("currentUser");
-        if (user == null || !"student".equals(user.getRole())) {
+        if (user == null || !"tutor".equals(user.getRole())) {
             return "redirect:/login";
         }
         
-        int studentId = user.getUser_id();
-        List<Session> sessions = sessionService.ofStudent(studentId);
+        int tutorId = user.getUser_id();
+        List<Session> sessions = sessionService.ofTutor(tutorId);
         model.addAttribute("sessions", sessions);
         model.addAttribute("subjects", subjectService.findAll());
         
-        return "main/timetable-student";
+        return "main/timetable-tutor";
     }
 }

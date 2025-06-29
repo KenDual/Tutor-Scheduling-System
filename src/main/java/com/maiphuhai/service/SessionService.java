@@ -24,6 +24,10 @@ public class SessionService {
         return repo.findScheduled().size();
     }
 
+    public List<Session> getSessionsForStudent(int studentId) {
+        return repo.findByStudent(studentId);
+    }
+
     public List<Session> ofStudent(int sid) {
         return repo.findByStudent(sid);
     }

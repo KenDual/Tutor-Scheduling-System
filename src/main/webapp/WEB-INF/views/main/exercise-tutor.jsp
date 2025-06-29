@@ -7,19 +7,14 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="<c:url value='/assets/img/apple-icon.png'/>">
         <link rel="icon" type="image/png" href="<c:url value='/assets/img/favicon.png'/>">
         <title>Exercise</title>
-        <!-- Fonts and icons -->
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
-        <!-- Nucleo Icons -->
         <link href="<c:url value='/assets/css/nucleo-icons.css'/>" rel="stylesheet" />
         <link href="<c:url value='/assets/css/nucleo-svg.css'/>" rel="stylesheet" />
-        <!-- Font Awesome Icons -->
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <!-- Material Icons -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-        <!-- CSS Files -->
         <link id="pagestyle" href="<c:url value='/assets/css/material-dashboard.css?v=3.2.0'/>" rel="stylesheet" />
         <style>
             .card-header {
@@ -61,7 +56,7 @@
             <div class="sidenav-header">
                 <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
                 <a class="navbar-brand px-4 py-3 m-0" href="https://github.com/KenDual/Tutor-Scheduling-System" target="_blank">
-                    <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
+                    <img src="<c:url value='/assets/img/logo-ct-dark.png'/>" class="navbar-brand-img" width="26" height="26" alt="main_logo">
                     <span class="ms-1 text-sm text-dark">Scheduling System</span>
                 </a>
             </div>
@@ -69,25 +64,25 @@
             <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/dashboard-student">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/dashboard-tutor">
                             <i class="material-symbols-rounded opacity-5">dashboard</i>
                             <span class="nav-link-text ms-1">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/timetable-student">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/timetable-tutor">
                             <i class="material-symbols-rounded opacity-5">table_view</i>
                             <span class="nav-link-text ms-1">Timetable</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active bg-gradient-dark text-white" href="${pageContext.request.contextPath}/exercise-student">
+                        <a class="nav-link active bg-gradient-dark text-white" href="${pageContext.request.contextPath}/exercise-tutor">
                             <i class="material-symbols-rounded opacity-5">checklist</i>
                             <span class="nav-link-text ms-1">Exercise</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/material-student">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/material-tutor">
                             <i class="material-symbols-rounded opacity-5">notifications</i>
                             <span class="nav-link-text ms-1">Study material</span>
                         </a>
@@ -114,7 +109,7 @@
             </div>
             <div class="sidenav-footer position-absolute w-100 bottom-0">
                 <div class="mx-3">
-                    <a class="btn btn-outline-dark mt-4 w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard?ref=sidebarfree" type="button">Documentation</a>
+                    <a class="btn btn-outline-dark mt-4 w-100" href="https://github.com/KenDual/Tutor-Scheduling-System.git" type="button">Documentation</a>
                 </div>
             </div>
         </aside>
@@ -277,20 +272,22 @@
             </div>
         </main>
         <!-- Core JS Files -->
-        <script src="../assets/js/core/popper.min.js"></script>
-        <script src="../assets/js/core/bootstrap.min.js"></script>
-        <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-        <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-        <script src="../assets/js/material-dashboard.min.js?v=3.2.0"></script>
+        <script src="<c:url value='/assets/js/core/popper.min.js'/>"></script>
+        <script src="<c:url value='/assets/js/core/bootstrap.min.js'/>"></script>
+        <script src="<c:url value='/assets/js/plugins/perfect-scrollbar.min.js'/>"></script>
+        <script src="<c:url value='/assets/js/plugins/smooth-scrollbar.min.js'/>"></script>
+        <script src="<c:url value='/assets/js/plugins/chartjs.min.js'/>"></script>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script src="<c:url value='/assets/js/material-dashboard.min.js?v=3.2.0'/>"></script>
         <script>
-                        let exerciseCount = 1;
+                                    let exerciseCount = 1;
 
-                        function addExerciseRow() {
-                            exerciseCount++;
-                            const tbody = document.getElementById('exerciseTableBody');
-                            const newRow = document.createElement('tr');
+                                    function addExerciseRow() {
+                                        exerciseCount++;
+                                        const tbody = document.getElementById('exerciseTableBody');
+                                        const newRow = document.createElement('tr');
 
-                            newRow.innerHTML = `
+                                        newRow.innerHTML = `
               <td>
                 <input type="text" class="form-control form-control-sm" id="exerciseName${exerciseCount}" placeholder="Nh?p tên bài t?p">
               </td>
@@ -304,33 +301,33 @@
                 <button class="btn btn-sm btn-primary" onclick="uploadExercise(${exerciseCount})">Upload</button>
               </td>
             `;
-                            tbody.appendChild(newRow);
-                        }
+                                        tbody.appendChild(newRow);
+                                    }
 
-                        function uploadExercise(rowId) {
-                            const fileInput = document.getElementById(`fileInput${rowId}`);
-                            const deadlineInput = document.getElementById(`deadlineInput${rowId}`);
-                            const exerciseNameInput = document.getElementById(`exerciseName${rowId}`);
-                            const uploadedExercisesDiv = document.getElementById('uploadedExercises');
+                                    function uploadExercise(rowId) {
+                                        const fileInput = document.getElementById(`fileInput${rowId}`);
+                                        const deadlineInput = document.getElementById(`deadlineInput${rowId}`);
+                                        const exerciseNameInput = document.getElementById(`exerciseName${rowId}`);
+                                        const uploadedExercisesDiv = document.getElementById('uploadedExercises');
 
-                            if (!exerciseNameInput.value) {
-                                alert("Vui lòng nh?p tên bài t?p!");
-                                return;
-                            }
-                            if (fileInput.files.length === 0) {
-                                alert("Vui lòng ch?n file!");
-                                return;
-                            }
-                            if (!deadlineInput.value) {
-                                alert("Vui lòng set deadline!");
-                                return;
-                            }
+                                        if (!exerciseNameInput.value) {
+                                            alert("Vui lòng nh?p tên bài t?p!");
+                                            return;
+                                        }
+                                        if (fileInput.files.length === 0) {
+                                            alert("Vui lòng ch?n file!");
+                                            return;
+                                        }
+                                        if (!deadlineInput.value) {
+                                            alert("Vui lòng set deadline!");
+                                            return;
+                                        }
 
-                            const fileName = fileInput.files[0].name;
-                            const deadline = deadlineInput.value;
-                            const exerciseName = exerciseNameInput.value;
+                                        const fileName = fileInput.files[0].name;
+                                        const deadline = deadlineInput.value;
+                                        const exerciseName = exerciseNameInput.value;
 
-                            const exerciseInfo = `
+                                        const exerciseInfo = `
               <div class="alert alert-success" role="alert">
                 <strong>Upload thành công!</strong><br>
                 Tên bài t?p: ${exerciseName}<br>
@@ -339,13 +336,13 @@
               </div>
             `;
 
-                            uploadedExercisesDiv.innerHTML += exerciseInfo;
+                                        uploadedExercisesDiv.innerHTML += exerciseInfo;
 
-                            // Reset inputs
-                            fileInput.value = '';
-                            deadlineInput.value = '';
-                            exerciseNameInput.value = '';
-                        }
+                                        // Reset inputs
+                                        fileInput.value = '';
+                                        deadlineInput.value = '';
+                                        exerciseNameInput.value = '';
+                                    }
         </script>
     </body>
 

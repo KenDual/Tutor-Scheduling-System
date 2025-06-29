@@ -12,16 +12,17 @@ import java.util.List;
 @Controller
 @RequestMapping("/exercise-tutor")
 public class ExerciseTutorController {
+    
     @Autowired
     private ExerciseService exerciseService;
 
     // Hiển thị danh sách theo sessionId
     @GetMapping
-    public String list(@RequestParam("sessionId") int sessionId, Model model) {
-        List<Exercise> exercises = exerciseService.getBySessionId(sessionId);
+    public String show(Model model) {
+        List<Exercise> exercises = exerciseService.findAll();
+        System.out.println("Exercises: " + exercises);
         model.addAttribute("exercises", exercises);
-        model.addAttribute("sessionId", sessionId);
-        return "main/exercise-student";
+        return "main/exercise-tutor";
     }
 
     // Form thêm mới
@@ -30,7 +31,7 @@ public class ExerciseTutorController {
         Exercise e = new Exercise();
         e.setSessionId(sessionId);
         model.addAttribute("exercise", e);
-        return "main/exercise-student";
+        return "main/exercise-tutor";
     }
 
     // Xử lý thêm
@@ -45,7 +46,7 @@ public class ExerciseTutorController {
     public String showEditForm(@PathVariable("id") int id, Model model) {
         Exercise e = exerciseService.getById(id);
         model.addAttribute("exercise", e);
-        return "main/exercise-student";
+        return "main/exercise-tutor";
     }
 
     // Xử lý cập nhật

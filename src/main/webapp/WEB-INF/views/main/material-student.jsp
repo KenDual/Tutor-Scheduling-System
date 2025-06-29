@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active bg-gradient-dark text-white" href="${pageContext.request.contextPath}/materials">
+                        <a class="nav-link active bg-gradient-dark text-white" href="${pageContext.request.contextPath}/material-student">
                             <i class="material-symbols-rounded opacity-5">notifications</i>
                             <span class="nav-link-text ms-1">Study material</span>
                         </a>
@@ -207,7 +207,8 @@
                                                         Uploaded on: ${material.uploadedAt}
                                                     </p>
                                                 </div>
-                                                <a class="btn btn-sm btn-light text-dark d-inline-flex align-items-center" href="${pageContext.request.contextPath}/materials/download/${material.materialId}">
+                                                <a class="btn btn-sm btn-light text-dark d-inline-flex align-items-center" 
+                                                   href="${pageContext.request.contextPath}/material-student/download/${material.materialId}">
                                                     <i class="material-symbols-rounded me-1">download</i> Download
                                                 </a>
                                             </div>
