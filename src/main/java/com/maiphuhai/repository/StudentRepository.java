@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ public class StudentRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    
+
     private Student mapRow(ResultSet rs, int rowNum) throws SQLException {
         Student e = new Student();
         e.setStudent_id(rs.getInt("student_id"));
@@ -23,7 +24,7 @@ public class StudentRepository {
         e.setLearning_goal(rs.getString("learning_goal"));
         return e;
     }
-    
+
     public List<Student> findAll() {
         String sql = "SELECT * FROM students";
         return jdbcTemplate.query(sql, this::mapRow);
@@ -33,5 +34,15 @@ public class StudentRepository {
         String sql = "SELECT * FROM students WHERE student_id = ?";
         List<Student> students = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Student.class), id);
         return students.isEmpty() ? Optional.empty() : Optional.of(students.get(0));
+    }
+
+    // Thêm phương thức mới
+    public Student findByUserId(int userId) {
+        String sql = "SELECT * FROM students WHERE student_id = ?"; // Giữ nguyên nếu student_id = user_id
+        try {
+            return jdbcTemplate.queryForObject(sql, this::mapRow, userId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 }

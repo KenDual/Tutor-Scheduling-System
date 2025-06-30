@@ -58,5 +58,28 @@ public class StudyMaterialRepository {
         String sql = "SELECT * FROM study_materials ORDER BY uploaded_at DESC";
         return jdbc.query(sql, MAPPER);
     }
-}
 
+    //NEW
+    /**
+     * Cập nhật metadata (title, description, file_url nếu có)
+     */
+    public int update(StudyMaterial m) {
+        String sql = "UPDATE study_materials SET title = ?, description = ?"
+                + (m.getFileUrl() != null ? ", file_url = ?" : "")
+                + " WHERE material_id = ?";
+        if (m.getFileUrl() != null) {
+            return jdbc.update(sql,
+                    m.getTitle(), m.getDescription(), m.getFileUrl(), m.getMaterialId());
+        } else {
+            return jdbc.update(sql,
+                    m.getTitle(), m.getDescription(), m.getMaterialId());
+        }
+    }
+
+    /**
+     * Xóa theo ID
+     */
+    public int deleteById(int id) {
+        return jdbc.update("DELETE FROM study_materials WHERE material_id = ?", id);
+    }
+}

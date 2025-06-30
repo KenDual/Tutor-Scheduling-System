@@ -47,12 +47,25 @@ public class UserController {
         session.setAttribute("currentUser", u);
         session.setAttribute("role", u.getRole());
 
+        // THÊM PHẦN NÀY: Lưu ID cho admin
+        if ("admin".equals(u.getRole())) {
+            session.setAttribute("adminId", u.getUser_id()); // Lưu adminId
+        }
+
+        // QUAN TRỌNG: Lưu studentId hoặc tutorId vào session
         if ("student".equals(u.getRole())) {
-            session.setAttribute("studentId", u.getUser_id());
-        } 
-        if ("tutor".equals(u.getRole())) {
+            // Tìm studentId tương ứng với user_id
+            Student student = studentService.findByUserId(u.getUser_id());
+            if (student != null) {
+                session.setAttribute("studentId", student.getStudent_id());
+            } else {
+                // Xử lý trường hợp không tìm thấy student
+                model.addAttribute("error", "Không tìm thấy thông tin học sinh");
+                return "account/login";
+            }
+        } else if ("tutor".equals(u.getRole())) {
             session.setAttribute("tutorId", u.getUser_id());
-        } 
+        }
 
         switch (u.getRole()) {
             case "admin":

@@ -1,66 +1,101 @@
 package com.maiphuhai.controller;
 
 import com.maiphuhai.model.Exercise;
+import com.maiphuhai.model.Session;
+import com.maiphuhai.model.User;
 import com.maiphuhai.service.ExerciseService;
+import com.maiphuhai.service.SessionService;
+import com.maiphuhai.service.UserService;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/exercise-tutor")
 public class ExerciseTutorController {
-    
+
     @Autowired
     private ExerciseService exerciseService;
 
-    // Hiển thị danh sách theo sessionId
+    @Autowired
+    private SessionService sessionService;
+
+    @Autowired
+    private UserService userService;
+
     @GetMapping
-    public String show(Model model) {
-        List<Exercise> exercises = exerciseService.findAll();
-        System.out.println("Exercises: " + exercises);
+    public String show(Model model, HttpSession session) {
+        Integer tutorId = (Integer) session.getAttribute("tutorId");
+        if (tutorId == null) {
+            return "redirect:/login";
+        }
+
+        // Lấy thông tin giảng viên
+        Optional<User> tutor = userService.findById(tutorId);
+        if (tutor.isPresent()) {
+            model.addAttribute("tutorName", tutor.get().getFull_name());
+        } else {
+            model.addAttribute("tutorName", "Unknown Tutor");
+        }
+
+        // Lấy danh sách session của tutor
+        List<Session> sessions = sessionService.findByTutor(tutorId);
+        model.addAttribute("sessions", sessions);
+
+        // Lấy bài tập theo tutorId
+        List<Exercise> exercises = exerciseService.findByTutorId(tutorId);
         model.addAttribute("exercises", exercises);
+
         return "main/exercise-tutor";
     }
 
-    // Form thêm mới
     @GetMapping("/add")
-    public String showAddForm(@RequestParam("sessionId") int sessionId, Model model) {
-        Exercise e = new Exercise();
-        e.setSessionId(sessionId);
-        model.addAttribute("exercise", e);
-        return "main/exercise-tutor";
+    public String showAddForm(Model model, HttpSession session) {
+        Integer tutorId = (Integer) session.getAttribute("tutorId");
+        if (tutorId == null) {
+            return "redirect:/login";
+        }
+
+        List<Session> sessions = sessionService.findByTutor(tutorId);
+        model.addAttribute("sessions", sessions);
+        model.addAttribute("exercise", new Exercise());
+        return "main/exercise-form";
     }
 
-    // Xử lý thêm
     @PostMapping("/add")
     public String add(@ModelAttribute Exercise exercise) {
         exerciseService.add(exercise);
-        return "redirect:/exercises?sessionId=" + exercise.getSessionId();
+        return "redirect:/exercise-tutor";
     }
 
-    // Form sửa
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id") int id, Model model) {
+    public String showEditForm(@PathVariable("id") int id, Model model, HttpSession session) {
+        Integer tutorId = (Integer) session.getAttribute("tutorId");
+        if (tutorId == null) {
+            return "redirect:/login";
+        }
+
         Exercise e = exerciseService.getById(id);
+        List<Session> sessions = sessionService.findByTutor(tutorId);
+
         model.addAttribute("exercise", e);
-        return "main/exercise-tutor";
+        model.addAttribute("sessions", sessions);
+        return "main/exercise-form";
     }
 
-    // Xử lý cập nhật
-    @PostMapping("/edit")
-    public String edit(@ModelAttribute Exercise exercise) {
+    @PostMapping("/update")
+    public String update(@ModelAttribute Exercise exercise) {
         exerciseService.update(exercise);
-        return "redirect:/exercises?sessionId=" + exercise.getSessionId();
+        return "redirect:/exercise-tutor";
     }
 
-    // Xử lý xóa
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
-        Exercise e = exerciseService.getById(id);
         exerciseService.delete(id);
-        return "redirect:/exercises?sessionId=" + e.getSessionId();
+        return "redirect:/exercise-tutor";
     }
 }

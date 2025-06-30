@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +25,7 @@
             }
         </style>
     </head>
+
     <body class="bg-gray-200">
         <div class="container-fluid p-0 position-sticky z-index-sticky top-0">
             <main class="main-content mt-0">
@@ -36,41 +38,63 @@
                                 <div class="card z-index-0 fadeIn3 fadeInBottom">
                                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                         <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
-                                            <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Edit User</h4>
+                                            <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+                                                ${user.user_id == 0 ? 'Create User' : 'Edit User'}
+                                            </h4>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <form:form action="${pageContext.request.contextPath}/user-admin/update" method="post" class="text-start">
+                                        <form action="${pageContext.request.contextPath}/user-admin/save" method="post" class="text-start">
                                             <input type="hidden" name="user_id" value="${user.user_id}" />
+
                                             <div class="input-group input-group-outline my-3">
                                                 <label class="form-label">Email</label>
                                                 <input name="email" type="email" class="form-control" value="${user.email}" required>
                                             </div>
+
                                             <div class="input-group input-group-outline my-3">
                                                 <label class="form-label">Password</label>
                                                 <input name="password" type="password" class="form-control" value="${user.password}" required>
                                             </div>
+
                                             <div class="input-group input-group-outline my-3">
                                                 <label class="form-label">Full Name</label>
-                                                <input name="full_name" type="text" class="form-control" value="${user.full_name}" required>
+                                                <input name="fullName" type="text" class="form-control" value="${user.full_name}" required>
                                             </div>
+
                                             <div class="input-group input-group-outline my-3">
                                                 <label class="form-label">Phone</label>
                                                 <input name="phone" type="text" class="form-control" value="${user.phone}">
                                             </div>
-                                            <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Update</button>
-                                        </form:form>
+
+                                            <div class="input-group input-group-outline my-3">
+                                                <label class="form-label">Role</label>
+                                                <select name="role" class="form-control">
+                                                    <option value="admin" ${user.role == 'admin' ? 'selected' : ''}>Admin</option>
+                                                    <option value="tutor" ${user.role == 'tutor' ? 'selected' : ''}>Tutor</option>
+                                                    <option value="student" ${user.role == 'student' ? 'selected' : ''}>Student</option>
+                                                </select>
+                                            </div>
+
+                                            <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">
+                                                ${user.user_id == 0 ? 'Create' : 'Update'}
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </main>
         </div>
-        <script src="<c:url value='/assets/js/core/popper.min.js'/>"></script>
-        <script src="<c:url value='/assets/js/core/bootstrap.min.js'/>"></script>
-        <script src="<c:url value='/assets/js/plugins/perfect-scrollbar.min.js'/>"></script>
-        <script src="<c:url value='/assets/js/plugins/smooth-scrollbar.min.js'/>"></script>
-        <script src="<c:url value='/assets/js/material-dashboard.min.js?v=3.2.0'/>"></script>
     </body>
+    <script src="<c:url value='/assets/js/core/popper.min.js'/>"></script>
+    <script src="<c:url value='/assets/js/core/bootstrap.min.js'/>"></script>
+    <script src="<c:url value='/assets/js/plugins/perfect-scrollbar.min.js'/>"></script>
+    <script src="<c:url value='/assets/js/plugins/smooth-scrollbar.min.js'/>"></script>
+    <script src="<c:url value='/assets/js/material-dashboard.min.js?v=3.2.0'/>"></script>
 </html>
+
+
+

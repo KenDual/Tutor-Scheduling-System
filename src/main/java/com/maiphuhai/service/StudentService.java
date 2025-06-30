@@ -16,8 +16,13 @@ public class StudentService {
     public List<Student> findAll() {
         return studentRepository.findAll();
     }
-    
+
     public Optional<Student> findById(int id) {
         return studentRepository.findById(id);
+    }
+
+    // Sửa thành gọi Repository
+    public Student findByUserId(int userId) {
+        return studentRepository.findByUserId(userId);
     }
 }

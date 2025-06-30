@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -218,7 +217,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item d-flex align-items-center">
-                                <a href="../pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">Login</a>
+                                <a class="nav-link text-body font-weight-bold px-0">Login</a>
                             </li>
                         </ul>
                     </div>
@@ -231,40 +230,52 @@
                         <div class="card my-4">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
-                                    <h6 class="text-white text-capitalize ps-3">Gi?ng viên: Lâm Chí B?o</h6>
+                                    <h6 class="text-white text-capitalize ps-3">Tutor: ${tutorName}}</h6>
                                 </div>
                             </div>
+
+                            <!-- cần thay -->
                             <div class="card-body px-0 pb-2">
                                 <div class="table-responsive p-0">
-                                    <table class="table align-items-center mb-0" id="exerciseTable">
+                                    <table class="table align-items-center mb-0">
                                         <thead>
                                             <tr>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên bài t?p</th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ch?n file</th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Set deadline (ngày gi?)</th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Session</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Due Date</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="exerciseTableBody">
-                                            <tr>
-                                                <td>
-                                                    <input type="text" class="form-control form-control-sm" id="exerciseName1" value="Bài t?p toán ch??ng 1" placeholder="Nh?p tên bài t?p">
-                                                </td>
-                                                <td>
-                                                    <input type="file" class="form-control form-control-sm" id="fileInput1">
-                                                </td>
-                                                <td>
-                                                    <input type="datetime-local" class="form-control form-control-sm" id="deadlineInput1">
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-primary" onclick="uploadExercise(1)">Upload</button>
-                                                </td>
-                                            </tr>
+                                        <tbody>
+                                            <c:forEach var="exercise" items="${exercises}">
+                                                <tr>
+                                                    <td>${exercise.title}</td>
+                                                    <td>
+                                                        <c:forEach var="session" items="${sessions}">
+                                                            <c:if test="${session.session_id == exercise.sessionId}">
+                                                                ${session.session_code}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>${exercise.description}</td>
+                                                    <td>${exercise.dueDate}</td>
+                                                    <td>
+                                                        <a href="${pageContext.request.contextPath}/exercise-tutor/edit/${exercise.exerciseId}" 
+                                                           class="btn btn-sm btn-warning">Edit</a>
+                                                        <a href="${pageContext.request.contextPath}/exercise-tutor/delete/${exercise.exerciseId}" 
+                                                           class="btn btn-sm btn-danger" 
+                                                           onclick="return confirm('Are you sure?')">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
-                                <button class="btn btn-success add-btn" onclick="addExerciseRow()">Thêm bài t?p</button>
-                                <div id="uploadedExercises" class="mt-3"></div>
+                                <div class="text-end mt-3 me-3">
+                                    <a href="${pageContext.request.contextPath}/exercise-tutor/add" 
+                                       class="btn btn-success">Add New Exercise</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -280,14 +291,14 @@
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <script src="<c:url value='/assets/js/material-dashboard.min.js?v=3.2.0'/>"></script>
         <script>
-                                    let exerciseCount = 1;
+                                   let exerciseCount = 1;
 
-                                    function addExerciseRow() {
-                                        exerciseCount++;
-                                        const tbody = document.getElementById('exerciseTableBody');
-                                        const newRow = document.createElement('tr');
+                                   function addExerciseRow() {
+                                       exerciseCount++;
+                                       const tbody = document.getElementById('exerciseTableBody');
+                                       const newRow = document.createElement('tr');
 
-                                        newRow.innerHTML = `
+                                       newRow.innerHTML = `
               <td>
                 <input type="text" class="form-control form-control-sm" id="exerciseName${exerciseCount}" placeholder="Nh?p tên bài t?p">
               </td>
@@ -301,33 +312,33 @@
                 <button class="btn btn-sm btn-primary" onclick="uploadExercise(${exerciseCount})">Upload</button>
               </td>
             `;
-                                        tbody.appendChild(newRow);
-                                    }
+                                       tbody.appendChild(newRow);
+                                   }
 
-                                    function uploadExercise(rowId) {
-                                        const fileInput = document.getElementById(`fileInput${rowId}`);
-                                        const deadlineInput = document.getElementById(`deadlineInput${rowId}`);
-                                        const exerciseNameInput = document.getElementById(`exerciseName${rowId}`);
-                                        const uploadedExercisesDiv = document.getElementById('uploadedExercises');
+                                   function uploadExercise(rowId) {
+                                       const fileInput = document.getElementById(`fileInput${rowId}`);
+                                       const deadlineInput = document.getElementById(`deadlineInput${rowId}`);
+                                       const exerciseNameInput = document.getElementById(`exerciseName${rowId}`);
+                                       const uploadedExercisesDiv = document.getElementById('uploadedExercises');
 
-                                        if (!exerciseNameInput.value) {
-                                            alert("Vui lòng nh?p tên bài t?p!");
-                                            return;
-                                        }
-                                        if (fileInput.files.length === 0) {
-                                            alert("Vui lòng ch?n file!");
-                                            return;
-                                        }
-                                        if (!deadlineInput.value) {
-                                            alert("Vui lòng set deadline!");
-                                            return;
-                                        }
+                                       if (!exerciseNameInput.value) {
+                                           alert("Vui lòng nh?p tên bài t?p!");
+                                           return;
+                                       }
+                                       if (fileInput.files.length === 0) {
+                                           alert("Vui lòng ch?n file!");
+                                           return;
+                                       }
+                                       if (!deadlineInput.value) {
+                                           alert("Vui lòng set deadline!");
+                                           return;
+                                       }
 
-                                        const fileName = fileInput.files[0].name;
-                                        const deadline = deadlineInput.value;
-                                        const exerciseName = exerciseNameInput.value;
+                                       const fileName = fileInput.files[0].name;
+                                       const deadline = deadlineInput.value;
+                                       const exerciseName = exerciseNameInput.value;
 
-                                        const exerciseInfo = `
+                                       const exerciseInfo = `
               <div class="alert alert-success" role="alert">
                 <strong>Upload thành công!</strong><br>
                 Tên bài t?p: ${exerciseName}<br>
@@ -336,14 +347,13 @@
               </div>
             `;
 
-                                        uploadedExercisesDiv.innerHTML += exerciseInfo;
+                                       uploadedExercisesDiv.innerHTML += exerciseInfo;
 
-                                        // Reset inputs
-                                        fileInput.value = '';
-                                        deadlineInput.value = '';
-                                        exerciseNameInput.value = '';
-                                    }
+                                       // Reset inputs
+                                       fileInput.value = '';
+                                       deadlineInput.value = '';
+                                       exerciseNameInput.value = '';
+                                   }
         </script>
     </body>
-
 </html>

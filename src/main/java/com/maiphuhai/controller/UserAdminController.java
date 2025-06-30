@@ -17,40 +17,57 @@ public class UserAdminController {
     @Autowired
     private UserService userService;
 
-    //Hiển thị toàn bộ người dùng
     @GetMapping
     public String show(Model model) {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "main/admin/user-admin";
     }
-    
-    //Ấn edit chuyển trang user-edit
+
     @GetMapping("/edit/{userId}")
     public String editUser(@PathVariable int userId, Model model) {
-        Optional<User> userOpt = userService.findById(userId);
-        if (userOpt.isPresent()) {
-            model.addAttribute("user", userOpt.get());
-            return "account/user-form";
-        } else {
-            return "redirect:/user-admin?error=User not found";
-        }
+        User user = userService.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + userId));
+        model.addAttribute("user", user);
+        return "account/user-form";
     }
 
-    //Phương thức Update
-    @PostMapping("/update")
-    public String updateUser(@ModelAttribute User user, Model model) {
-        try {
-            userService.update(user);
-            return "redirect:/user-admin";
-        } catch (Exception e) {
-            model.addAttribute("error", "Error updating user: " + e.getMessage());
-            model.addAttribute("user", user);
-            return "account/user-form";
-        }
+    @GetMapping("/save")
+    public String showCreateForm(Model model) {
+        User newUser = new User();
+        newUser.setUser_id(0);
+        model.addAttribute("user", newUser);
+        return "account/user-form";
     }
 
-    //Phương thức xóa
+    @PostMapping("/save")
+    public String saveUser(@RequestParam(required = false) Integer user_id,
+            @RequestParam String email,
+            @RequestParam String password,
+            @RequestParam String fullName,
+            @RequestParam(required = false) String phone,
+            @RequestParam String role) {
+
+        User user = new User();
+        if (user_id != null && user_id > 0) {
+            // Lấy user hiện tại nếu có
+            Optional<User> existingUser = userService.findById(user_id);
+            if (existingUser.isPresent()) {
+                user = existingUser.get();
+            }
+        }
+
+        // Cập nhật thông tin
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setFull_name(fullName);
+        user.setPhone(phone != null ? phone : "");
+        user.setRole(role);
+
+        userService.saveOrUpdate(user);
+        return "redirect:/user-admin";
+    }
+
     @PostMapping("/delete")
     @ResponseBody
     public ResponseEntity<String> deleteUser(@RequestParam int userId) {

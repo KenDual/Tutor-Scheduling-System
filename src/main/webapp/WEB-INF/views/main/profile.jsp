@@ -155,11 +155,13 @@
                                         <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> ${user.full_name}</li>
                                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> ${user.email}</li>
                                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> ${user.phone}</li>
-                                            <c:if test="${user.role == 'tutor' && not empty tutor}">
+                                            
+                                        <c:if test="${user.role == 'tutor' && not empty tutor}">
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Education:</strong> ${tutor.education}</li>
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Profile:</strong> ${tutor.profile}</li>
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Fee Default:</strong> ${tutor.fee_default}</li>
                                             </c:if>
+                                            
                                             <c:if test="${user.role == 'student' && not empty student}">
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Grade Level:</strong> ${student.grade_level}</li>
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Learning Goal:</strong> ${student.learning_goal}</li>

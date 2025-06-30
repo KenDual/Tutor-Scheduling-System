@@ -36,4 +36,9 @@ public class ExerciseService {
     public void delete(int id) {
         exerciseRepository.delete(id);
     }
+
+    // Trong ExerciseService.java
+    public List<Exercise> findByTutorId(int tutorId) {
+        return exerciseRepository.findByTutorId(tutorId);
+    }
 }

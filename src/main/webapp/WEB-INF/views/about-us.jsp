@@ -10,7 +10,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>About Us – Vũ Trụ Kiến Thức</title>
+        <title>About Us – Universe of Knowledge</title>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
               rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -190,7 +190,7 @@
     <body>
         <!-- Header -->
         <header data-aos="fade-down">
-            <div class="logo">Vũ Trụ <span>Kiến Thức</span></div>
+            <div class="logo">Universe <span>Knowledge</span></div>
             <nav>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/">Home</a></li>
@@ -203,16 +203,15 @@
 
         <!-- Hero -->
         <section class="hero" data-aos="fade-up">
-            <h1>Trung Tâm Dạy Học Online – Bòi Đầm Già</h1>
-            <p>Chúng tôi kiến tạo không gian học tập ảo giàu tương tác, nơi mọi học viên kết nối với gia sư
-                giỏi nhất chỉ bằng một cú nhấp chuột.</p>
+            <h1>Online Tutor Scheduling System</h1>
+            <p>"Success usually comes to those who are too busy to be looking for it." - Henry David Thoreau</p>
         </section>
 
         <!-- Who we are -->
         <section class="bg-dark text-light" data-aos="fade-up">
             <div class="container">
-                <h2 class="section-title">Chúng tôi là ai?</h2>
-                <p class="lead text-center">Vũ Trụ Kiến Thức là nền tảng dạy học online hiện đại, kết nối
+                <h2 class="section-title">Who are we?</h2>
+                <p class="lead text-center">KenDual Scheduling Web is where we connect each other
                     <strong>gia sư</strong> và <strong>học viên</strong> qua lớp học ảo chất lượng cao.</p>
                 <p class="text-center">Sứ mệnh của chúng tôi là mang trải nghiệm học tập cá nhân hoá đến mọi
                     nhà, xoá nhoà giới hạn không gian – thời gian.</p>

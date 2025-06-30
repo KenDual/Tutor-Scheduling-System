@@ -69,12 +69,6 @@
                         <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Account pages</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="<c:url value='/profile'/>">
-                            <i class="material-symbols-rounded opacity-5">person</i>
-                            <span class="nav-link-text ms-1">Profile</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link text-dark" href="<c:url value='/logout'/>">
                             <i class="material-symbols-rounded opacity-5">login</i>
                             <span class="nav-link-text ms-1">Log out</span>

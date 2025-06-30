@@ -34,4 +34,13 @@ public class StudyMaterialService {
                 .orElseThrow(()
                         -> new RuntimeException("Không tìm thấy tài liệu với id=" + id));
     }
+
+    public void update(StudyMaterial material) {
+        material.setUploadedAt(new Date());
+        repo.update(material);
+    }
+
+    public void delete(int id) {
+        repo.deleteById(id);
+    }
 }

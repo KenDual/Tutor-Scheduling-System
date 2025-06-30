@@ -4,11 +4,14 @@ import com.maiphuhai.model.Session;
 import java.sql.*;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Repository
 public class SessionRepository {
 
@@ -61,13 +64,16 @@ public class SessionRepository {
         return kh.getKey().intValue();
     }
 
-    /* ---------- Truy vấn ---------- */
     public List<Session> findAll() {
         return jdbc.query(SELECT_JOIN, map);
     }
 
     public Session findById(int id) {
-        return jdbc.queryForObject(SELECT_JOIN + " WHERE s.session_id=?", map, id);
+        try {
+            return jdbc.queryForObject(SELECT_JOIN + " WHERE s.session_id=?", map, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public List<Session> findByTutor(int tutorId) {
@@ -78,7 +84,6 @@ public class SessionRepository {
         return jdbc.query(SELECT_JOIN + " WHERE s.status='scheduled'", map);
     }
 
-    /* ---------- update / delete ---------- */
     public void update(Session s) {
         String sql = "UPDATE sessions SET subject_id=?,day_of_week=?,slot=?,location=?,capacity=?,status=? WHERE session_id=?";
         jdbc.update(sql, s.getSubject_id(), s.getDay_of_week(), s.getSlot(),
@@ -87,16 +92,21 @@ public class SessionRepository {
     }
 
     public void delete(int id) {
+        // 1. Xóa các bài tập (exercises) liên quan
+        jdbc.update("DELETE FROM exercises WHERE session_id=?", id);
+
+        // 2. Xóa các bản ghi trong student_bookings
+        jdbc.update("DELETE FROM student_bookings WHERE session_id=?", id);
+
+        // 3. Xóa session
         jdbc.update("DELETE FROM sessions WHERE session_id=?", id);
     }
 
-    /* ---------- chống trùng ca ---------- */
     public boolean existsByDaySlotTutor(String day, int slot, int tutorId) {
         String sql = "SELECT COUNT(*) FROM sessions WHERE day_of_week=? AND slot=? AND tutor_id=? AND status<>'cancelled'";
         return jdbc.queryForObject(sql, Integer.class, day, slot, tutorId) > 0;
     }
 
-    /* Ca của một STUDENT (đã book) */
     public List<Session> findByStudent(int stuId) {
         String sql = SELECT_JOIN
                 + " JOIN student_bookings b ON b.session_id = s.session_id"
@@ -104,8 +114,7 @@ public class SessionRepository {
         return jdbc.query(sql, map, stuId);
     }
 
-    /* Tất cả ca của hệ thống (admin) */
-    public List<Session> findAllWithJoin() {      // đã có SELECT_JOIN
+    public List<Session> findAllWithJoin() {
         return jdbc.query(SELECT_JOIN, map);
     }
 }

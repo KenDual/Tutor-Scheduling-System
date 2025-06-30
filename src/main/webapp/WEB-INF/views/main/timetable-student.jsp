@@ -368,28 +368,37 @@
                                 }
 
                                 function selectSession(sessionId) {
+                                    // Sửa thành lấy studentId từ session attribute đúng
                                     var studentId = ${sessionScope.studentId != null ? sessionScope.studentId : 0};
+
                                     console.log("Student ID: " + studentId);
                                     if (studentId === 0) {
                                         alert("Vui lòng đăng nhập để chọn ca học!");
                                         return;
                                     }
+
                                     $.ajax({
                                         type: "POST",
                                         url: "${pageContext.request.contextPath}/sessions/book",
-                                        data: {
+                                        contentType: "application/json", // Thêm dòng này
+                                        data: JSON.stringify({// Chuyển đổi thành JSON
                                             sessionId: sessionId,
                                             studentId: studentId
-                                        },
+                                        }),
                                         success: function (response) {
                                             if (response.status === "success") {
                                                 alert("Đăng ký ca học thành công!");
                                             } else {
-                                                alert(response.message || "Bạn đã đăng ký ca học này!");
+                                                alert(response.message);
                                             }
                                         },
-                                        error: function () {
-                                            alert("Đã xảy ra lỗi khi đăng ký ca học!");
+                                        error: function (xhr) {
+                                            try {
+                                                const errorResponse = JSON.parse(xhr.responseText);
+                                                alert(errorResponse.message || "Đã xảy ra lỗi!");
+                                            } catch (e) {
+                                                alert("Lỗi hệ thống: " + xhr.statusText);
+                                            }
                                         }
                                     });
                                 }

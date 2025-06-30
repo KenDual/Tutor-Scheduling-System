@@ -9,16 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/sessions")
@@ -26,7 +20,7 @@ public class SessionController {
 
     @Autowired
     private SessionService sessionService;
-    
+
     @Autowired
     private StudentBookingService studentBookingService;
 
@@ -48,14 +42,19 @@ public class SessionController {
         sessionService.register(day, slot, tutorId, subjectId, "Default Location");
         return "redirect:/timetable-tutor?success=Session registered successfully";
     }
-    
+
     //Student Booking
     @Autowired
     private StudentBookingService service;
 
     @PostMapping("/book")
     @ResponseBody
-    public ResponseEntity<Map<String, String>> bookSession(@RequestParam int sessionId, @RequestParam int studentId) {
+    public ResponseEntity<Map<String, String>> bookSession(
+            @RequestBody Map<String, Integer> requestData) {
+
+        int sessionId = requestData.get("sessionId");
+        int studentId = requestData.get("studentId");
+
         Map<String, String> response = new HashMap<>();
         try {
             int bookingId = service.bookSession(sessionId, studentId);
@@ -65,7 +64,7 @@ public class SessionController {
         } catch (RuntimeException e) {
             response.put("status", "error");
             response.put("message", e.getMessage());
-            return ResponseEntity.badRequest().body(response);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 

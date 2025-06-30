@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class SessionService {
 
@@ -19,7 +22,6 @@ public class SessionService {
     @Autowired
     private SubjectService subjectService;
 
-    /* ---------- API cho Controller ---------- */
     public int getScheduledSessionCount() {
         return repo.findScheduled().size();
     }
@@ -31,7 +33,7 @@ public class SessionService {
     public List<Session> findAll() {
         return repo.findAll();
     }
-    
+
     public List<Session> ofStudent(int sid) {
         return repo.findByStudent(sid);
     }
@@ -47,7 +49,7 @@ public class SessionService {
     public List<Session> findByTutor(int tutorId) {
         return repo.findByTutor(tutorId);
     }
-
+    
     public List<Session> findScheduled() {
         List<Session> list = repo.findScheduled();
         Map<Integer, String> subMap = subjectService.findAll()
@@ -89,5 +91,13 @@ public class SessionService {
 
     public boolean existsByDaySlotTutor(String day, int slot, int tutorId) {
         return repo.existsByDaySlotTutor(day, slot, tutorId);
+    }
+
+    public void deleteSession(int sessionId) {
+        Session session = repo.findById(sessionId);
+        if (session == null) {
+            throw new EmptyResultDataAccessException("Session not found with ID: " + sessionId, 1);
+        }
+        repo.delete(sessionId);
     }
 }

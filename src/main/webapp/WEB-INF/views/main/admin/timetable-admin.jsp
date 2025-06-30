@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -176,6 +175,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/user-admin">
+                            <i class="material-symbols-rounded opacity-5">attribution</i>
+                            <span class="nav-link-text ms-1">User</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active bg-gradient-dark text-white" href="${pageContext.request.contextPath}/timetable-admin">
                             <i class="material-symbols-rounded opacity-5">table_view</i>
                             <span class="nav-link-text ms-1">Timetable</span>
@@ -195,12 +200,6 @@
                     </li>
                     <li class="nav-item mt-3">
                         <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Account pages</h6>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="<c:url value='/profile'/>">
-                            <i class="material-symbols-rounded opacity-5">person</i>
-                            <span class="nav-link-text ms-1">Profile</span>
-                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="<c:url value='/logout'/>">
@@ -353,7 +352,6 @@
                             <div class="card-body px-0 pb-2">
                                 <div class="table-responsive p-0">
                                     <table class="table timetable">
-
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -367,112 +365,36 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th class="time-col">Morning</th>
-                                                <td>
-                                                    <div class="class-info">
-                                                        <p class="subject mb-0">Toán</p>
-                                                        <p class="admin mb-0 text-secondary small">Admin: A</p>
-                                                        <div class="tooltip">
-                                                            <p><strong>Admin:</strong> A</p>
-                                                            <p><strong>Subject:</strong> Toán</p>
-                                                            <p><strong>Address:</strong> Phòng 101</p>
-                                                        </div>
-                                                        <button class="remove-btn" onclick="confirmRemove(this)">X</button>
-                                                    </div>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <div class="class-info">
-                                                        <p class="subject mb-0">Toán</p>
-                                                        <p class="admin mb-0 text-secondary small">Admin: A</p>
-                                                        <div class="tooltip">
-                                                            <p><strong>Admin:</strong> D</p>
-                                                            <p><strong>Subject:</strong> Lịch Sử</p>
-                                                            <p><strong>Address:</strong> Phòng 202</p>
-                                                        </div>
-                                                        <button class="remove-btn" onclick="confirmRemove(this)">X</button>
-                                                    </div>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="time-col">Afternoon</th>
-                                                <td></td>
-                                                <td>
-                                                    <div class="class-info">
-                                                        <p class="subject mb-0">Toán</p>
-                                                        <p class="admin mb-0 text-secondary small">Admin: A</p>
-                                                        <div class="tooltip">
-                                                            <p><strong>Admin:</strong> B</p>
-                                                            <p><strong>Subject:</strong> Khoa Học</p>
-                                                            <p><strong>Address:</strong> Lab 2</p>
-                                                        </div>
-                                                        <button class="remove-btn" onclick="confirmRemove(this)">X</button>
-                                                    </div>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <div class="class-info">
-                                                        <p class="subject mb-0">Toán</p>
-                                                        <p class="admin mb-0 text-secondary small">Admin: A</p>
-                                                        <div class="tooltip">
-                                                            <p><strong>Admin:</strong> E</p>
-                                                            <p><strong>Subject:</strong> Mỹ Thuật</p>
-                                                            <p><strong>Address:</strong> Xưởng 1</p>
-                                                        </div>
-                                                        <button class="remove-btn" onclick="confirmRemove(this)">X</button>
-                                                    </div>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="time-col">Evening</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <div class="class-info">
-                                                        <p class="subject mb-0">Toán</p>
-                                                        <p class="admin mb-0 text-secondary small">Admin: A</p>
-                                                        <div class="tooltip">
-                                                            <p><strong>Admin:</strong> C</p>
-                                                            <p><strong>Subject:</strong> Tiếng Anh</p>
-                                                            <p><strong>Address:</strong> Library</p>
-                                                        </div>
-                                                        <button class="remove-btn" onclick="confirmRemove(this)">X</button>
-                                                    </div>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <div class="class-info">
-                                                        <p class="subject mb-0">Toán</p>
-                                                        <p class="admin mb-0 text-secondary small">Admin: A</p>
-                                                        <div class="tooltip">
-                                                            <p><strong>Admin:</strong> F</p>
-                                                            <p><strong>Subject:</strong> Âm Nhạc</p>
-                                                            <p><strong>Address:</strong> Hall 3</p>
-                                                        </div>
-                                                        <button class="remove-btn" onclick="confirmRemove(this)">X</button>
-                                                    </div>
-                                                </td>
-                                                <td></td>
-                                            </tr>
+                                            <c:forEach var="slot" items="${['Morning', 'Afternoon', 'Evening']}">
+                                                <tr>
+                                                    <th class="time-col">${slot}</th>
+                                                        <c:forEach var="day" items="${['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']}">
+                                                        <td>
+                                                            <div class="class-info">
+                                                                <c:forEach var="session" items="${sessions}">
+                                                                    <c:if test="${session.day_of_week == day && session.slot == (slot == 'Morning' ? 1 : slot == 'Afternoon' ? 2 : 3)}">
+                                                                        <button class="remove-btn" onclick="confirmRemove(this, ${session.session_id})">X</button>
+                                                                        <p class="subject mb-0">${session.subjectName}</p>
+                                                                        <p class="tutor mb-0 text-secondary small">GV: ${session.tutorName}</p>
+                                                                        <div class="tooltip">
+                                                                            <p><strong>Tutor:</strong> ${session.tutorName}</p>
+                                                                            <p><strong>Subject:</strong> ${session.subjectName}</p>
+                                                                            <p><strong>Address:</strong> ${session.location}</p>
+                                                                        </div>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </div>
+                                                        </td>
+                                                    </c:forEach>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                     <hr class="my-4">
-
-                                    <form id="register-form" class="row g-3 px-4">
-                                        <!-- 1. Chọn ngày -->
+                                    <form action="${pageContext.request.contextPath}/sessions/register" method="post" class="row g-2">
                                         <div class="col-md-3">
-                                            <label class="form-label fw-bold">Day of week</label>
-                                            <select id="daySelect" class="form-select">
-                                                <option selected disabled>Choose a day…</option>
+                                            <select name="day" class="form-select" required>
+                                                <option selected disabled>Choose a day...</option>
                                                 <option value="mon">Monday</option>
                                                 <option value="tue">Tuesday</option>
                                                 <option value="wed">Wednesday</option>
@@ -482,30 +404,24 @@
                                                 <option value="sun">Sunday</option>
                                             </select>
                                         </div>
-
-                                        <!-- 2. Chọn ca – mặc định bị khoá -->
                                         <div class="col-md-3">
-                                            <label class="form-label fw-bold">Timeslot</label>
-                                            <select id="slotSelect" class="form-select" disabled>
-                                                <option selected disabled>Choose a slot…</option>
-                                                <option value="morning">Morning</option>
-                                                <option value="afternoon">Afternoon</option>
-                                                <option value="evening">Evening</option>
+                                            <select name="slot" class="form-select" required>
+                                                <option selected disabled>Choose a slot...</option>
+                                                <option value="1">Morning</option>
+                                                <option value="2">Afternoon</option>
+                                                <option value="3">Evening</option>
                                             </select>
                                         </div>
-
-                                        <!-- 3. Nhập môn học – mặc định bị khoá -->
                                         <div class="col-md-4">
-                                            <label class="form-label fw-bold">Subject</label>
-                                            <input id="subjectInput" type="text" class="form-control" placeholder="Choose a slot first…"
-                                                   disabled>
+                                            <select name="subjectId" class="form-select" required>
+                                                <option selected disabled>Choose a subject...</option>
+                                                <c:forEach var="subject" items="${subjects}">
+                                                    <option value="${subject.subject_id}">${subject.name}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
-
-                                        <!-- 4. Submit -->
-                                        <div class="col-md-2 d-flex align-items-end">
-                                            <button id="submitBtn" type="submit" class="btn btn-primary w-100" disabled>
-                                                Submit
-                                            </button>
+                                        <div class="col-md-2 d-grid">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -513,27 +429,21 @@
                         </div>
                     </div>
                 </div>
-                <footer class="footer py-4  ">
+                <footer class="footer py-4">
                     <div class="container-fluid">
                         <div class="row align-items-center justify-content-lg-between">
                             <div class="col-lg-6 mb-lg-0 mb-4">
                                 <div class="copyright text-center text-sm text-muted text-lg-start">
-                                    ©
-                                    <script>
-                                        document.write(new Date().getFullYear())
-                                    </script>,
+                                    © <script>document.write(new Date().getFullYear())</script>,
                                     made with <i class="fa fa-heart"></i> by
-                                    <a href="https://github.com/KenDual/Tutor-Scheduling-System" class="font-weight-bold" target="_blank">Bo
-                                        Tam AI Thu</a>
+                                    <a href="https://github.com/KenDual/Tutor-Scheduling-System" class="font-weight-bold" target="_blank">Bo Tam AI Thu</a>
                                     for a better web.
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                                     <li class="nav-item">
-                                        <a href="https://github.com/KenDual/Tutor-Scheduling-System" class="nav-link text-muted"
-                                           target="_blank">About
-                                            Us</a>
+                                        <a href="https://github.com/KenDual/Tutor-Scheduling-System" class="nav-link text-muted" target="_blank">About Us</a>
                                     </li>
                                 </ul>
                             </div>
@@ -632,67 +542,35 @@
         <script src="<c:url value='/assets/js/plugins/smooth-scrollbar.min.js'/>"></script>
         <script src="<c:url value='/assets/js/plugins/chartjs.min.js'/>"></script>
         <script>
-                      var win = navigator.platform.indexOf('Win') > -1;
-                      if (win && document.querySelector('#sidenav-scrollbar')) {
-                          var options = {
-                              damping: '0.5'
-                          }
-                          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-                      }
+                                var win = navigator.platform.indexOf('Win') > -1;
+                                if (win && document.querySelector('#sidenav-scrollbar')) {
+                                    var options = {
+                                        damping: '0.5'
+                                    }
+                                    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+                                }
         </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-                      // Lấy các phần tử
-                      const daySel = document.getElementById('daySelect');
-                      const slotSel = document.getElementById('slotSelect');
-                      const subjectInp = document.getElementById('subjectInput');
-                      const submitBtn = document.getElementById('submitBtn');
-
-                      // Khi chọn ngày ► mở khoá chọn ca
-                      daySel.addEventListener('change', () => {
-                          slotSel.disabled = false;
-                          slotSel.selectedIndex = 0;           // reset nếu user đổi ngày
-                          subjectInp.value = '';
-                          subjectInp.disabled = true;
-                          submitBtn.disabled = true;
-                      });
-
-                      // Khi chọn ca ► mở khoá ô nhập môn
-                      slotSel.addEventListener('change', () => {
-                          subjectInp.disabled = false;
-                          subjectInp.placeholder = 'Enter a subject…';
-                          submitBtn.disabled = true;
-                          subjectInp.value = '';
-                          subjectInp.focus();
-                      });
-
-                      // Khi gõ môn học ► kích hoạt submit (nếu không trống)
-                      subjectInp.addEventListener('input', () => {
-                          submitBtn.disabled = subjectInp.value.trim() === '';
-                      });
-
-                      // Ngăn submit giả tạo (demo)
-                      document.getElementById('register-form')
-                              .addEventListener('submit', e => {
-                                  e.preventDefault();
-                                  // TODO: AJAX gửi dữ liệu về server
-                                  alert(
-                                          `Đăng ký thành công:\n• Day: ${daySel.value}\n• Slot: ${slotSel.value}\n• Subject: ${subjectInp.value}`
-                                          );
-                                  // reset form
-                                  daySel.selectedIndex = 0;
-                                  slotSel.disabled = true;
-                                  subjectInp.disabled = true;
-                                  submitBtn.disabled = true;
-                                  slotSel.selectedIndex = 0;
-                                  subjectInp.value = '';
-                                  subjectInp.placeholder = 'Choose a slot first…';
-                              });
-
-                      function confirmRemove(button) {
-                          if (confirm('Are you sure you want to remove this class?')) {
-                              button.parentElement.parentElement.style.display = 'none';
-                          }
-                      }
+                                function confirmRemove(button, sessionId) {
+                                    if (confirm('Are you sure you want to remove this class?')) {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "${pageContext.request.contextPath}/timetable-admin/delete-session",
+                                            data: {sessionId: sessionId},
+                                            success: function (response) {
+                                                if (response === "success") {
+                                                    $(button).closest('.class-info').remove();
+                                                } else {
+                                                    alert("Failed to delete session: " + response);
+                                                }
+                                            },
+                                            error: function (xhr) {
+                                                alert("Server error: " + xhr.status + " - " + xhr.responseText);
+                                            }
+                                        });
+                                    }
+                                }
         </script>
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <script src="<c:url value='/assets/js/material-dashboard.min.js?v=3.2.0'/>"></script>
