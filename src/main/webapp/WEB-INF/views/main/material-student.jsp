@@ -71,7 +71,7 @@
             </div>
             <div class="sidenav-footer position-absolute w-100 bottom-0">
                 <div class="mx-3">
-                    <a class="btn btn-outline-dark mt-4 w-100" href="https://github.com/KenDual/Tutor-Scheduling-System" type="button">Documentation</a>
+                    <a class="btn btn-outline-dark mt-4 w-100" href="<c:url value='/about-us'/>" type="button">Documentation</a>
                 </div>
             </div>
         </aside>

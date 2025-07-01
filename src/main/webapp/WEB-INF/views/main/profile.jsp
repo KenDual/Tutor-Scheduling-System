@@ -92,7 +92,7 @@
             </div>
             <div class="sidenav-footer position-absolute w-100 bottom-0">
                 <div class="mx-3">
-                    <a class="btn btn-outline-dark mt-4 w-100" href="/about-us" type="button">Documentation</a>
+                    <a class="btn btn-outline-dark mt-4 w-100" href="<c:url value='/about-us'/>" type="button">Documentation</a>
                 </div>
             </div>
         </aside>
@@ -105,16 +105,6 @@
                             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Profile</li>
                         </ol>
                     </nav>
-                    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                        <ul class="navbar-nav d-flex align-items-center justify-content-end">
-                            <li class="nav-item d-flex align-items-center">
-                                <a class="nav-link text-body font-weight-bold px-0">
-                                    <i class="material-symbols-rounded">account_circle</i>
-                                    <span class="ms-1">${user.full_name}</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </nav>
             <div class="container-fluid px-2 px-md-4">

@@ -22,7 +22,7 @@
                 <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
                 <a class="navbar-brand px-4 py-3 m-0" href="https://github.com/KenDual/Tutor-Scheduling-System" target="_blank">
                     <img src="<c:url value='/assets/img/logo-ct-dark.png'/>" class="navbar-brand-img" width="26" height="26" alt="main_logo">
-                    <span class="ms-1 text-sm text-dark">Scheduling System</span>
+                    <span class="ms-1 text-sm text-dark">Tutor Scheduling Web</span>
                 </a>
             </div>
             <hr class="horizontal dark mt-0 mb-2">
@@ -71,7 +71,7 @@
             </div>
             <div class="sidenav-footer position-absolute w-100 bottom-0">
                 <div class="mx-3">
-                    <a class="btn btn-outline-dark mt-4 w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard?ref=sidebarfree" type="button">Documentation</a>
+                    <a class="btn btn-outline-dark mt-4 w-100" href="<c:url value='/about-us'/>" type="button">Documentation</a>
                 </div>
             </div>
         </aside>

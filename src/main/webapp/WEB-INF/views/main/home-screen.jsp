@@ -220,7 +220,7 @@
 
         <!-- Header -->
         <header>
-            <div class="logo">Vũ Trụ <span>Kiến Thức</span></div>
+            <div class="logo">Universe <span>Knowledge</span></div>
             <nav>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/about-us">About us</a></li>
@@ -233,50 +233,50 @@
         <!-- Hero Section -->
         <main>
             <section class="hero">
-                <h1>Khám Phá Vũ Trụ Kiến Thức</h1>
-                <p>Hành trình học tập của bạn bắt đầu từ đây</p>
-                <a href="${pageContext.request.contextPath}/signup" class="btn">Đăng Ký Ngay</a>
+                <h1>Explore the knowledge universe</h1>
+                <p>Your journney begins here</p>
+                <a href="${pageContext.request.contextPath}/signup" class="btn">Register now</a>
             </section>
 
             <!-- Services Section -->
             <section class="services">
-                <h2>Dịch Vụ Của Chúng Tôi</h2>
+                <h2>Our service</h2>
                 <div class="service-grid">
                     <div class="service">
-                        <img src="<c:url value='/assets/img/science.png'/>" alt="Khoa Học">
-                        <h3>Du Hành Khoa Học</h3>
-                        <p>Khám phá các bí ẩn của vũ trụ</p>
+                        <img src="<c:url value='/assets/img/science.png'/>" alt="Science">
+                        <h3>Science travel</h3>
+                        <p>Discover the mysteries of the universe</p>
                     </div>
                     <div class="service">
-                        <img src="<c:url value='/assets/img/math.png'/>" alt="Toán Học">
-                        <h3>Chinh Phục Toán Học</h3>
-                        <p>Lên kế hoạch cho các vì sao</p>
+                        <img src="<c:url value='/assets/img/math.png'/>" alt="Math">
+                        <h3>Conquer mathematics</h3>
+                        <p>Plan for the stars</p>
                     </div>
                     <div class="service">
-                        <img src="<c:url value='/assets/img/language.png'/>" alt="Ngôn Ngữ">
-                        <h3>Khám Phá Ngôn Ngữ</h3>
-                        <p>Giao tiếp với các hành tinh</p>
+                        <img src="<c:url value='/assets/img/language.png'/>" alt="Language">
+                        <h3>Discover language</h3>
+                        <p>Communicate with planets</p>
                     </div>
                 </div>
             </section>
 
             <!-- Testimonials Section -->
             <section class="testimonials">
-                <h2>Lời Nhận Xét Từ Nhà Du Hành</h2>
+                <h2>Our first priorities</h2>
                 <div class="testimonial">
-                    <p>"Trung tâm này đã giúp con tôi bay cao trong học tập!"</p>
-                    <p>- Phụ huynh A</p>
+                    <p>“Don't be pushed around by the fears in your mind. Be led by the dreams in your heart.”</p>
+                    <p>― Roy T. Bennett, The Light in the Heart ―</p>
                 </div>
                 <div class="testimonial">
-                    <p>"Các gia sư như những phi hành gia, rất tuyệt vời!"</p>
-                    <p>- Học sinh B</p>
+                    <p>“When we are no longer able to change a situation, we are challenged to change ourselves.”</p>
+                    <p>― Viktor E. Frankl, Man's Search for Meaning ―</p>
                 </div>
             </section>
         </main>
 
         <!-- Footer -->
         <footer>
-            <p>Liên hệ: info@vutrukienthuc.com | 0123-456-789</p>
+            <p>Contact: info@vutrukienthuc.com | 0123-456-789</p>
             <img class="spaceship" src="<c:url value='/assets/img/rocket.png'/>" alt="Tàu vũ trụ">
         </footer>
     </body>

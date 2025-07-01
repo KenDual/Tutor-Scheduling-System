@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -204,7 +203,7 @@
         <!-- Hero -->
         <section class="hero" data-aos="fade-up">
             <h1>Online Tutor Scheduling System</h1>
-            <p>"Success usually comes to those who are too busy to be looking for it." - Henry David Thoreau</p>
+            <p>"Success usually comes to those who are too busy to be looking for it." - Henry David Thoreau -</p>
         </section>
 
         <!-- Who we are -->
@@ -212,24 +211,23 @@
             <div class="container">
                 <h2 class="section-title">Who are we?</h2>
                 <p class="lead text-center">KenDual Scheduling Web is where we connect each other
-                    <strong>gia sư</strong> và <strong>học viên</strong> qua lớp học ảo chất lượng cao.</p>
-                <p class="text-center">Sứ mệnh của chúng tôi là mang trải nghiệm học tập cá nhân hoá đến mọi
-                    nhà, xoá nhoà giới hạn không gian – thời gian.</p>
+                    <strong>Tutors</strong> and <strong>Students</strong> Through high quality virtual class.</p>
+                <p class="text-center">Our mission is to bring personalized learning experience to every home, eradicating the space limit - time.</p>
             </div>
         </section>
 
         <!-- Mission & Vision Cards -->
         <section class="bg-dark text-light" data-aos="fade-up">
             <div class="container">
-                <h2 class="section-title">Sứ mệnh &amp; Tầm nhìn</h2>
+                <h2 class="section-title">Mission &amp; Vision</h2>
                 <div class="row g-4">
                     <div class="col-md-6">
                         <div class="card h-100 text-center shadow">
                             <div class="card-body">
                                 <i class="fas fa-bullseye fa-2x text-primary mb-3"></i>
-                                <h5 class="card-title fw-bold">Sứ mệnh</h5>
-                                <p>Mang đến trải nghiệm học tập liền mạch, truyền cảm hứng, giúp học viên
-                                    phát triển tối đa tiềm năng và gia sư toả sáng chuyên môn.</p>
+                                <h5 class="card-title fw-bold">Mission</h5>
+                                <p>
+                                    Bring a seamless, inspiring learning experience, helping students develop their potential and tutors to shine.</p>
                             </div>
                         </div>
                     </div>
@@ -237,9 +235,9 @@
                         <div class="card h-100 text-center shadow">
                             <div class="card-body">
                                 <i class="fas fa-eye fa-2x text-success mb-3"></i>
-                                <h5 class="card-title fw-bold">Tầm nhìn</h5>
-                                <p>Trở thành nền tảng dạy học online dẫn đầu Việt Nam, mở rộng ra khu vực,
-                                    nơi kiến thức lan toả đến mọi người, mọi nơi.</p>
+                                <h5 class="card-title fw-bold">Vision</h5>
+                                <p>Becoming the leading online teaching platform in Vietnam, expanding to the area, where knowledge spreads to everyone, everywhere.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -250,16 +248,17 @@
         <!-- Features -->
         <section class="bg-dark text-light" data-aos="fade-up">
             <div class="container">
-                <h2 class="section-title">Những giá trị chúng tôi mang lại</h2>
-                <p class="lead text-center mb-5">Không chỉ là công cụ – chúng tôi kiến tạo hành trình học
-                    tập.</p>
+                <h2 class="section-title">The values ​​we bring
+                </h2>
+                <p class="lead text-center mb-5">Not just a tool - we create learning journeys.
+                </p>
                 <div class="row g-4">
                     <div class="col-md-6 col-lg-3">
                         <div class="card h-100 text-center shadow feature-card">
                             <div class="card-body">
                                 <i class="fas fa-chalkboard fa-2x text-primary mb-3"></i>
-                                <h6 class="card-title fw-bold">Lớp học ảo tương tác</h6>
-                                <p>Bảng trắng, chia sẻ màn hình, file và chat real-time.</p>
+                                <h6 class="card-title fw-bold">Interacting virtual class</h6>
+                                <p>White table, screen sharing, files and Real-time chat.</p>
                             </div>
                         </div>
                     </div>
@@ -267,8 +266,8 @@
                         <div class="card h-100 text-center shadow feature-card">
                             <div class="card-body">
                                 <i class="fas fa-calendar-check fa-2x text-success mb-3"></i>
-                                <h6 class="card-title fw-bold">Quản lý lịch học</h6>
-                                <p>Đặt lịch, nhắc nhở tự động, đồng bộ đa thiết bị.</p>
+                                <h6 class="card-title fw-bold">Schedule management</h6>
+                                <p>Schedule, automatic reminder, synchronization of multi -equipment.</p>
                             </div>
                         </div>
                     </div>
@@ -276,8 +275,8 @@
                         <div class="card h-100 text-center shadow feature-card">
                             <div class="card-body">
                                 <i class="fas fa-wallet fa-2x text-warning mb-3"></i>
-                                <h6 class="card-title fw-bold">Thanh toán linh hoạt</h6>
-                                <p>Ví điện tử, chuyển khoản, bảo mật nhiều lớp.</p>
+                                <h6 class="card-title fw-bold">Flexible payment</h6>
+                                <p>Electronic wallet, bank transfer, multi-layer security.</p>
                             </div>
                         </div>
                     </div>
@@ -285,8 +284,8 @@
                         <div class="card h-100 text-center shadow feature-card">
                             <div class="card-body">
                                 <i class="fas fa-chart-line fa-2x text-danger mb-3"></i>
-                                <h6 class="card-title fw-bold">Thống kê tiến độ</h6>
-                                <p>Báo cáo điểm, mức độ hoàn thành bài tập, đánh giá.</p>
+                                <h6 class="card-title fw-bold">Progress statistics</h6>
+                                <p>Report points, level of exercise and evaluation.</p>
                             </div>
                         </div>
                     </div>
@@ -297,11 +296,10 @@
         <!-- Team -->
         <section class="bg-dark text-light" data-aos="fade-up">
             <div class="container">
-                <h2 class="section-title">Đội ngũ của chúng tôi</h2>
+                <h2 class="section-title">Our team</h2>
                 <div class="row g-4 justify-content-center">
                     <div class="col-md-4 col-lg-3">
                         <div class="card member-card text-center">
-                            <img src="icon/member1.jpg" class="card-img-top" alt="Mai Phú Hải">
                             <div class="card-body">
                                 <h5 class="card-title">Mai Phú Hải</h5>
                                 <p class="card-text">Member 1</p>
@@ -310,7 +308,6 @@
                     </div>
                     <div class="col-md-4 col-lg-3">
                         <div class="card member-card text-center">
-                            <img src="icon/member2.png" class="card-img-top" alt="Lâm Chí Bảo">
                             <div class="card-body">
                                 <h5 class="card-title">Lâm Chí Bảo</h5>
                                 <p class="card-text">Member 2</p>
@@ -319,7 +316,6 @@
                     </div>
                     <div class="col-md-4 col-lg-3">
                         <div class="card member-card text-center">
-                            <img src="icon/member3.jpg" class="card-img-top" alt="Nguyễn Thụy Hải Vân">
                             <div class="card-body">
                                 <h5 class="card-title">Nguyễn Thụy Hải Vân</h5>
                                 <p class="card-text">Member 3</p>
@@ -334,22 +330,22 @@
         <section class="bg-dark text-white" data-aos="fade-up">
             <div class="container text-center">
                 <h2 class="section-title">Contact</h2>
-                <p class="lead">Email: maiphuhai123@gmail.com | Hotline: 0123 456 789 | Address: In my heart</p>
+                <p class="lead">Email: info@vutrukienthuc.com | Hotline: 0123 456 789 | Address: In my heart</p>
             </div>
         </section>
 
         <!-- Footer -->
         <footer>
             <p>©
-            <fmt:formatDate value="${now}" pattern="yyyy" /> Vũ Trụ Kiến Thức. All rights reserved.
-        </p>
-        <img class="spaceship" src="<c:url value="/assets/img/rocket.png"/>" alt="Tàu vũ trụ">
-    </footer>
+                <fmt:formatDate value="${now}" pattern="yyyy" /> Universe knowledge. All rights reserved.
+            </p>
+            <img class="spaceship" src="<c:url value="/assets/img/rocket.png"/>" alt="Tàu vũ trụ">
+        </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        AOS.init({duration: 800, once: false});
-    </script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({duration: 800, once: false});
+        </script>
+    </body>
 </html>

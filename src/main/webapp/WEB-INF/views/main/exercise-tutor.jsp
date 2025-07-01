@@ -108,7 +108,7 @@
             </div>
             <div class="sidenav-footer position-absolute w-100 bottom-0">
                 <div class="mx-3">
-                    <a class="btn btn-outline-dark mt-4 w-100" href="https://github.com/KenDual/Tutor-Scheduling-System.git" type="button">Documentation</a>
+                    <a class="btn btn-outline-dark mt-4 w-100" href="<c:url value='/about-us'/>" type="button">Documentation</a>
                 </div>
             </div>
         </aside>
@@ -119,7 +119,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Student Dashboard</li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tutor Exercise</li>
                         </ol>
                     </nav>
                     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -230,7 +230,7 @@
                         <div class="card my-4">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
-                                    <h6 class="text-white text-capitalize ps-3">Tutor: ${tutorName}}</h6>
+                                    <h6 class="text-white text-capitalize ps-3">Tutor: ${tutorName}</h6>
                                 </div>
                             </div>
 

@@ -111,7 +111,7 @@
                 <i class="fas fi-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
                 <a class="navbar-brand px-4 py-3 m-0" href="https://github.com/KenDual/Tutor-Scheduling-System" target="_blank">
                     <img src="<c:url value='/assets/img/logo-ct-dark.png'/>" class="navbar-brand-img" width="26" height="26" alt="main_logo">
-                    <span class="ms-1 text-sm text-dark">Scheduling System</span>
+                    <span class="ms-1 text-sm text-dark">Tutor Scheduling Web</span>
                 </a>
             </div>
             <hr class="horizontal dark mt-0 mb-2">
@@ -170,7 +170,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Timetable</li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tutor Timetable</li>
                         </ol>
                     </nav>
                     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">

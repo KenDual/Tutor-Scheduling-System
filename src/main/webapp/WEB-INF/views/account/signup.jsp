@@ -138,7 +138,7 @@
                             <div class="col-12 col-md-6">
                                 <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                                     <li class="nav-item">
-                                        <a href="https://www.creative-tim.com/presentation" class="nav-link text-white" target="_blank">About
+                                        <a href="https://github.com/KenDual/Tutor-Scheduling-System" class="nav-link text-white" target="_blank">About
                                             Us</a>
                                     </li>
                                 </ul>

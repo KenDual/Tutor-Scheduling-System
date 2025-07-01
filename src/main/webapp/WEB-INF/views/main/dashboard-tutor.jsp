@@ -196,7 +196,7 @@
                             <div class="card-header p-2 ps-3">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="text-sm mb-0 text-capitalize">Tổng ca học trong tuần</p>
+                                        <p class="text-sm mb-0 text-capitalize">Total Session in week</p>
                                         <h4 class="mb-0">${totalSessions}</h4>
                                     </div>
                                     <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
@@ -215,7 +215,7 @@
                             <div class="card-header p-2 ps-3">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="text-sm mb-0 text-capitalize">Bài tập về nhà</p>
+                                        <p class="text-sm mb-0 text-capitalize">Exercises</p>
                                         <h4 class="mb-0">${totalExercises}</h4>
                                     </div>
                                     <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
